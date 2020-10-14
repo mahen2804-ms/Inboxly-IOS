@@ -18,6 +18,8 @@ Route::group(['prefix' => 'v1'], function () {
 	
     // Route for registration of user
     Route::post('user-registration', 'Api\V1\UserRegistrationController@userRegistration');
+    // Route for Login using email id
+    Route::post('login', 'Api\V1\UserRegistrationController@login');
    
 });
 
