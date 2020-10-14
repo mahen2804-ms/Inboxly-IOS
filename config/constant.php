@@ -2,36 +2,8 @@
     return [
         'common' => [
 
-            //assessment sub category norm type id
-            'NORM_TYPE_ID_SUB_CATEGORY'=>3,
-            //status
-            'STATUS' => ['Select Status', 'Active', 'Deactive'],
-
-            // titles of the page
-            'title' => [
-                'TITLE_LOGIN'=> 'Login',
-                'TITLE_DASHBOARD'=> 'Dashboard',
-                'TITLE_DEPARTMENT_LIST' => 'Department List',
-                'TITLE_JOB_ROLE' => 'Job role List',
-                'TITLE_QUIZ_CATEGORY_LIST'=> 'Quiz Category List',
-                'TITLE_ASSESSMENT_CATEGORY_LIST'=> 'Assessment Category List',
-                'TITLE_CORE_ASSESSMENT_LIST'=> 'Core Assessment List',
-                'TITLE_EMPLOYER_LIST' => 'Employer Listing',
-                'TITLE_BADGES' => 'Badges',
-                'TITLE_ADMIN_VIEW' => 'Admin View',
-                'TITLE_CORE_ASSESSMENT_VIEW' => 'Core Assessment View',
-                'TITLE_GOAL_TRACKER_LIST' => 'Goal Tracker List',
-                'TITLE_GOAL_TRACKER_VIEW' => 'Goal Tracker View',
-                'TITLE_MINI_QUIZZES_STANDARD_NORMS' => 'Mini Quizzes Standard Norms',
-                'TITLE_EMPLOYER_LIST' => 'Employer List',
-                'TITLE_MINI_QUIZZES_LIST' => 'Mini Quizzes List',
-                'TITLE_NOTIFICATIONS' => 'Custom Notifications',
-            ],
-
             // message of the pages
             'messages' => [
-                'NORM_RECORD_DELETED' => 'Norm deleted successfully',
-                'STATUS_ALREADY_EXIST' => 'Status is already up-to-date',
                 'RECORD_NOT_EXIST' => 'This record is not exist',
                 'ORDER_UPDATED' => 'Question order updated successfully',
                 'EMPTY_SPACES' => 'Empty spaces are not allowed',
@@ -119,127 +91,8 @@
                 'LOGOUT' => 'Logout successfully',
                 'ADMIN_GOAL' => 'You can not delete reminder until created.',
                 'GOAL_SETTING' => 'You are not allowed to create goal, please contact your employer',
-                ],
-                'NORM_RANGE_ALREADY_EXIST' => 'Range Already Exists',
-                
+                ],        
 
-            // nav link titles
-            'nav_status' => [
-                'NAV_ACTIVE_EMPLOYER' => 'active',
-                'NAV_ACTIVE_MASTER' => 'active',
-                'NAV_ACTIVE_ADMIN_MANAGEMENT' => 'active',
-                'NAV_ACTIVE_QUIZ' => 'active',
-                'NAV_ACTIVE_ASSESSMENT' => 'active',
-                'NAV_ACTIVE_DEPARTMENT' => 'active',
-                'NAV_ACTIVE_JOB_ROLE' => 'active',
-                'NAV_ACTIVE_BADGES' => 'active',
-                'NAV_ACTIVE_CORE_ASSESSMENT' => 'active',
-                'NAV_ACTIVE_MINI_QUIZZES' => 'active',
-                'NAV_ACTIVE_JOB_ROLE' => 'active',
-                'NAV_ACTIVE_GOAL_TRACKER' => 'active',
-                'NAV_ACTIVE_NORMS' => 'active',
-                'NAV_ACTIVE_MINI_QUIZZES' => 'active',
-                'NAV_ACTIVE_NOTIFICATIONS' => 'active',                
-            ],
-
-            //status
-            'status' => [
-                'ACTIVE' => 'Active',
-                'DEACTIVE' => 'Inactive'
-            ],
-
-             //Date format
-            'table_date_format' => 'd/m/Y',
-            'db_date_format' => 'Y-m-d',
-            'role_id' => 2,
-            'user_role_id'=>3,
-            'super_admin_role_id' => 1,
-
-
-            // Status Active/deactive
-            'status_lable' => [
-                "ACTIVE" => 'activate',
-                "DEACTIVE" => 'inactivate'
-            ],
-
-            //mail status
-            'mail_status' => [
-                'ACTIVE' => 'activated',
-                'DEACTIVE' => 'deactivated'
-            ],
-
-            // Date format
-            'date_format' => [
-                'API_DATE' => 'Y-m-d H:i:s',
-                'NAV_ACTIVE_NOTIFICATIONS' => 'active',
-
-            ],
-
-            //status_filter_label
-            'STATUS_FILTER_LABEL' => ['Select Status', 'Active', 'Inactive'],
-            'item_action' => [
-                '1' => 1 ,
-                '2' => 2,
-                '3' => 3,
-                '4' => 4,
-                '5' => 5,
-            ],
-
-            //status_filter_label
-            'STATUS_FILTER_LABEL' => ['Select Status', 'Active', 'Inactive'],
-
-            //code status
-            'api_code' => [
-                'CREATE' => '201',
-                'UPDATE' => '200',
-                'DELETE' => '204',
-                'LIST'   => '200',
-                'FAILED' => '412',
-                'UNAUTHORIZED' => '401'
-            ],
-
-            'token_name' => [
-                'MY_APP' => 'MyApp'
-            ],
-
-            'icon_validation' => [
-                'ICON' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ],
-
-            'email_result_validation' => [
-                'IMAGE' => 'image|required|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ],
-
-            'file_path' => [
-                'GOAL_ICON' => '/uploads/goal-tracker/',
-                'USER_IMAGE' => '/uploads/user/',
-                'CATEGORY_IMAGE' => '/uploads/assessment-category/',
-                'NORMS_IMAGE' => '/uploads/norms/',
-                'QUIZ_ICONS' => '/uploads/quiz-category/',
-                'BADGES_IMAGE' => '/uploads/badges/',
-                'PROFILE_TITLE_IMAGE' => '/uploads/profile-titles/',
-
-            ],
-
-            //actions
-            'actions' => [
-                'POSITIVE_ACTION' => 'positiveAction',
-                'NEGATIVE_ACTION' => 'negativeAction',
-                'NO_ACTION' => 'noAction'
-            ],
-
-            //badge conditions
-            'badge_condition' => [
-                'FIRST' => 1,
-                'SECOND' => 2,
-                'THIRD' => 3,
-                'FOURTH' => 4,
-                'FIFTH' => 5,
-                'SIXTH' => 6,
-                'SEVENTH' => 7,
-                'EIGHT' => 8
-            ],
-        ],
         
      
     ];

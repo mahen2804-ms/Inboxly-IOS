@@ -30,7 +30,7 @@
                 <tr>
                     <td>
                         <p style="font-weight: 700; margin: 0 0 9px 0;">Dear {{$user['userName']}},</p>
-                        <p style="margin: 0;">Your account has been created on '<a href="#" style="color: #0D52B9; text-decoration: none;">My Mental Fitness</a>'. <br>Please log in to the application with the below credentials to start using your account.</p>
+                        <p style="margin: 0;">Your account has been created on '<a href="#" style="color: #0D52B9; text-decoration: none;">Inboxly</a>'. <br>Please log in to the application with the below credentials to start using your account.</p>
                         <p style="margin:20px 0 0 0;">
                             <strong>Username:</strong> {{$user['userName']}} <br>
                             <strong>OTP:</strong> {{$user['otp']}} <br>

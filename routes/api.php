@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 Route::group(['prefix' => 'v1'], function () {
 	
     // Route for registration of user
-    Route::get('user-registration', 'Api\V1\UserRegistrationController@userRegistration');
+    Route::post('user-registration', 'Api\V1\UserRegistrationController@userRegistration');
    
 });
 

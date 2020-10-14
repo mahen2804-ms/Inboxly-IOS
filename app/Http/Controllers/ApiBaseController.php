@@ -1,5 +1,5 @@
 <?php
-die('123454');
+
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\File;

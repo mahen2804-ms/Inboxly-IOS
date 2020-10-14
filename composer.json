@@ -16,9 +16,12 @@
         "laravel/passport": "^10.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
+        "laravelcollective/html": "^6.2",
+        "owen-it/laravel-auditing": "^11.0",
         "spatie/laravel-medialibrary": "^8.7",
-        "yajra/laravel-datatables-oracle": "^9.6",
-        "laravelcollective/html": "^5.0"
+        "spatie/laravel-permission": "^3.17",
+        "spatie/laravel-responsecache": "^6.6",
+        "yajra/laravel-datatables-oracle": "^9.6"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",
@@ -44,6 +47,9 @@
         "classmap": [
             "database/seeds",
             "database/factories"
+        ],
+        "files": [
+            "app/Http/Helpers.php"
         ]
     },
     "autoload-dev": {

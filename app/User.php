@@ -11,8 +11,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Laravel\Passport\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Auditable
 {
     use Notifiable, HasApiTokens, HasRoles;
     use SoftDeletes;
@@ -34,6 +35,7 @@ class User extends Authenticatable
     protected $auditInclude = [
         'first_name',
         'last_name',
+        'user_name',
         'email',
         'mobile_number',
         'password',
@@ -64,6 +66,7 @@ class User extends Authenticatable
         'deleted',
         'updated',
         'update',
+        'retrieved'
     ];
 
     /**
@@ -93,6 +96,7 @@ class User extends Authenticatable
     protected $fillable = [
         'first_name',
         'last_name',
+        'user_name',
         'email',
         'mobile_number',
         'password',
@@ -185,7 +189,7 @@ class User extends Authenticatable
         $email = self::leftJoin('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
         ->leftJoin('roles', 'roles.id', '=','model_has_roles.role_id')
         ->where('users.email', $email)
-        ->where('model_has_roles.role_id', config('constant.common.role_id'));
+        ->where('model_has_roles.role_id', config('constant.common.user_role_id'));
 
         if(!empty($userId)) {
             $email = $email->where('id', '!=', $userId);
@@ -573,7 +577,6 @@ class User extends Authenticatable
      */
     public static function checkEmailUser($email, $userId = '') {
         $email = self::leftJoin('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
-            ->leftJoin('roles', 'roles.id', '=','model_has_roles.role_id')
             ->where('users.email', $email)
             ->where('model_has_roles.role_id', config('constant.common.user_role_id'));
 
