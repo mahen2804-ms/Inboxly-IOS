@@ -91,7 +91,30 @@
                 'LOGOUT' => 'Logout successfully',
                 'ADMIN_GOAL' => 'You can not delete reminder until created.',
                 'GOAL_SETTING' => 'You are not allowed to create goal, please contact your employer',
-                ],        
+                ], 
+
+                //code status
+            'api_code' => [
+                'CREATE' => '201',
+                'UPDATE' => '200',
+                'DELETE' => '204',
+                'LIST'   => '200',
+                'FAILED' => '412',
+                'UNAUTHORIZED' => '401'
+            ],
+
+            'token_name' => [
+                'MY_APP' => 'MyApp'
+            ],
+
+            'icon_validation' => [
+                'ICON' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ],
+            
+            'file_path' => [
+                'USER_IMAGE' => '/uploads/user/',
+            ],
+       
 
         ],
      

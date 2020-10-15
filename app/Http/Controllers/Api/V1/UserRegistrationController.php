@@ -108,8 +108,8 @@ class UserRegistrationController extends ApiBaseController
                     $user->last_name = $input['lastName'];
                     $user->user_name = $input['userName'];
                     $user->email = $input['email'];
-                    $user->recovery_email = $input['recoveryEmail'];
-                    $user->mobile_number = $input['mobile'];
+                    $user->recovery_email = $input['recovery_email'];
+                    //$user->mobile_number = $input['mobile'];
                     $user->password = bcrypt($input['password']);
                     $user->is_verified = 0;
                     $user->is_initial_setup = 0;
@@ -122,14 +122,14 @@ class UserRegistrationController extends ApiBaseController
                     try {
                         $dats['user'] = ['userName' => $input['userName'], 'otp' => $randomid];
                         $subject = 'Inboxly App - Account created.';
-                        Helpers::sendEmail('emails.user-otp', $dats, $user['recovery_email'], $subject);
+                        Helpers::sendEmail('emails.user-otp', $dats,$user['recovery_email'], $user['recovery_email'], $subject);
                     } catch (Exception $ex) {
                         $error['message'] = config('constant.common.messages.INVALID_EMAIL');
                         return $this->sendFailureResponse($error);
                     }
                     DB::commit();
                     $data['message'] = 'success';
-                    $data['data'] = ['mobile_number' => $input['mobile'], 'email' => $input['email']];
+                    $data['data'] = ['email' => $input['email']];
                     $code = config('constant.common.api_code.CREATE');
                     return $this->sendSuccessResponse($data, $code);
                     
@@ -168,7 +168,6 @@ class UserRegistrationController extends ApiBaseController
      */
     public function checkEmail($email, $userId= '') {
         try {
-            print_r($email); die;
             //check user enter email is already exist in database
             $checkEmail = User::checkEmailUser($email);
 
@@ -237,7 +236,7 @@ class UserRegistrationController extends ApiBaseController
      *     )
      * )
      */
-    public function validateOTP($otp,$mobile,$email,$deviceId,$deviceType) {
+    public function validateOTP($otp,$email,$deviceId,$deviceType) {
         try {
             $numlength = strlen((string)$otp);
 
@@ -347,6 +346,45 @@ class UserRegistrationController extends ApiBaseController
             } else {
                 return $this->sendFailureResponse(config('constant.common.messages.EXCEPTION_ERROR'));
             }
+        } catch(Exception $ex) {
+            return $this->sendFailureResponse();
+        }
+    }
+
+     /**
+     * @name updateUserDevices
+     * @desc update user device table
+     * @param $id, $password
+     * @return array
+     */
+    public function updateUserDevices($userId, $deviceId) {
+        try{
+            //if exist user then update device id
+            $already = UserDevices::checkAlreadyDevice($userId);
+
+            if($already > 0) {
+                $update =  UserDevices::updateDevice($userId, $deviceId);
+
+                if($update) {
+                    return true;
+                } else {
+                    return false;
+                }
+
+            } else {
+                //insert data into user device
+                $newDevice = new UserDevices();
+                $newDevice->user_id = $userId;
+                $newDevice->device_id = $deviceId;
+
+                if($newDevice->save()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+
         } catch(Exception $ex) {
             return $this->sendFailureResponse();
         }
