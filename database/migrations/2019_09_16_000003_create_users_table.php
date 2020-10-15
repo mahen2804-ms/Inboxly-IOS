@@ -14,6 +14,7 @@ class CreateUsersTable extends Migration
             $table->string('first_name')->default('null');
             $table->string('last_name')->default('null');
             $table->string('email');
+            $table->string('recovery_email');
             $table->string('mobile_number',15)->nullable();
             $table->datetime('email_verified_at')->nullable();
             $table->string('password');

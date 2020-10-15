@@ -37,6 +37,7 @@ class User extends Authenticatable implements Auditable
         'last_name',
         'user_name',
         'email',
+        'recovery_email',
         'mobile_number',
         'password',
         'status',
@@ -98,6 +99,7 @@ class User extends Authenticatable implements Auditable
         'last_name',
         'user_name',
         'email',
+        'recovery_email',
         'mobile_number',
         'password',
         'status',
@@ -289,7 +291,12 @@ class User extends Authenticatable implements Auditable
             'userName' => 'required|max:50',
             'firstName' => 'required|max:50',
             'lastName' => 'required|max:50',
-            'password' => 'required|max:50',
+            'recovery_email' => 'required|email|max:70|unique:users',
+            'password' => [
+                'required',
+                'min:8',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'
+            ],
         ];
     }
 
@@ -301,7 +308,7 @@ class User extends Authenticatable implements Auditable
     public static function validationRulesCommon() {
 
         return [
-            'email' => 'required|email|max:50',
+            'email' => 'required|email|max:70|unique:users|regex:/^[A-Za-z0-9\.]*@(inboxly)[.](com)$/',
         ];
     }
 
@@ -430,7 +437,8 @@ class User extends Authenticatable implements Auditable
 
     /**
      * @name checkUserName
-     * @desc checkUserName already exist or not
+     * @desc check
+      already exist or not
      * @param $email
      * @return mixed
      */

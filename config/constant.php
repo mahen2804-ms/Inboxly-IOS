@@ -93,7 +93,7 @@
                 'GOAL_SETTING' => 'You are not allowed to create goal, please contact your employer',
                 ],        
 
-        
+        ],
      
     ];
 ?>
