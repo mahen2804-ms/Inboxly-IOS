@@ -17,6 +17,7 @@ use App\Roles;
 use Helpers;
 use URL;
 use App\UserDevices;
+use App\UserLoginDetails;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserRegistrationController extends ApiBaseController
@@ -259,30 +260,27 @@ class UserRegistrationController extends ApiBaseController
                     if(empty($user)) {
                         return $this->sendFailureResponse(config('constant.common.messages.RECORD_NOT_FOUND'));
                     }
+                    
+                    $userDetails = User::getUserByEmail($user['email']);
 
-                    if ($user['is_initial_setup']) {
+                    if (count($userDetails) > 0) {
+                        $data['data']['userDetail'] = $userDetails[0];
 
-                        $userDetails = User::getUserByEmail($user['email']);
+                        $user = User::findOrFail($userDetails[0]['id']);
+                        $token = $user->createToken(config('constant.common.token_name.MY_APP'))->accessToken;
+                        $data['data']['token'] = $token;
+                        //update device table
+                        $deviceTableUpdate = $this->updateUserDevices($user['id'], $deviceId);
 
-                        if (count($userDetails) > 0) {
-                            $data['data']['userDetail'] = $userDetails[0];
-
-                            $user = User::findOrFail($userDetails[0]['id']);
-                            $token = $user->createToken(config('constant.common.token_name.MY_APP'))->accessToken;
-                            $data['data']['token'] = $token;
-                            //update device table
-                            $deviceTableUpdate = $this->updateUserDevices($user['id'], $deviceId);
-
-                            if($deviceTableUpdate == false) {
-                                return $this->sendFailureResponse(config('constant.common.messages.EXCEPTION_ERROR'));
-                            }
-                            $updateOtp = User::updateOTPTOZero($email);
-                            //insert data into user login details
-                            $loginDetails = $this->insertLoginDetails($user['id'], $deviceId , $user['employer_id']);
-                            return $this->sendSuccessResponse($data);
+                        if($deviceTableUpdate == false) {
+                            return $this->sendFailureResponse(config('constant.common.messages.EXCEPTION_ERROR'));
                         }
-
+                        $updateOtp = User::updateOTPTOZero($email);
+                        //insert data into user login details
+                        $loginDetails = $this->insertLoginDetails($user['id'], $deviceId);
+                        return $this->sendSuccessResponse($data);
                     }
+
                 } else {
                     return $this->sendFailureResponse(config('constant.common.messages.INVALID_OTP'));
                 }
@@ -326,14 +324,14 @@ class UserRegistrationController extends ApiBaseController
             if($updateOTP) {
                 //Get user details for sending sms and email
                 $user = User::getUserByEmailID($email);
-
+                
                 if(!empty($user)) {
 
                     /*mail send to user for creating a new account*/
                     try {
                         $dats['user'] = ['userName' => $user['user_name'], 'otp' => $randomid];
                         $subject = 'Inboxly App - Account created.';
-                        Helpers::sendEmail('emails.user-otp', $dats, $email, $user['recovery_email'], $subject);
+                        Helpers::sendEmail('emails.user-otp', $dats, $user['recovery_email'], $email, $subject);
                     } catch(Exception $ex) {
                         $error['message'] = config('constant.common.messages.INVALID_EMAIL');
                         return $this->sendFailureResponse($error);
@@ -466,7 +464,7 @@ class UserRegistrationController extends ApiBaseController
                             $data['data']['deviceID'] = false;
                         }
                         //insert data into user login details
-                        $loginDetails = $this->insertLoginDetails(Auth::user()->id, $deviceID , Auth::user()->employer_id);
+                        $loginDetails = $this->insertLoginDetails(Auth::user()->id, $deviceID );
                         return $this->sendSuccessResponse($data);
                     }
                     
@@ -479,4 +477,28 @@ class UserRegistrationController extends ApiBaseController
         }
     }
 
+    /**
+     * @name insertLoginDetails
+     * @desc insert login details
+     * @param $id, $password
+     * @return array
+     */
+    public function insertLoginDetails($userId, $deviceId ) {
+        try{
+            //insert data into user login details
+            $loginDetails = new UserLoginDetails();
+            $loginDetails->user_id = $userId;
+            $loginDetails->device_id = $deviceId;
+            $loginDetails->created_by = $userId;
+
+            if($loginDetails->save()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch(Exception $ex) {
+            return $this->sendFailureResponse();
+        }
+    }
 }

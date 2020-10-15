@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserDevicesTable extends Migration
+class CreateUserLoginDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,17 @@ class CreateUserDevicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_devices', function (Blueprint $table) {
+        Schema::create('user_login_details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('employer_id')->nullable();
             $table->string('device_id',250)->nullable();
-            $table->rememberToken();
             $table->unsignedBigInteger('created_by')->nullable();
-            $table->foreign('created_by', 'created_by_fk_344234')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('created_by')->references('id')->on('users');
             $table->unsignedBigInteger('updated_by')->nullable();
-            $table->foreign('updated_by', 'updated_by_fk_344234')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('updated_by')->references('id')->on('users');
             $table->unsignedBigInteger('deleted_by')->nullable();
-            $table->foreign('deleted_by',  'deleted_by_fk_344234')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('deleted_by')->references('id')->on('users');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -36,6 +36,6 @@ class CreateUserDevicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_devices');
+        Schema::dropIfExists('user_login_details');
     }
 }
