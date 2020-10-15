@@ -18,6 +18,7 @@ use Helpers;
 use URL;
 use App\UserDevices;
 use App\UserLoginDetails;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserRegistrationController extends ApiBaseController
@@ -501,4 +502,68 @@ class UserRegistrationController extends ApiBaseController
             return $this->sendFailureResponse();
         }
     }
+
+     /**
+     * @OA\Post(
+     *     path="/api/v1/forgot-password",
+     *     tags={"Forgot Password"},
+     *     summary="Api to get user password",
+     *     operationId="forgotPassword",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(property="email",type="string"),
+     *                example={"email": "manjinder07031990@gmail.com"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=200,description="OK"),
+     *     @OA\Response(
+     *         response="default",
+     *         description="unexpected error",
+     *         @OA\Schema(ref="#/components/schemas/Error")
+     *     )
+     * )
+     */
+    public function forgotPassword(Request $request) {
+        try {
+            //check email exist
+            $email = $request->email;
+            $isExist = User::checkUser($email);
+
+            if((!empty($isExist)) ){
+                //Regenerate otp
+                $randomid =  Str::random(10);
+                //update otp for same user
+                $updatePassword = User::updatePassword($randomid,$email);
+
+                if($updatePassword) {
+                    //Get user details for sending sms and email
+                    $user = User::getUserByEmailID($email);
+
+                    if(!empty($user)) {
+                        try {
+                            $dats = ['name' => ucfirst($user['first_name']).' '.ucfirst($user['last_name']), 'password' => $randomid, 'email'=>$email];
+                            $subject = 'Inboxly App - Forgot password.';
+                            Helpers::sendEmail('emails.password', $dats, $user['recovery_email'], $email,  $subject);
+                        } catch(Exception $ex) {
+                            $error['message'] = config('constant.common.messages.INVALID_EMAIL');
+                            return $this->sendFailureResponse($error);
+                        }
+                    } else {
+                        return $this->sendFailureResponse(config('constant.common.messages.RECORD_NOT_FOUND'));
+                    }
+
+                    $data = config('constant.common.messages.EMAIL_SEND');
+                    return $this->sendSuccessResponse($data);
+                }
+            } else {
+                return $this->sendFailureResponse(config('constant.common.messages.EMAIL_NOT_EXIST'));
+            }
+        } catch(Exception $ex) {
+            return $this->sendFailureResponse();
+        }
+    }
+
 }

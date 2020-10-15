@@ -378,13 +378,13 @@ class User extends Authenticatable implements Auditable
 
 
     /**
-     * @name updateOTP
-     * @desc update OTP
+     * @name updatePassword
+     * @desc update password
      * @param $email
      * @return mixed
      */
-    public static function updateOTP($otp,$email) {
-        return self::where('email', $email)->update(['otp' =>$otp]);
+    public static function updatePassword($password,$email) {
+        return self::where('email', $email)->update(['password' =>$password]);
     }
 
     /**

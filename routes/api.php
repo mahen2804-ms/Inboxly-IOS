@@ -26,6 +26,9 @@ Route::group(['prefix' => 'v1'], function () {
 
     // Route for Login using email id
     Route::post('login', 'Api\V1\UserRegistrationController@login');
+
+     // Route for forgot password
+    Route::post('forgot-password', 'Api\V1\UserRegistrationController@forgotPassword');
   
 });
 
