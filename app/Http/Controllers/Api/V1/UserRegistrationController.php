@@ -16,6 +16,7 @@ use Mockery\Exception;
 use App\Roles;
 use Helpers;
 use URL;
+use App\UserDevices;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserRegistrationController extends ApiBaseController
@@ -386,6 +387,94 @@ class UserRegistrationController extends ApiBaseController
 
 
         } catch(Exception $ex) {
+            return $this->sendFailureResponse();
+        }
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/login",
+     *     tags={"User"},
+     *     summary="api for user login",
+     *     operationId="login",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(property="user_name",type="string"),
+     *                 @OA\Property(property="password",type="string"),
+     *                 example={"username": "Mj", "password": "Mj@123"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=200,description="OK")
+     * )
+     */
+    public function login(Request $request){
+
+        try {
+
+            $loginArray = array(
+                'user_name' => request('username'),
+                'password' => request('password'),
+                'status' => 1
+            );
+
+            if (Auth::attempt($loginArray)) {
+
+                //insert device id into user devices table
+                $deviceID = $request->deviceId;
+                $devices = UserDevices::getDevices(Auth::user()->id, $deviceID);
+
+                $user = Auth::user();
+                die($user);
+                $token = $user->createToken(config('constant.common.token_name.MY_APP'))->accessToken;
+                
+                //update device type when login
+                $updateDeviceType = User::findOrFail($user['id']);
+                $updateDeviceType->device_type = $request->deviceType;
+                $updateDeviceType->save();
+
+                //Get user details by email id
+                if ($user['is_initial_setup'] && $user['is_verified']) {
+                    $userDetails = User::getUserByEmail($user['email']);
+
+                    if(!empty($request->FCMToken)) {
+                        $fcmTokenUpdate = $this->updateFCMToken(Auth::user()->id, $request->FCMToken);
+                    }
+
+                    if (!empty($userDetails['profile_picture'])) {
+                        $userDetails['user'][0]['profile_picture'] = URL::to('/') . config('constant.common.file_path.USER_IMAGE') . $userDetails['user'][0]['profile_picture'];
+                    } else if(!empty(Auth::user()->profile_picture)) {
+                        $userDetails['user'][0]['profile_picture'] = URL::to('/') . config('constant.common.file_path.USER_IMAGE') . Auth::user()->profile_picture;
+                    } else {
+                        $userDetails['user'][0]['profile_picture'] = '';
+                    }
+
+                    if (count($userDetails) > 0) {
+                        $data['data']['userDetail'] = $userDetails[0];
+                        $data['data']['token'] = $token;
+                        //check device already exist
+                        if (count($devices) > 0) {
+                            $data['data']['deviceID'] = true;
+                        } else {
+                            //insert new deice
+                            $deviceTableUpdate = $this->updateUserDevices(Auth::user()->id, $deviceID);
+                            if($deviceTableUpdate == false) {
+                                return $this->sendFailureResponse(config('constant.common.messages.EXCEPTION_ERROR'));
+                            }
+                            $data['data']['deviceID'] = false;
+                        }
+                        //insert data into user login details
+                        $loginDetails = $this->insertLoginDetails(Auth::user()->id, $deviceID , Auth::user()->employer_id);
+                        return $this->sendSuccessResponse($data);
+                    }
+                    
+                }
+            } else {
+                return $this->sendFailureResponse(config('constant.common.messages.VALID_CREDENTIALS'), config('constant.common.api_code.UNAUTHORIZED'));
+            }
+        } catch (\Exception $e) {
             return $this->sendFailureResponse();
         }
     }
