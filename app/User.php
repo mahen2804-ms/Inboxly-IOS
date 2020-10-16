@@ -290,9 +290,9 @@ class User extends Authenticatable implements Auditable
     public static function validationRulesForApiUser() {
 
         return [
-            'userName' => 'required|max:50',
-            'firstName' => 'required|max:50',
-            'lastName' => 'required|max:50',
+            'name' => 'required|max:50',
+            // 'firstName' => 'required|max:50',
+            // 'lastName' => 'required|max:50',
             'recovery_email' => 'required|email|max:70|unique:users',
             'password' => [
                 'required',

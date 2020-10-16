@@ -107,9 +107,9 @@ class UserRegistrationController extends ApiBaseController
                     //register user details
                     $input = $request->all();
                     $user = new User();
-                    $user->first_name = $input['firstName'];
-                    $user->last_name = $input['lastName'];
-                    $user->user_name = $input['userName'];
+                    // $user->first_name = $input['firstName'];
+                    // $user->last_name = $input['lastName'];
+                    $user->user_name = $input['name'];
                     $user->email = $input['email'];
                     $user->recovery_email = $input['recovery_email'];
                     //$user->mobile_number = $input['mobile'];
@@ -117,7 +117,7 @@ class UserRegistrationController extends ApiBaseController
                     $user->is_verified = 0;
                     $user->is_initial_setup = 0;
                     $user->otp = $randomid;
-                    $user->fcm_token = $input['FCMToken'];
+                    //$user->fcm_token = $input['FCMToken'];
                     $user->save();
                     $user->assignRole('user');
 
@@ -544,7 +544,7 @@ class UserRegistrationController extends ApiBaseController
 
                     if(!empty($user)) {
                         try {
-                            $dats = ['name' => ucfirst($user['first_name']).' '.ucfirst($user['last_name']), 'password' => $randomid, 'email'=>$email];
+                            $dats = ['name' => ucfirst($user['user_name']), 'password' => $randomid, 'email'=>$email];
                             $subject = 'Inboxly App - Forgot password.';
                             Helpers::sendEmail('emails.password', $dats, $user['recovery_email'], $email,  $subject);
                         } catch(Exception $ex) {
