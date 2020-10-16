@@ -91,7 +91,7 @@ class UserRegistrationController extends ApiBaseController
                 return $this->sendFailureResponse($errorsMsg);
             } else {
 
-                if($this->checkUserName($input['userName'])) {
+                if($this->checkUserName($input['name'])) {
                     $this->_response =config('constant.common.messages.USER_ALREADY_EXIST');
                     $code = config('constant.common.api_code.FAILED');
                     $data = $this->_response;
@@ -123,7 +123,7 @@ class UserRegistrationController extends ApiBaseController
 
                     /*mail send to user for creating a new account*/
                     try {
-                        $dats['user'] = ['userName' => $input['userName'], 'otp' => $randomid];
+                        $dats['user'] = ['userName' => $input['name'], 'otp' => $randomid];
                         $subject = 'Inboxly App - Account created.';
                         Helpers::sendEmail('emails.user-otp', $dats,$user['recovery_email'], $user['recovery_email'], $subject);
                     } catch (Exception $ex) {

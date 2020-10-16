@@ -388,6 +388,16 @@ class User extends Authenticatable implements Auditable
     }
 
     /**
+     * @name updateOTP
+     * @desc update OTP
+     * @param $email
+     * @return mixed
+     */
+    public static function updateOTP($otp,$email) {
+        return self::where('email', $email)->update(['otp' =>$otp]);
+    }
+
+    /**
      * @name getUserByEmailID
      * @desc fetch records on the basis of email id.
      * @return array
