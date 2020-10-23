@@ -17,7 +17,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" />
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
+    <link href="{{ url('css/custom.css') }}" rel="stylesheet" />
+     <link href="{{ url('css/app.css') }}" rel="stylesheet" />
     @yield('styles')
 </head>
 
@@ -27,6 +28,10 @@
             @yield("content")
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="{{ url('js/app.js') }}"></script>
+    <script src="{{url('js/parsley.min.js')}}"></script> 
     @yield('scripts')
 </body>
 

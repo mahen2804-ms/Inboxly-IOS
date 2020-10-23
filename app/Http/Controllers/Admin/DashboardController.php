@@ -6,14 +6,28 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Role;
 use App\User;
 use Gate;
+use Auth;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class DashboardController extends Controller
 {
+    private $_request;
+    /**
+     * @name __construct
+     * @desc create a new controller instance.
+     * @return void
+     */
+    public function __construct(Request $request) {
+        // Execute authentication filter before processing any request
+        $this->middleware('auth');
+        // Assign logged in user value
+        $this->_user = Auth::user();
+        $this->_request = $request;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,11 +35,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-       // abort_if(Gate::denies('dashboard_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $activeUsers = User::getActiveUsersCount($this->_request->customFilter);
 
-        $activeUsers = User::where('status', 1)->count();
-
-        $inactiveUsers = User::where('status', 0)->count();
+        $inactiveUsers = User::getInactiveUsersCount($this->_request->customFilter);
 
         return view('admin.dashboard.index', compact('activeUsers', 'inactiveUsers'));
     }
@@ -95,4 +107,6 @@ class DashboardController extends Controller
     {
         
     }
+
+
 }

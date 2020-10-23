@@ -61,6 +61,8 @@ return [
             'email_verified_at_helper'  => '',
             'password'                  => 'Password',
             'password_helper'           => '',
+            'old_password'              => 'Current Password',
+            'old_password_helper'       => '',
             'status'                    => 'Status',
             'status_helper'             => '',
             'registered_on'            => 'Registered On',

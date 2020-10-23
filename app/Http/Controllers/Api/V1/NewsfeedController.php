@@ -4,31 +4,49 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use PHPUnit\Framework\TestCase;
+use Storage;
+use App\SenderDetails;
+use App\Newsfeeds;
 
-class NewsfeedController extends Controller
+class NewsfeedController extends TestCase
 {
-    public function testMailSlurp(){
-    	$config = \MailSlurp\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', '3a33d8063534acf6d7b0d5c3536f66509d904240cdf01abcf3a65f847aa7bf65');
-    	$apiInstance = new \MailSlurp\Apis\AttachmentControllerApi(
-		    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-		    // This is optional, `GuzzleHttp\Client` will be used as default.
-		    new \GuzzleHttp\Client(),
-		    $config
-		);
-    	
-    	
-		// create controllers to access parts of the MailSlurp API
-		$inboxController = new \MailSlurp\Models\Inbox();
-		$waitForController = new \MailSlurp\Models\WaitForConditions();
 
-		// create an email address
-		$inbox = $apiInstance->createInbox($inboxController);
-		print_r($inbox->getEmailAddress()); die;
-		// get an email in the inbox
-		$timeout = 10000; // wait at most 10 seconds for new email
-		$unread_only = true; // only count unread emails
-
-		$email = $waitForController->waitForLatestEmail($inbox->getId(), $timeout, $unread_only);
-		print_r($email->getBody());die;
+     private function getConfig()
+    {
+        // create a mailslurp configuration with API_KEY environment variable
+        // get your own free API KEY at https://app.mailslurp.com/sign-up/
+        return \MailSlurp\Configuration::getDefaultConfiguration()
+            ->setApiKey('x-api-key', config('constant.common.mailslurp_api_key'));
     }
+
+    public function test1(Request $request)
+    {    
+        Storage::put('file.txt', json_encode($request->all()));  
+        $emailId = $request->emailId;
+        // create an inbox controller
+        $emailController = new \MailSlurp\Apis\EmailControllerApi(null, $this->getConfig());
+        $email = $emailController->getEmail($emailId); 
+        $sender = $email->getHeaders();
+        Storage::put(time().'_sender.txt', $sender);     
+        // $senderDetails = new SenderDetails();
+        // $senderDetails->name = $senderName;
+
+        // if($senderDetails->save()) {
+        //     $newsfeed = new Newsfeeds();
+        //     $newsfeed->title = $email->getSubject();
+        //     $newsfeed->image = '';
+        //     $newsfeed->description = $email->getBody();
+        //     $newsfeed->date_time = date('Y-m-d h:i:s', strtotime($email->getUpadtedAt());
+        //     $newsfeed->user_id = Auth::user()->id;
+        //     $newsfeed->sender_id = $senderDetails->id;
+        //     $newsfeed->save();
+
+        // }
+
+        Storage::put('email.txt', $email);         
+    }
+
+
+
 }
