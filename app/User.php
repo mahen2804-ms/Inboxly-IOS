@@ -41,12 +41,15 @@ class User extends Authenticatable implements Auditable
         'mobile_number',
         'password',
         'status',
+        'inbox_id',
         'facebook_token',
         'device_token',
         'device_type',
         'profile_pic',
         'google_token',
         'forgot_pass_code',
+        'is_initial_setup',
+        'is_verified',
         'verification_code',
         'verification_code_datetime',
         'created_at',
@@ -103,6 +106,7 @@ class User extends Authenticatable implements Auditable
         'mobile_number',
         'password',
         'status',
+        'inbox_id',
         'is_initial_setup',
         'is_verified',
         'profile_picture',
@@ -314,6 +318,23 @@ class User extends Authenticatable implements Auditable
         ];
     }
 
+    /**
+     * @name validationRulesCommon
+     * @desc validation rules for add user form
+     * @return array
+     */
+    public static function validationRulesCommonForLogin() {
+
+        return [
+            'email' => 'required|email|max:70|regex:/^[A-Za-z0-9\.]*@(inboxly)[.](com)$/',
+            'password' => [
+                'required',
+                'min:8',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'
+            ],
+        ];
+    }
+
      /**
      * @name validationRulesCommon
      * @desc validation rules for add user form
@@ -342,12 +363,13 @@ class User extends Authenticatable implements Auditable
         'email.between' => 'Email address should have 07 to 70 characters only',
         'email.required' => 'Please enter your email address',
         'email.email' => 'Invalid email. Please enter a valid email.',
-        'email.max' => 'The email should have max 50 characters.',
-        'first_name.required' => 'Please enter your first name',
-        'last_name.required' => 'Please enter your last name',
+        'email.max' => 'The email should have max 70 characters.',
+        'recovery_email.required' => 'Please enter your recovery email address',
+        'recovery_email.email' => 'Invalid recovery email. Please enter a valid email.',
+        'recovery_email.max' => 'The recovery email should have max 70 characters.',
         'new_password.regex' => 'New password should be combination of alphabets, numbers and special characters'  , 
-        'name.required'=> 'Name is required',
-        'name.pattern' => 'Name contains only alphabets characters',
+        'user_name.required'=> 'Name is required',
+        'user_name.pattern' => 'Name contains only alphabets characters',
         'admin_search.required'  => 'Search value is required',
         'status.required'  => 'Status is required',        
     ]; 
@@ -361,7 +383,7 @@ class User extends Authenticatable implements Auditable
      */
     public static function checkOTP($otp,$email) {
         return self::where('otp', $otp)
-            ->where('email', $email)
+            ->where('recovery_email', $email)
             ->where('status', 1)
             ->first();
     }
@@ -384,7 +406,7 @@ class User extends Authenticatable implements Auditable
      * @return mixed
      */
     public static function updatePassword($password,$email) {
-        return self::where('email', $email)->update(['password' =>$password]);
+        return self::where('recovery_email', $email)->update(['password' =>$password]);
     }
 
     /**
@@ -394,7 +416,7 @@ class User extends Authenticatable implements Auditable
      * @return mixed
      */
     public static function updateOTP($otp,$email) {
-        return self::where('email', $email)->update(['otp' =>$otp]);
+        return self::where('recovery_email', $email)->update(['otp' =>$otp]);
     }
 
     /**
@@ -405,19 +427,16 @@ class User extends Authenticatable implements Auditable
     public static function getUserByEmailID($email) {
         $column = [
             'id',
-            'first_name',
-            'last_name',
             'email',
             'recovery_email',
-            'mobile_number',
-            'gender',
+            'inbox_id',
             'created_at as added_on',
             'updated_at',
             'status',
             'user_name',
-            'is_initial_setup'
+            'is_login'
         ];
-        return self::select($column)->where('email', $email)->first();
+        return self::select($column)->where('recovery_email', $email)->first();
     }
 
     /**
@@ -429,23 +448,7 @@ class User extends Authenticatable implements Auditable
     public static function updatePaswordByEmail($password,$email) {
 
         return self::where('email', $email)->update(['password' => $password]);
-    }
-
-    
-    /**
-     * @name updateInitialSetup
-     * @desc update updateInitialSetup
-     * @param $id, $password
-     * @return array
-     */
-    public static function updateInitialSetup($id) {
-
-        return self::whereNotNull('dob')
-            ->whereNotNull('gender')
-            ->whereNotNull('job_role_id')
-            ->where('job_role_id','!=',0)
-            ->update(['is_initial_setup' => 1]);
-    }
+    }   
 
     /**
      * @name checkUserName
@@ -477,9 +480,9 @@ class User extends Authenticatable implements Auditable
      * @desc update is otp to zero.
      * @return array
      */
-    public static function updateOTPTOZero($email) {
-        $record = self::where('email',$email)
-            ->update(['otp' => 0]);
+    public static function updateOTPTOZero($email, $inbox) {
+        $record = self::where('recovery_email',$email)
+            ->update(['otp' => 0, 'is_verified'=>1, 'inbox_id'=>$inbox, 'is_login'=>1]);
     }
 
     /**
@@ -490,20 +493,15 @@ class User extends Authenticatable implements Auditable
     public static function getUserByEmail($email) {
         $column = [
             'id',
-            'first_name',
-            'last_name',
-            'email',
-            'recovery_email',
-            'mobile_number',
-            'gender',
-            'is_verified',
-            'is_initial_setup',
             'user_name',
-            'profile_pic',
-            'dob',
+            'email',
+            'inbox_id',
+            'recovery_email',
+            'is_verified',
             'created_at as added_on',
             'updated_at',
             'status',
+            'is_login'
         ];
 
         return self::select($column)->where('email', $email)->get()->toArray();
@@ -585,7 +583,7 @@ class User extends Authenticatable implements Auditable
      */
     public static function checkUser($email) {
         //return a device token, either from the model or from some other place. 
-        return self::where('email', $email)->first();
+        return self::where('recovery_email', $email)->first();
     }
 
     /**
