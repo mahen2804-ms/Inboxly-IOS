@@ -30,7 +30,7 @@ Route::group(['prefix' => 'v1'], function () {
      // Route for forgot password
     Route::post('forgot-password', 'Api\V1\UserRegistrationController@forgotPassword');
 
-    // Route for user's listing
+        // Route for user's listing
         Route::get('categories', 'Api\V1\CategoriesController@allCategoriesList');
         // Route for user's listing
         Route::post('create-category', 'Api\V1\CategoriesController@createCategory');
