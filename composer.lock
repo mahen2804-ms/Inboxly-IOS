@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "44384e0d2ea85968ab824c064ae7ab02",
+=======
+    "content-hash": "c6127909419e42ecd8a33320b98dbbe3",
+>>>>>>> fetch-newsfeed-api
     "packages": [
         {
             "name": "brick/math",
@@ -368,6 +372,7 @@
         },
         {
             "name": "doctrine/dbal",
+<<<<<<< HEAD
             "version": "2.12.0",
             "source": {
                 "type": "git",
@@ -378,6 +383,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/dbal/zipball/c6d37b4c42aaa3c3ee175f05eca68056f4185646",
                 "reference": "c6d37b4c42aaa3c3ee175f05eca68056f4185646",
+=======
+            "version": "2.11.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/dbal.git",
+                "reference": "b88a45cbc395e850b2d958dcd7b9d49d09ff23e0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/b88a45cbc395e850b2d958dcd7b9d49d09ff23e0",
+                "reference": "b88a45cbc395e850b2d958dcd7b9d49d09ff23e0",
+>>>>>>> fetch-newsfeed-api
                 "shasum": ""
             },
             "require": {
@@ -457,7 +474,11 @@
                 "sqlserver",
                 "sqlsrv"
             ],
+<<<<<<< HEAD
             "time": "2020-10-22T17:26:24+00:00"
+=======
+            "time": "2020-10-19T02:01:37+00:00"
+>>>>>>> fetch-newsfeed-api
         },
         {
             "name": "doctrine/event-manager",
@@ -6420,6 +6441,7 @@
         },
         {
             "name": "filp/whoops",
+<<<<<<< HEAD
             "version": "2.9.0",
             "source": {
                 "type": "git",
@@ -6430,6 +6452,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/filp/whoops/zipball/2ec31f3adc54c71a59c5e3c2143d7a0e2f8899f8",
                 "reference": "2ec31f3adc54c71a59c5e3c2143d7a0e2f8899f8",
+=======
+            "version": "2.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/filp/whoops.git",
+                "reference": "fa50d9db1c0c2fae99cf988d27023effda5524a3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/fa50d9db1c0c2fae99cf988d27023effda5524a3",
+                "reference": "fa50d9db1c0c2fae99cf988d27023effda5524a3",
+>>>>>>> fetch-newsfeed-api
                 "shasum": ""
             },
             "require": {
@@ -6477,7 +6511,11 @@
                 "throwable",
                 "whoops"
             ],
+<<<<<<< HEAD
             "time": "2020-10-20T12:00:00+00:00"
+=======
+            "time": "2020-10-17T09:00:00+00:00"
+>>>>>>> fetch-newsfeed-api
         },
         {
             "name": "fzaninotto/faker",

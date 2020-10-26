@@ -16,9 +16,9 @@
                                 <div class="form-group {{ $errors->has('search') ? 'has-error' : '' }}">
                                     <label for="search">{{ trans('cruds.dashboard.fields.search') }}</label>
                                     <select name="search" id="search" class="form-control ">
-                                        <option value="1" >Daily</option>
-                                        <option value="2" >Weekly</option>
-                                        <option value="3" >Monthly</option>
+                                        <option value="daily" >Daily</option>
+                                        <option value="weekly" >Weekly</option>
+                                        <option value="monthly" >Monthly</option>
                                     </select>
                                     @if($errors->has('search'))
                                         <em class="invalid-feedback">
@@ -87,13 +87,14 @@
             dateFormat: "dd-mm-yy"
         });
         //on select get users records counts
-        $('.date, #search').on('change', function(){
-            alert('1233');
+        $('.datepicker, #search').on('change', function(){
+
             $.ajax({
-                url:APP_BASE_URL+'/getFilteredUser',
+                url:APP_BASE_URL+'/admin/dashboard/getFilteredUser',
                 type:'post',
                 date:{
-
+                    customFilter:$(this).val(),
+                    '_token':$('meta[name="csrf-token"]').attr('content')
                 },
                 success:function(data) {
                     console.log(data);

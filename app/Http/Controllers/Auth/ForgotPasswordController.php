@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Auth;
 use DB;
+use Helpers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Password;
@@ -63,7 +64,7 @@ class ForgotPasswordController extends Controller
         //create a new token to be sent to the user. 
         DB::table('password_resets')->insert([
             'email' => $request->email,
-            'token' => Str::random(10), //change 60 to any length you want
+            'token' => Helpers::randomPassword(10), //change 60 to any length you want
             'created_at' => new \DateTime('NOW')
         ]);
 

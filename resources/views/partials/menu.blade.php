@@ -28,9 +28,8 @@
                         {{ trans('cruds.ProfileManagement.title') }}
                     </a>
                     <ul class="nav-dropdown-items">
-                        
                             <li class="nav-item">
-                                <a href="{{ route('admin.users.edit', eAuth::user()->id) }}" class="nav-link {{ request()->is('admin/user') || request()->is('admin/users/*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.users.edit', Auth::user()->id) }}" class="nav-link {{ request()->is('admin/user') || request()->is('admin/users/*') ? 'active' : '' }}">
                                     <i class="fa-fw fas fa-briefcase nav-icon">
 
                                     </i>

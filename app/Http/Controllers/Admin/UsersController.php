@@ -6,14 +6,32 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Role;
 use App\User;
 use Gate;
+use Role;
+use Auth;
+use Storage;
+use Hash;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class UsersController extends Controller
 {
+
+    private $_request;
+    /**
+     * @name __construct
+     * @desc create a new controller instance.
+     * @return void
+     */
+    public function __construct(Request $request) {
+        // Execute authentication filter before processing any request
+        $this->middleware('auth');
+        // Assign logged in user value
+        $this->_user = Auth::user();
+        $this->_request = $request;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +41,7 @@ class UsersController extends Controller
     {
         //abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::all()->where('status', 1);
+        $users = User::getAllUsers();
 
         return view('admin.users.index', compact('users'));
     }
@@ -37,9 +55,9 @@ class UsersController extends Controller
     {
         //abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $roles = Role::all()->pluck('title', 'id');
+       // $roles = Role::all()->pluck('title', 'id');
 
-        return view('admin.users.create', compact('roles'));
+        return view('admin.users.create');
     }
 
     /**
@@ -64,11 +82,9 @@ class UsersController extends Controller
     {
         //abort_if(Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $roles = Role::all()->pluck('title', 'id');
+        //$roles = Role::all()->pluck('title', 'id');
 
-        $user->load('roles');
-
-        return view('admin.users.edit', compact('roles', 'user'));
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -77,11 +93,16 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateUserRequest $request, User $user)
-    {
-        $user->update($request->all());
+    {   
+        $input = $request->all();
+        $imagePath = Storage::disk('uploads')->put('profile-picture', $input['profile_picture']);
+        $imageName = str_replace('profile-picture/', '', $imagePath);
+        $input['profile_picture'] = $imageName;      
+        $user->update($input);
         $user->roles()->sync($request->input('roles', []));
+        toastr()->success(config('constant.common.messages.RECORDS_UPDATED'));
 
-        return redirect()->route('admin.users.index');
+        return redirect('/admin/users/'.Auth::user()->id.'/edit');
     }
 
     /**
@@ -93,7 +114,7 @@ class UsersController extends Controller
     {
         //abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $user->load('roles');
+        //$user->load('roles');
 
         return view('admin.users.show', compact('user'));
     }
@@ -129,7 +150,7 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function updateStatus() { 
+    public function updateStatus(){
         try {
             $id = $this->_request->id;
             $status = $this->_request->status;
@@ -158,16 +179,54 @@ class UsersController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * load change password page.
      *
      * @return \Illuminate\Http\Response
      */
     public function changePassword() { 
         try {
-            return view('admin.update-password');
+            return view('admin.users.update-password');
         } catch(Exception $ex) { 
            return redirect()->back()->with('failure', config('constant.common.messages.EXCEPTION_ERROR'));
         }
     }
 
+    /**
+     * check password exist in records or not.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function checkPassword() { 
+        try {
+            $password = $this->_request->current_password;
+            $user = User::findOrFail(Auth::user()->id);
+            
+            if(Hash::check($password, $user->password)) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch(Exception $ex) { 
+           return redirect()->back()->with('failure', config('constant.common.messages.EXCEPTION_ERROR'));
+        }
+    }
+
+
+    /**
+     * update new password.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePassword() { 
+        try {
+            $user = User::findOrFail(Auth::user()->id);
+            $user->update(['password'=>$this->_request->password]);
+            toastr()->success(config('constant.common.messages.RECORDS_UPDATED'));
+
+            return redirect('/admin/users/change-password');
+        } catch(Exception $ex) { 
+           return redirect()->back()->with('failure', config('constant.common.messages.EXCEPTION_ERROR'));
+        }
+    }
 }

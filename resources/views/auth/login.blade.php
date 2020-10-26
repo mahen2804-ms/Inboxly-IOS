@@ -10,7 +10,7 @@
                             {{ \Session::get('message') }}
                         </p>
                     @endif
-                    <form method="POST" action="{{ route('login') }}" data-parsley-validate="">
+                    <form method="POST" action="{{ route('login') }}" data-parsley-validate="" autocomplete="off">
                         {{ csrf_field() }}
                         <div class="text-center"><h1>{{ trans('panel.site_title') }}</h1></div>
                         <p class="text-muted">{{ trans('global.login') }}</p>
@@ -21,7 +21,7 @@
                                     <i class="fa fa-user"></i>
                                 </span>
                             </div>
-                            <input name="email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" required autofocus placeholder="{{ trans('global.login_email') }}" value="{{ old('email', null) }}">
+                            <input name="email" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" data-parsley-required autofocus placeholder="{{ trans('global.login_email') }}" value="{{ old('email', null) }}" data-parsley-required-message="Please enter email" maxlength="70">
                             @if($errors->has('email'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('email') }}
@@ -33,7 +33,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-lock"></i></span>
                             </div>
-                            <input name="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required placeholder="{{ trans('global.login_password') }}">
+                            <input name="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" data-parsley-required placeholder="{{ trans('global.login_password') }}" data-parsley-required-message="Please enter password">
                             @if($errors->has('password'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('password') }}

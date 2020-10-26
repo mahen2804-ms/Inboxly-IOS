@@ -69,7 +69,6 @@
                 'USER_IMAGE' => '/uploads/user/',
             ],
             'mailslurp_api_key'=>'817cd3ec54bbd44a8fe34b0e3b38ec36d32d520981a3c2c7d2fa54754d01678a',
-
         ],
      
     ];
