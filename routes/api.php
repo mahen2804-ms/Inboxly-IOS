@@ -33,8 +33,10 @@ Route::group(['prefix' => 'v1'], function () {
 
         // Route for user's listing
         Route::get('newsfeed', 'Api\V1\NewsfeedController@allNewsfeedList');
-
-
+        // Route for user's listing
+        Route::post('newsfeed-details', 'Api\V1\NewsfeedController@newsfeedDetails');
+         // Route for user's listing
+        Route::post('search-newsfeed', 'Api\V1\NewsfeedController@allNewsfeedList');
          // Route for user's listing
         Route::get('categories', 'Api\V1\CategoriesController@allCategoriesList');
         // Route for user's listing

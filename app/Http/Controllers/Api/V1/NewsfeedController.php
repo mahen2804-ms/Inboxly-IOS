@@ -12,7 +12,7 @@ use DB;
 use PHPUnit\Framework\TestCase;
 use Storage;
 use App\SenderDetails;
-use App\Newsfeeds;
+use App\Newsfeed;
 
 
 class NewsfeedController extends ApiBaseController
@@ -111,9 +111,44 @@ class NewsfeedController extends ApiBaseController
         {
             try {
                 //get frequency list
-                $newsfeed = Newsfeed::allNewsfeedList();
+                $newsfeed = Newsfeed::allNewsfeedList($this->_request->filterValue);
 
-                if(count($Newsfeed) > 0) {
+                if(count($newsfeed) > 0) {
+                    $data['data'] = $newsfeed;
+
+                    return $this->sendSuccessResponse($data);
+                } else {
+                    return $this->sendFailureResponse(config('constant.common.messages.RECORD_NOT_FOUND'));
+                }
+            } catch(Exception $ex) {
+                return $this->sendFailureResponse();
+            }
+        }
+
+    /**
+         * @OA\Get(
+         *     path="/api/v1/newsfeed-details",
+         *     tags={"All Newsfeed details"},
+         *     summary="api to get all Newsfeed details",
+         *     operationId="allNewsfeedList",
+         *    @OA\Response(
+         *         response=200,
+         *         description="Ok"
+         *     ),
+         *      @OA\Response(
+         *         response="default",
+         *         description="unexpected error",
+         *         @OA\Schema(ref="#/components/schemas/Error")
+         *     )
+         * )
+         */
+        public function newsfeedDetails()
+        {
+            try {
+                //get frequency list
+                $newsfeed = Newsfeed::newsfeedDetails($this->_request->id);
+
+                if(count($newsfeed) > 0) {
                     $data['data'] = $newsfeed;
 
                     return $this->sendSuccessResponse($data);
