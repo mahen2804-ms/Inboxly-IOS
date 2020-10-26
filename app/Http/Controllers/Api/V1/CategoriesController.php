@@ -22,6 +22,8 @@ class CategoriesController extends ApiBaseController
      * @return void
      */
     public function __construct(Request $request) {
+        // Execute authentication filter before processing any request
+        $this->middleware('auth');
         // Assign logged in user value
         $this->_user = Auth::user();
         $this->_request = $request;
@@ -46,6 +48,7 @@ class CategoriesController extends ApiBaseController
          */
         public function allCategoriesList()
         {
+            die('1w123123');
             try {
                 //get frequency list
                 $categories = Categories::allCategoriesList();

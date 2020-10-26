@@ -30,7 +30,10 @@ Route::group(['prefix' => 'v1'], function () {
      // Route for forgot password
     Route::post('forgot-password', 'Api\V1\UserRegistrationController@forgotPassword');
 
-        // Route for user's listing
+       
+    // Apply middleware for routes which will need authentication
+    Route::group(['middleware' => 'auth:api'], function(){
+         // Route for user's listing
         Route::get('categories', 'Api\V1\CategoriesController@allCategoriesList');
         // Route for user's listing
         Route::post('create-category', 'Api\V1\CategoriesController@createCategory');
@@ -38,9 +41,6 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('update-category', 'Api\V1\CategoriesController@updateCategory');
         // Route for user's listing
         Route::post('manage-status', 'Api\V1\CategoriesController@manageStatus');
-    // Apply middleware for routes which will need authentication
-    Route::group(['middleware' => 'auth:api'], function(){
-        
     });
   
 });
