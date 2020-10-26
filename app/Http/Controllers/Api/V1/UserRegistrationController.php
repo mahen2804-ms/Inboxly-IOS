@@ -6,7 +6,7 @@ use App\Http\Controllers\ApiBaseController;
 use App\User;
 use DemeterChain\A;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -20,6 +20,8 @@ use App\UserDevices;
 use App\UserLoginDetails;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use PHPUnit\Framework\TestCase;
+use Storage;
 
 class UserRegistrationController extends ApiBaseController
 {
@@ -35,6 +37,19 @@ class UserRegistrationController extends ApiBaseController
         // Assign logged in user value
         $this->_user = Auth::user();
         $this->_request = $request;
+    }
+
+    /**
+     * Configuration of mailslurp api key.
+     *
+     * @return void
+     */
+    private function getConfig()
+    {
+        // create a mailslurp configuration with API_KEY environment variable
+        // get your own free API KEY at https://app.mailslurp.com/sign-up/
+        return \MailSlurp\Configuration::getDefaultConfiguration()
+            ->setApiKey('x-api-key', config('constant.common.mailslurp_api_key'));
     }
 
     /**
@@ -70,6 +85,7 @@ class UserRegistrationController extends ApiBaseController
     public function userRegistration(Request $request)
     {
         try {
+
             $input = $request->all();
 
             //vadilations
@@ -133,6 +149,7 @@ class UserRegistrationController extends ApiBaseController
                     DB::commit();
                     $data['message'] = 'success';
                     $data['data'] = ['email' => $input['email']];
+                    $data['data'] = ['recovery_email' => $input['recovery_email']];
                     $code = config('constant.common.api_code.CREATE');
                     return $this->sendSuccessResponse($data, $code);
                     
@@ -210,7 +227,7 @@ class UserRegistrationController extends ApiBaseController
         }
     }
 
-     /**
+    /**
      * @OA\Get(
      *     path="/api/v1/validate-otp/{otp}/{mobile}/{email}",
      *     tags={"Validate OTP"},
@@ -239,10 +256,11 @@ class UserRegistrationController extends ApiBaseController
      *     )
      * )
      */
-    public function validateOTP($otp,$email,$deviceId,$deviceType) {
+    public function validateOTP($otp,$email) {
         try {
-            $numlength = strlen((string)$otp);
 
+            $numlength = strlen((string)$otp);
+            
             if (is_numeric($otp) && $numlength == 6) {
                 //check otp is already exist in database
                 $checkOtp = User::checkOTP($otp, $email);
@@ -253,32 +271,28 @@ class UserRegistrationController extends ApiBaseController
                     $data['isVerified'] = true;
                     $user = User::getUserByEmailID($email);
 
-                    //update device type when login
-                    $updateDeviceType = User::findOrFail($user['id']);
-                    $updateDeviceType->device_type = $deviceType;
-                    $updateDeviceType->save();
-
                     if(empty($user)) {
                         return $this->sendFailureResponse(config('constant.common.messages.RECORD_NOT_FOUND'));
                     }
-                    
+                       
                     $userDetails = User::getUserByEmail($user['email']);
 
                     if (count($userDetails) > 0) {
                         $data['data']['userDetail'] = $userDetails[0];
-
+                    
                         $user = User::findOrFail($userDetails[0]['id']);
                         $token = $user->createToken(config('constant.common.token_name.MY_APP'))->accessToken;
-                        $data['data']['token'] = $token;
-                        //update device table
-                        $deviceTableUpdate = $this->updateUserDevices($user['id'], $deviceId);
+                        $data['data']['token'] = $token; 
+                        // create an inbox controller
+                        $inboxController = new \MailSlurp\Apis\InboxControllerApi(null, $this->getConfig());
+                        $inbox = $inboxController->createInbox();
+                         // create an inbox controller
+                        $webhookController = new \MailSlurp\Apis\WebhookControllerApi(null, $this->getConfig());
+                        $webhook = $webhookController->createWebhook($inbox->getId(), ['url'=>'https://inboxymobileapp.siplsolutions.com/api/v1/respponse']);
 
-                        if($deviceTableUpdate == false) {
-                            return $this->sendFailureResponse(config('constant.common.messages.EXCEPTION_ERROR'));
-                        }
-                        $updateOtp = User::updateOTPTOZero($email);
+                        $updateOtp = User::updateOTPTOZero($email, $inbox->getId());
                         //insert data into user login details
-                        $loginDetails = $this->insertLoginDetails($user['id'], $deviceId);
+                        //$loginDetails = $this->insertLoginDetails($user['id'], $deviceId);
                         return $this->sendSuccessResponse($data);
                     }
 
@@ -414,64 +428,63 @@ class UserRegistrationController extends ApiBaseController
         try {
 
             $loginArray = array(
-                'user_name' => request('username'),
+                'email' => request('email'),
                 'password' => request('password'),
                 'status' => 1
             );
 
-            if (Auth::attempt($loginArray)) {
+            //vadilations
+            $validUserCommon = User::validationRulesCommonForLogin();
+            $validator = Validator::make($loginArray,$validUserCommon, User::$validationMessages);
 
-                //insert device id into user devices table
-                $deviceID = $request->deviceId;
-                $devices = UserDevices::getDevices(Auth::user()->id, $deviceID);
+            /*check fields validation on server side*/
+            if($validator->fails()) {
 
-                $user = Auth::user();
-                die($user);
-                $token = $user->createToken(config('constant.common.token_name.MY_APP'))->accessToken;
-                
-                //update device type when login
-                $updateDeviceType = User::findOrFail($user['id']);
-                $updateDeviceType->device_type = $request->deviceType;
-                $updateDeviceType->save();
+                /*Redirect user back with input if server side validation fails*/
+                $errors = $validator->errors();
+                $errorsMsg = "";
 
-                //Get user details by email id
-                if ($user['is_initial_setup'] && $user['is_verified']) {
+                if ($errors->first()) {
+                    $errorsMsg .= " " . $errors->first();
+                }
+
+                return $this->sendFailureResponse($errorsMsg);
+            } else {
+
+                //print_r(Auth::attempt($loginArray)); die;
+                if (Auth::attempt($loginArray)) {
+                    $user = Auth::user();
+                    $token = $user->createToken(config('constant.common.token_name.MY_APP'))->accessToken;                
+                    //Get user details by email id
                     $userDetails = User::getUserByEmail($user['email']);
-
-                    if(!empty($request->FCMToken)) {
-                        $fcmTokenUpdate = $this->updateFCMToken(Auth::user()->id, $request->FCMToken);
-                    }
-
-                    if (!empty($userDetails['profile_picture'])) {
-                        $userDetails['user'][0]['profile_picture'] = URL::to('/') . config('constant.common.file_path.USER_IMAGE') . $userDetails['user'][0]['profile_picture'];
-                    } else if(!empty(Auth::user()->profile_picture)) {
-                        $userDetails['user'][0]['profile_picture'] = URL::to('/') . config('constant.common.file_path.USER_IMAGE') . Auth::user()->profile_picture;
-                    } else {
-                        $userDetails['user'][0]['profile_picture'] = '';
-                    }
 
                     if (count($userDetails) > 0) {
                         $data['data']['userDetail'] = $userDetails[0];
                         $data['data']['token'] = $token;
-                        //check device already exist
-                        if (count($devices) > 0) {
-                            $data['data']['deviceID'] = true;
-                        } else {
-                            //insert new deice
-                            $deviceTableUpdate = $this->updateUserDevices(Auth::user()->id, $deviceID);
-                            if($deviceTableUpdate == false) {
-                                return $this->sendFailureResponse(config('constant.common.messages.EXCEPTION_ERROR'));
+                        
+                        if(!empty($userDetails[0]['is_verified']) && $userDetails[0]['is_verified'] != 1) {
+                            /*mail send to user for creating a new account*/
+                            try {
+                                $randomid = Helpers::getRandomOTP();
+                                $updateOTP = User::updateOTP($randomid,$userDetails[0]['email']);
+                                /*mail send to user for creating a new account*/
+                                $dats['user'] = ['userName' => $input['name'], 'otp' => $randomid];
+                                $subject = 'Inboxly App - Account created.';
+                                Helpers::sendEmail('emails.user-otp', $dats,$user['recovery_email'], $user['recovery_email'], $subject);
+                   
+                            } catch (Exception $ex) {
+                                $error['message'] = config('constant.common.messages.INVALID_EMAIL');
+                                return $this->sendFailureResponse($error);
                             }
-                            $data['data']['deviceID'] = false;
+
                         }
-                        //insert data into user login details
-                        $loginDetails = $this->insertLoginDetails(Auth::user()->id, $deviceID );
+
                         return $this->sendSuccessResponse($data);
                     }
                     
+                } else {
+                    return $this->sendFailureResponse(config('constant.common.messages.VALID_CREDENTIALS'), config('constant.common.api_code.UNAUTHORIZED'));
                 }
-            } else {
-                return $this->sendFailureResponse(config('constant.common.messages.VALID_CREDENTIALS'), config('constant.common.api_code.UNAUTHORIZED'));
             }
         } catch (\Exception $e) {
             return $this->sendFailureResponse();
@@ -534,9 +547,9 @@ class UserRegistrationController extends ApiBaseController
 
             if((!empty($isExist)) ){
                 //Regenerate otp
-                $randomid =  Str::random(10);
+                $randomid =  Helpers::randomPassword(10);
                 //update otp for same user
-                $updatePassword = User::updatePassword($randomid,$email);
+                $updatePassword = User::updatePassword(bcrypt($randomid),$email);
 
                 if($updatePassword) {
                     //Get user details for sending sms and email
@@ -561,6 +574,44 @@ class UserRegistrationController extends ApiBaseController
             } else {
                 return $this->sendFailureResponse(config('constant.common.messages.EMAIL_NOT_EXIST'));
             }
+        } catch(Exception $ex) {
+            return $this->sendFailureResponse();
+        }
+    }
+
+     /**
+     * @OA\Get(
+     *     path="/api/v1/logoutApi",
+     *     tags={"Logout"},
+     *     summary="api to log out",
+     *     operationId="logoutApi",
+     *    @OA\Response(
+     *         response=200,
+     *         description="Ok"
+     *     ),
+     *      @OA\Response(
+     *         response="default",
+     *         description="unexpected error",
+     *         @OA\Schema(ref="#/components/schemas/Error")
+     *     )
+     * )
+     */
+    public function logoutApi()
+    {
+        try {
+
+            if (Auth::check()) {
+                Auth::user()->AauthAcessToken()->delete();
+                User::where('id',Auth::user()->id)->update(['is_login' => 0]);
+                $data['message'] =config('constant.common.messages.LOGOUT');
+                $code = config('constant.common.api_code.UPDATE');
+                return $this->sendSuccessResponse($data,$code);
+            } else {
+                $data['message'] =config('constant.common.messages.EXCEPTION_ERROR');
+                $code = config('constant.common.api_code.FAILED');
+                return $this->sendSuccessResponse($data,$code);
+            }
+
         } catch(Exception $ex) {
             return $this->sendFailureResponse();
         }
