@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Categories;
-use Auth;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Controllers\ApiBaseController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use DB;
+use App\Categories;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CategoriesController extends ApiBaseController
 {
-    private $_user;
+    //private $_user;
     private $_request;
     
     /**
@@ -23,10 +25,11 @@ class CategoriesController extends ApiBaseController
      */
     public function __construct(Request $request) {
         // Execute authentication filter before processing any request
-        $this->middleware('auth');
+        //$this->middleware('auth');
         // Assign logged in user value
         $this->_user = Auth::user();
         $this->_request = $request;
+
     }
 
     /**
@@ -48,12 +51,11 @@ class CategoriesController extends ApiBaseController
          */
         public function allCategoriesList()
         {
-            die('1w123123');
             try {
                 //get frequency list
                 $categories = Categories::allCategoriesList();
-
-                if(count($categories) > 0) {
+                
+                if(!empty($categories) && count($categories) > 0) {
                     $data['data'] = $categories;
 
                     return $this->sendSuccessResponse($data);
@@ -109,7 +111,7 @@ class CategoriesController extends ApiBaseController
                 return $this->sendFailureResponse($errorsMsg);
             } else {
 
-                if($this->checkCategoryName($input['name'])) {
+                if($this->checkCategoryName($input['category'])) {
                     $this->_response =config('constant.common.messages.CATEGORY_ALREADY_EXIST');
                     $code = config('constant.common.api_code.FAILED');
                     $data = $this->_response;
@@ -119,13 +121,13 @@ class CategoriesController extends ApiBaseController
                     //register category details
                     $input = $this->_request->all();
                     $category = new Categories();
-                    $category->name = $input['name'];
+                    $category->name = $input['category'];
                     $category->status = 1;
                     $category->save();
                                         
                     DB::commit();
                     $data['message'] = 'success';
-                    $data['data'] = ['category_name' => $input['name']];
+                    $data['data'] = ['category_name' => $input['category']];
                     $code = config('constant.common.api_code.CREATE');
                     return $this->sendSuccessResponse($data, $code);
                     
@@ -200,7 +202,7 @@ class CategoriesController extends ApiBaseController
                 return $this->sendFailureResponse($errorsMsg);
             } else {
 
-                if($this->checkCategoryName($input['name'], $input['category_id'])) {
+                if($this->checkCategoryName($input['category'], $input['category_id'])) {
                     $this->_response =config('constant.common.messages.CATEGORY_ALREADY_EXIST');
                     $code = config('constant.common.api_code.FAILED');
                     $data = $this->_response;
@@ -209,13 +211,13 @@ class CategoriesController extends ApiBaseController
                    
                     //register category details
                     $category = Categories::findOrFail($input['category_id']);
-                    $category->name = $input['name'];
+                    $category->name = $input['category'];
                     $category->status = 1;
                     $category->save();
                                         
                     DB::commit();
                     $data['message'] = 'success';
-                    $data['data'] = ['category_name' => $input['name']];
+                    $data['data'] = ['category_name' => $input['category']];
                     $code = config('constant.common.api_code.UPDATE');
                     return $this->sendSuccessResponse($data, $code);
                     
