@@ -29,6 +29,14 @@ Route::group(['prefix' => 'v1'], function () {
 
      // Route for forgot password
     Route::post('forgot-password', 'Api\V1\UserRegistrationController@forgotPassword');
+
+     // Route for view profile
+    Route::get('view-profile', 'Api\V1\ManageProfileController@viewUser');
+
+    // Route for view profile
+    Route::post('edit-profile', 'Api\V1\ManageProfileController@editUser');
+    // Route for view profile
+    Route::post('delete-profile', 'Api\V1\ManageProfileController@deleteUser');
   
 });
 

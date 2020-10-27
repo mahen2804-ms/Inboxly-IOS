@@ -17,6 +17,7 @@
                 'STATUS_UPDATED_SUCCESSFULLY'=> 'Status updated successfully',
                 'PASSWORD_UPDATE' => 'Password updated successfully',
                 'RECORDS_UPDATED' => 'Records updated successfully',
+                'RECORDS_DELETED' => 'Records deleted successfully',
                 'RECORDS_ADDED' => 'Records added successfully',
                 'PASSWORD_NOT_EXIST' => 'Current password is incorrect',
                 'IS_NUMERIC' => 'Please enter only numeric 6 digit values',

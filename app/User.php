@@ -33,21 +33,14 @@ class User extends Authenticatable implements Auditable
      * @var array
      */
     protected $auditInclude = [
-        'first_name',
-        'last_name',
         'user_name',
         'email',
         'recovery_email',
-        'mobile_number',
         'password',
         'status',
-        'facebook_token',
-        'device_token',
-        'device_type',
-        'profile_pic',
-        'google_token',
-        'forgot_pass_code',
-        'verification_code',
+        'is_verified',
+        'otp',
+        'is_login',
         'verification_code_datetime',
         'created_at',
         'updated_at',
@@ -95,8 +88,6 @@ class User extends Authenticatable implements Auditable
      * @var array
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
         'user_name',
         'email',
         'recovery_email',
@@ -106,10 +97,8 @@ class User extends Authenticatable implements Auditable
         'is_initial_setup',
         'is_verified',
         'profile_picture',
-        'forgot_pass_code',
-        'verification_code',
-        'verification_code_datetime', 
-        'fcm_token'
+        'otp',
+        'is_login',
     ];
 
      /**
