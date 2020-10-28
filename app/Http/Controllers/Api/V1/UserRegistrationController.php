@@ -131,7 +131,6 @@ class UserRegistrationController extends ApiBaseController
                     //$user->mobile_number = $input['mobile'];
                     $user->password = bcrypt($input['password']);
                     $user->is_verified = 0;
-                    $user->is_initial_setup = 0;
                     $user->otp = $randomid;
                     //$user->fcm_token = $input['FCMToken'];
                     $user->save();
@@ -462,13 +461,13 @@ class UserRegistrationController extends ApiBaseController
                         $data['data']['userDetail'] = $userDetails[0];
                         $data['data']['token'] = $token;
                         
-                        if(!empty($userDetails[0]['is_verified']) && $userDetails[0]['is_verified'] != 1) {
+                        if(empty($userDetails[0]['is_verified'])) {
                             /*mail send to user for creating a new account*/
                             try {
                                 $randomid = Helpers::getRandomOTP();
-                                $updateOTP = User::updateOTP($randomid,$userDetails[0]['email']);
+                                $updateOTP = User::updateOTP($randomid,$userDetails[0]['recovery_email']);
                                 /*mail send to user for creating a new account*/
-                                $dats['user'] = ['userName' => $input['name'], 'otp' => $randomid];
+                                $dats['user'] = ['userName' => $user['user_name'], 'otp' => $randomid];
                                 $subject = 'Inboxly App - Account created.';
                                 Helpers::sendEmail('emails.user-otp', $dats,$user['recovery_email'], $user['recovery_email'], $subject);
                    
@@ -599,11 +598,12 @@ class UserRegistrationController extends ApiBaseController
     public function logoutApi()
     {
         try {
-
+            print_r(Auth::guard('api')->user()); die;
             if (Auth::check()) {
                 Auth::user()->AauthAcessToken()->delete();
                 User::where('id',Auth::user()->id)->update(['is_login' => 0]);
                 $data['message'] =config('constant.common.messages.LOGOUT');
+
                 $code = config('constant.common.api_code.UPDATE');
                 return $this->sendSuccessResponse($data,$code);
             } else {

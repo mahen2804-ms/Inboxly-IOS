@@ -3,28 +3,25 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.edit') }} {{ trans('cruds.user.title_singular') }}
+        {{ trans('global.change_password') }} 
     </div>
 
     <div class="card-body">
-        <form action="#" method="POST" enctype="multipart/form-data">
+        <form action="{{url('/admin/users/update-password')}}" method="POST" autocomplete="off" data-parsley-validate>
             @csrf
-            @method('PUT')
             <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
-                <label for="password">{{ trans('cruds.user.fields.password') }}</label>
-                <input type="password" id="password" name="password" class="form-control">
-                @if($errors->has('password'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('password') }}
-                    </em>
-                @endif
+                <label for="password">{{ trans('cruds.user.fields.old_password') }}</label>
+                <input type="password" id="old_password" name="old_password" class="form-control" data-parsley-required data-parsley-required-message="Please enter current password">
+                <em class="invalid-feedback old_password" >
+                    {{ $errors->first('password') }}
+                </em>
                 <p class="helper-block">
                     {{ trans('cruds.user.fields.password_helper') }}
                 </p>
             </div>
             <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
-                <label for="password">{{ trans('cruds.user.fields.password') }}</label>
-                <input type="password" id="password" name="password" class="form-control">
+                <label for="password">New {{ trans('cruds.user.fields.password') }}</label>
+                <input type="password" id="password" data-parsley-pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" minlength="8" data-parsley-minlength="8" name="password" class="form-control" data-parsley-required data-parsley-required-message="Please enter new password" data-parsley-trigger="keyup" data-parsley-pattern-message="Password must contain at least (1) lowercase, (1) uppercase letter, (1) number and (1) special character.">
                 @if($errors->has('password'))
                     <em class="invalid-feedback">
                         {{ $errors->first('password') }}
@@ -42,4 +39,30 @@
 
     </div>
 </div>
+@endsection
+@section('scripts')
+@parent
+    <script>
+        $(function () {
+            //check the current password is exist in db or not
+            $('#old_password').on('keyup', function(){
+                $.ajax({
+                    url:APP_BASE_URL+'/admin/users/check-password',
+                    type:'post',
+                    data:{'current_password':$(this).val(), '_token':$('meta[name="csrf-token"]').attr('content')},
+                    success:function(data){
+            
+                        if(data == '') {
+                            $('.invalid-feedback').css('display', 'block');
+                            $('.old_password').text('Please enter valid password');
+                        } else {
+                            $('.invalid-feedback').css('display', 'none');
+                            $('.old_password').text('');
+                        }
+
+                    }
+                })
+            })
+        })
+    </script>
 @endsection

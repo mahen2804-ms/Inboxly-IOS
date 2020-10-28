@@ -13,9 +13,9 @@
                     <tr>
                         <td>
                             <p style="font-weight: 700; margin: 0 0 9px 0;">Hello {{$name}},</p></br>
-                            <p>Forgot your password? Not a problem!</p>
-                            <p>Please use mentioned password to login to your account on the website.</p>
-                            <p>New Password: {{$password}}</p>
+                            <p>Forgot your password? Not a problem!</p><br>
+                            <p>Please use mentioned password to login to your account on the website.</p><br>
+                            <p>New Password: {{$password}}</p><br>
                             <p>If you have not requested this, please contact us to let us know!</p>
                         </td>
                     </tr>

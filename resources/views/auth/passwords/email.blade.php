@@ -18,7 +18,7 @@
         <div class="card-group">
             <div class="card p-4">
                 <div class="card-body">
-                    <form method="POST" action="{{ url('/password-reset') }}">
+                    <form method="POST" action="{{ url('/password-reset') }}" data-parsley-validate>
                         {{ csrf_field() }}
                         <h1>
                             <div class="login-logo">
@@ -31,7 +31,7 @@
                         <div>
                             {{ csrf_field() }}
                             <div class="form-group has-feedback">
-                                <input type="email" name="email" class="form-control" required="autofocus" placeholder="{{ trans('global.login_email') }}">
+                                <input type="email" name="email" class="form-control" placeholder="{{ trans('global.login_email') }}" data-parsley-required data-parsley-required-message="Please enter email">
                                 @if($errors->has('email'))
                                     <em class="invalid-feedback">
                                         {{ $errors->first('email') }}

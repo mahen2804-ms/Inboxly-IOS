@@ -19,6 +19,7 @@ Route::get('clear', function() {
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
+    Route::post('users/update-password', 'UsersController@updatePassword');
     Route::get('/', 'HomeController@index')->name('home');
 
     // Permissions
@@ -30,11 +31,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('roles', 'RolesController');
 
     // Dashboard
+    Route::post('dashboard/getFilteredUser', 'DashboardController@index');
     Route::delete('dashboard/destroy', 'DashboardController@massDestroy')->name('dashboard.massDestroy');
     Route::resource('dashboard', 'DashboardController');
 
     // Users
+    Route::post('users/update-password', 'UsersController@updatePassword');
+    Route::post('users/check-password', 'UsersController@checkPassword');
     Route::get('users/change-password', 'UsersController@changePassword');
+    
     Route::post('users/status', 'UsersController@updateStatus');
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
     Route::resource('users', 'UsersController');

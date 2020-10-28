@@ -4,8 +4,6 @@
 
             // message of the pages
             'messages' => [
-                'CATEGORY_ALREADY_EXIST'=>'Category is already exist.',
-                'RECORD_NOT_FOUND' => 'Records not found.',
                 'RECORD_NOT_EXIST' => 'This record is not exist',
                 'ORDER_UPDATED' => 'Question order updated successfully',
                 'EMPTY_SPACES' => 'Empty spaces are not allowed',
@@ -19,7 +17,6 @@
                 'STATUS_UPDATED_SUCCESSFULLY'=> 'Status updated successfully',
                 'PASSWORD_UPDATE' => 'Password updated successfully',
                 'RECORDS_UPDATED' => 'Records updated successfully',
-                'RECORDS_DELETED' => 'Records deleted successfully',
                 'RECORDS_ADDED' => 'Records added successfully',
                 'PASSWORD_NOT_EXIST' => 'Current password is incorrect',
                 'IS_NUMERIC' => 'Please enter only numeric 6 digit values',
@@ -45,7 +42,9 @@
                 'NORMS_NOT_FOUND' => 'There is something wrong with this quiz, contact your employer for the same',
                 'EMAIL_NOT_FOUND' => 'Super admin email not found',
                 'DATA_EXIST' => 'Record already exist',
-                'LOGOUT' => 'Logout successfully'
+                'LOGOUT' => 'Logout successfully',
+                'RECORD_NOT_FOUND'=>'Record not found',
+                'CATEGORY_ALREADY_EXIST'=>'Category is already exist'
                 ], 
 
                 //code status
@@ -69,6 +68,7 @@
             'file_path' => [
                 'USER_IMAGE' => '/uploads/user/',
             ],
+            'mailslurp_api_key'=>'817cd3ec54bbd44a8fe34b0e3b38ec36d32d520981a3c2c7d2fa54754d01678a',
 
         ],
      

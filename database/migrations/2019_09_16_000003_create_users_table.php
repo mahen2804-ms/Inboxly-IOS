@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->string('device_type')->nullable();
             $table->enum('gender', ['male', 'female','Prefer not to say','Non-binary']);
+            $table->string('inbox_id');
             $table->DATE('dob')->nullable();
             $table->string('fcm_token')->nullable();
             $table->unsignedBigInteger('verification_Code')->default(0);

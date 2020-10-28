@@ -47,7 +47,7 @@
                 <tr>
                     <td style="text-align: left; padding: 19px 32px 32px 32px;">
                         <p style="margin: 0;">
-                            <strong>Regards,</strong> <br>My Mental Fitness Team
+                            <strong>Regards,</strong> <br>Inboxly Team
                         </p>
                     </td>
                 </tr>
