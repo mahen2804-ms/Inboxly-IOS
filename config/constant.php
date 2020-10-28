@@ -4,6 +4,8 @@
 
             // message of the pages
             'messages' => [
+                'CATEGORY_ALREADY_EXIST'=>'Category is already exist.',
+                'RECORD_NOT_FOUND' => 'Records not found.',
                 'RECORD_NOT_EXIST' => 'This record is not exist',
                 'ORDER_UPDATED' => 'Question order updated successfully',
                 'EMPTY_SPACES' => 'Empty spaces are not allowed',

@@ -20,7 +20,7 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('user-registration', 'Api\V1\UserRegistrationController@userRegistration');
 
    	// Route for validate otp
-    Route::get('validate-otp/{otp}/{email}/{deviceId}/{deviceType}', 'Api\V1\UserRegistrationController@validateOTP');
+    Route::get('validate-otp/{otp}/{email}', 'Api\V1\UserRegistrationController@validateOTP');
     // Route for resend otp
     Route::get('resend-otp/{email}', 'Api\V1\UserRegistrationController@resendOTP');
 
@@ -30,6 +30,7 @@ Route::group(['prefix' => 'v1'], function () {
      // Route for forgot password
     Route::post('forgot-password', 'Api\V1\UserRegistrationController@forgotPassword');
 
+<<<<<<< HEAD
      // Route for view profile
     Route::get('view-profile', 'Api\V1\ManageProfileController@viewUser');
 
@@ -37,6 +38,20 @@ Route::group(['prefix' => 'v1'], function () {
     Route::post('edit-profile', 'Api\V1\ManageProfileController@editUser');
     // Route for view profile
     Route::post('delete-profile', 'Api\V1\ManageProfileController@deleteUser');
+=======
+       
+    // Apply middleware for routes which will need authentication
+    Route::group(['middleware' => 'auth:api'], function(){
+         // Route for user's listing
+        Route::get('categories', 'Api\V1\CategoriesController@allCategoriesList');
+        // Route for user's listing
+        Route::post('create-category', 'Api\V1\CategoriesController@createCategory');
+        // Route for user's listing
+        Route::post('update-category', 'Api\V1\CategoriesController@updateCategory');
+        // Route for user's listing
+        Route::post('manage-status', 'Api\V1\CategoriesController@manageStatus');
+    });
+>>>>>>> categories-api
   
 });
 
