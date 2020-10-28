@@ -453,6 +453,7 @@ class UserRegistrationController extends ApiBaseController
                 //print_r(Auth::attempt($loginArray)); die;
                 if (Auth::attempt($loginArray)) {
                     $user = Auth::user();
+
                     $token = $user->createToken(config('constant.common.token_name.MY_APP'))->accessToken;                
                     //Get user details by email id
                     $userDetails = User::getUserByEmail($user['email']);
@@ -598,7 +599,7 @@ class UserRegistrationController extends ApiBaseController
     public function logoutApi()
     {
         try {
-            print_r(Auth::guard('api')->user()); die;
+            print_r(Auth::user()); die;
             if (Auth::check()) {
                 Auth::user()->AauthAcessToken()->delete();
                 User::where('id',Auth::user()->id)->update(['is_login' => 0]);

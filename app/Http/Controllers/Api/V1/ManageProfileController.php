@@ -28,10 +28,50 @@ class ManageProfileController extends ApiBaseController
      * @return void
      */
     public function __construct(Request $request) {
+         // Execute authentication filter before processing any request
+        $this->middleware('auth:api');
         // Assign logged in user value
         $this->_user = Auth::user();
         $this->_request = $request;
 
+    }
+
+     /**
+     * @OA\Get(
+     *     path="/api/v1/logoutApi",
+     *     tags={"Logout"},
+     *     summary="api to log out",
+     *     operationId="logoutApi",
+     *    @OA\Response(
+     *         response=200,
+     *         description="Ok"
+     *     ),
+     *      @OA\Response(
+     *         response="default",
+     *         description="unexpected error",
+     *         @OA\Schema(ref="#/components/schemas/Error")
+     *     )
+     * )
+     */
+    public function logoutApi()
+    {
+        try {
+            if (Auth::check()) {
+                Auth::user()->AauthAcessToken()->delete();
+                User::where('id',Auth::user()->id)->update(['is_login' => 0]);
+                $data['message'] =config('constant.common.messages.LOGOUT');
+
+                $code = config('constant.common.api_code.UPDATE');
+                return $this->sendSuccessResponse($data,$code);
+            } else {
+                $data['message'] =config('constant.common.messages.EXCEPTION_ERROR');
+                $code = config('constant.common.api_code.FAILED');
+                return $this->sendSuccessResponse($data,$code);
+            }
+
+        } catch(Exception $ex) {
+            return $this->sendFailureResponse();
+        }
     }
 
      /**

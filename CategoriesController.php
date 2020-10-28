@@ -25,7 +25,7 @@ class CategoriesController extends ApiBaseController
      */
     public function __construct(Request $request) {
         // Execute authentication filter before processing any request
-        $this->middleware('auth:api');
+        //$this->middleware('auth');
         // Assign logged in user value
         $this->_user = Auth::user();
         $this->_request = $request;
@@ -89,7 +89,7 @@ class CategoriesController extends ApiBaseController
      *         description="unexpected error",
      *         @OA\Schema(ref="#/components/schemas/Error")
      *     )
-      * )
+     * )
      */
     public function createCategory()
     {
