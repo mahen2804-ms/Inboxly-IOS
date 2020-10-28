@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 
 Route::group(['prefix' => 'v1'], function () {
-	
+
     // Route for registration of user
     Route::post('user-registration', 'Api\V1\UserRegistrationController@userRegistration');
 
@@ -47,9 +47,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('manage-status', 'Api\V1\CategoriesController@manageStatus');
 
     // Apply middleware for routes which will need authentication
-    Route::group(['middleware' => 'auth:api'], function(){
-        
-    });
+
 
      Route::get('test', 'Api\V1\NewsfeedController@testMailSlurp');
     // Route for registration of user
