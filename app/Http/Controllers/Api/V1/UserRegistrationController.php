@@ -206,26 +206,6 @@ class UserRegistrationController extends ApiBaseController
         }
     }
 
-    /**
-     * @name checkMobile
-     * @desc checkMobile is exist in database or not
-     * @return int
-     */
-    public function checkMobile($userMobile,$userId= '') {
-        try {
-            //check user enter email is already exist in database
-            $checkMobile = User::checkMobile($userMobile);
-
-            if(!empty($checkMobile)) {
-                return 1;
-            } else {
-                return 0;
-            }
-
-        } catch(Exception $ex) {
-            return $this->sendFailureResponse();
-        }
-    }
 
     /**
      * @OA\Get(
@@ -557,7 +537,7 @@ class UserRegistrationController extends ApiBaseController
 
                     if(!empty($user)) {
                         try {
-                            $dats = ['name' => ucfirst($user['user_name']), 'password' => $randomid, 'email'=>$email];
+                            $dats = ['name' => ucfirst($user['user_name']), 'password' => $randomid, 'email'=>$email];  
                             $subject = 'Inboxly App - Forgot password.';
                             Helpers::sendEmail('emails.password', $dats, $user['recovery_email'], $email,  $subject);
                         } catch(Exception $ex) {
@@ -618,3 +598,45 @@ class UserRegistrationController extends ApiBaseController
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

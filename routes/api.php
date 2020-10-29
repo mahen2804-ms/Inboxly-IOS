@@ -30,6 +30,7 @@ Route::group(['prefix' => 'v1'], function () {
      // Route for forgot password
     Route::post('forgot-password', 'Api\V1\UserRegistrationController@forgotPassword');
 
+    Route::group(['as' => 'api.', 'namespace' => 'Api\V1', 'middleware' => ['auth:api']], function () {
 
         // Route for user's listing
         Route::get('newsfeed', 'Api\V1\NewsfeedController@allNewsfeedList');
@@ -46,13 +47,13 @@ Route::group(['prefix' => 'v1'], function () {
         // Route for user's listing
         Route::post('manage-status', 'Api\V1\CategoriesController@manageStatus');
 
-    // Apply middleware for routes which will need authentication
+        // Apply middleware for routes which will need authentication
+         Route::get('test', 'Api\V1\NewsfeedController@testMailSlurp');
+        // Route for registration of user
+        Route::get('response', 'Api\V1\NewsfeedController@test');
+        Route::post('respponse', 'Api\V1\NewsfeedController@test1');
 
-
-     Route::get('test', 'Api\V1\NewsfeedController@testMailSlurp');
-    // Route for registration of user
-    Route::get('response', 'Api\V1\NewsfeedController@test');
-    Route::post('respponse', 'Api\V1\NewsfeedController@test1');
+    });
   
 });
 

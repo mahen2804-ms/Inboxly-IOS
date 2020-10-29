@@ -17,7 +17,8 @@ class Categories extends Model
      */
     protected $fillable = [
         'name',
-        'status'
+        'status',
+        'created_at'
     ];
 
 
@@ -29,18 +30,18 @@ class Categories extends Model
     public static function validationRules() {
 
         return [
-            'name' => 'required|max:25|regex:/^[A-Za-z .,-]*$/',
+            'category' => 'required|max:25|regex:/^[A-Za-z .,-]*$/',
         ];
     }
 
     /**
-     * @name Validation messages
+     * @category Validation messages
      * @var array
      */
     public static $validationMessages = [
-        'name.required'=> 'Category name is required',
-        'name.regex' => 'Category name contains only alphabets characters', 
-        'name.max' => 'Category name should have max 25 characters.'
+        'category.required'=> 'Category is required',
+        'category.regex' => 'Category contains only alphabets characters', 
+        'category.max' => 'Category should have max 25 characters.'
 
     ]; 
 
@@ -54,7 +55,6 @@ class Categories extends Model
      */
     public static function checkCategoryName($categoryName) {
         return self::where('name', $categoryName)
-            ->where('status', 1)
             ->first();
     }
 
@@ -66,16 +66,38 @@ class Categories extends Model
      * @return mixed
      */
     public static function allCategoriesList() {
-    	$column = [
+        $column = [
                    'id',
                    'name',
+                   'created_at',
                    'status'
                   ];
 
        return self::select($column)
-        	->where('status', 1)
-        	->orderBy('id','desc')
+            ->orderBy('id','desc')
             ->get();
     }
+
+    /**
+     * @name allActiveCategories
+     * @desc check
+      already exist or not
+     * @param $email
+     * @return mixed
+     */
+    public static function allActiveCategories() {
+        $column = [
+                   'id',
+                   'name',
+                   'created_at',
+                   'status'
+                  ];
+
+       return self::select($column)
+            ->orderBy('id','desc')
+            ->where('status', 1)
+            ->get();
+    }
+    
     
 }

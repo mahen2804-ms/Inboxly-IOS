@@ -70,22 +70,25 @@ class NewsfeedController extends ApiBaseController
         // create an inbox controller
         $emailController = new \MailSlurp\Apis\EmailControllerApi(null, $this->getConfig());
         $email = $emailController->getEmail($emailId); 
-        $sender = $email->getHeaders();
+        $sender = $this->_request->from;
+        $senderName = explode('@', $sender);
         Storage::put(time().'_sender.txt', $sender);     
-        // $senderDetails = new SenderDetails();
-        // $senderDetails->name = $senderName;
+        $senderDetails = new SenderDetails();
+        $senderDetails->name = $senderName[0];
+        $senderDetails->email = $this->_request->from;
+        $senderDetails->user_id = Auth::user()->id;
+        $senderDetails->created_at = $this->_request->createdAt;
 
-        // if($senderDetails->save()) {
-        //     $newsfeed = new Newsfeeds();
-        //     $newsfeed->title = $email->getSubject();
-        //     $newsfeed->image = '';
-        //     $newsfeed->description = $email->getBody();
-        //     $newsfeed->date_time = date('Y-m-d h:i:s', strtotime($email->getUpadtedAt());
-        //     $newsfeed->user_id = Auth::user()->id;
-        //     $newsfeed->sender_id = $senderDetails->id;
-        //     $newsfeed->save();
-
-        // }
+        if($senderDetails->save()) {
+            $newsfeed = new Newsfeed();
+            $newsfeed->title = $email->getSubject();
+            $newsfeed->image = '';
+            $newsfeed->description = $email->getBody();
+            $newsfeed->date_time = date('Y-m-d h:i:s', strtotime($email->getUpadtedAt()));
+            $newsfeed->user_id = Auth::user()->id;
+            $newsfeed->sender_id = $senderDetails->id;
+            $newsfeed->save();
+        }
 
         Storage::put('email.txt', $email);         
     }
@@ -150,6 +153,41 @@ class NewsfeedController extends ApiBaseController
 
                 if(count($newsfeed) > 0) {
                     $data['data'] = $newsfeed;
+
+                    return $this->sendSuccessResponse($data);
+                } else {
+                    return $this->sendFailureResponse(config('constant.common.messages.RECORD_NOT_FOUND'));
+                }
+            } catch(Exception $ex) {
+                return $this->sendFailureResponse();
+            }
+        }
+
+        /**
+         * @OA\Get(
+         *     path="/api/v1/news-cayegories",
+         *     tags={"All active categories List"},
+         *     summary="api to get all categories list",
+         *     operationId="allActiveCategories",
+         *    @OA\Response(
+         *         response=200,
+         *         description="Ok"
+         *     ),
+         *      @OA\Response(
+         *         response="default",
+         *         description="unexpected error",
+         *         @OA\Schema(ref="#/components/schemas/Error")
+         *     )
+         * )
+         */
+        public function allActiveCategories()
+        {
+            try {
+                //get frequency list
+                $categories = Categories::allActiveCategories();
+
+                if(count($categories) > 0) {
+                    $data['data'] = $categories;
 
                     return $this->sendSuccessResponse($data);
                 } else {
