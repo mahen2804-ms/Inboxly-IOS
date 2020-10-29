@@ -89,7 +89,7 @@ class CategoriesController extends ApiBaseController
      *         description="unexpected error",
      *         @OA\Schema(ref="#/components/schemas/Error")
      *     )
-      * )
+     * )
      */
     public function createCategory()
     {

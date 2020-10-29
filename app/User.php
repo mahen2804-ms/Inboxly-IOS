@@ -125,7 +125,8 @@ class User extends Authenticatable implements Auditable
         'status' => 'boolean',
         'is_verified' => 'boolean',
         'is_initial_setup' => 'boolean',
-        'is_first_time' => 'boolean'
+        'is_first_time' => 'boolean',
+        'is_login'=> 'boolean',
     ];
 
     /**

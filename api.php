@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 
 Route::group(['prefix' => 'v1'], function () {
-
+	
     // Route for registration of user
     Route::post('user-registration', 'Api\V1\UserRegistrationController@userRegistration');
 
@@ -30,15 +30,18 @@ Route::group(['prefix' => 'v1'], function () {
      // Route for forgot password
     Route::post('forgot-password', 'Api\V1\UserRegistrationController@forgotPassword');
 
-    Route::group(['middleware' => ['auth:api']], function () {
+     // Route for forgot password
+    Route::get('logout', 'Api\V1\UserRegistrationController@logoutApi');
 
+
+     Route::get('test', 'Api\V1\NewsfeedController@testMailSlurp');
+    // Route for registration of user
+    Route::get('response', 'Api\V1\NewsfeedController@test');
+    Route::post('respponse', 'Api\V1\NewsfeedController@test1');
+
+     // Apply middleware for routes which will need authentication
+    Route::group(['middleware' => 'auth:api'], function(){
         // Route for user's listing
-        Route::get('newsfeed', 'Api\V1\NewsfeedController@allNewsfeedList');
-        // Route for user's listing
-        Route::post('newsfeed-details', 'Api\V1\NewsfeedController@newsfeedDetails');
-         // Route for user's listing
-        Route::post('search-newsfeed', 'Api\V1\NewsfeedController@allNewsfeedList');
-         // Route for user's listing
         Route::get('categories', 'Api\V1\CategoriesController@allCategoriesList');
         // Route for user's listing
         Route::post('create-category', 'Api\V1\CategoriesController@createCategory');
@@ -46,16 +49,6 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('update-category', 'Api\V1\CategoriesController@updateCategory');
         // Route for user's listing
         Route::post('manage-status', 'Api\V1\CategoriesController@manageStatus');
-
-        // Apply middleware for routes which will need authentication
-         Route::get('test', 'Api\V1\NewsfeedController@testMailSlurp');
-        // Route for registration of user
-        Route::get('response', 'Api\V1\NewsfeedController@test');
-        Route::post('respponse', 'Api\V1\NewsfeedController@test1');
-
-         // Route for forgot password
-    Route::get('logout', 'Api\V1\ManageProfileController@logoutApi');
-
     });
   
 });

@@ -205,6 +205,26 @@ class UserRegistrationController extends ApiBaseController
         }
     }
 
+    /**
+     * @name checkMobile
+     * @desc checkMobile is exist in database or not
+     * @return int
+     */
+    public function checkMobile($userMobile,$userId= '') {
+        try {
+            //check user enter email is already exist in database
+            $checkMobile = User::checkMobile($userMobile);
+
+            if(!empty($checkMobile)) {
+                return 1;
+            } else {
+                return 0;
+            }
+
+        } catch(Exception $ex) {
+            return $this->sendFailureResponse();
+        }
+    }
 
     /**
      * @OA\Get(
@@ -433,7 +453,6 @@ class UserRegistrationController extends ApiBaseController
                 //print_r(Auth::attempt($loginArray)); die;
                 if (Auth::attempt($loginArray)) {
                     $user = Auth::user();
-
                     $token = $user->createToken(config('constant.common.token_name.MY_APP'))->accessToken;                
                     //Get user details by email id
                     $userDetails = User::getUserByEmail($user['email']);
@@ -442,13 +461,13 @@ class UserRegistrationController extends ApiBaseController
                         $data['data']['userDetail'] = $userDetails[0];
                         $data['data']['token'] = $token;
                         
-                        if(empty($userDetails[0]['is_verified'])) {
+                        if(!empty($userDetails[0]['is_verified']) && $userDetails[0]['is_verified'] != 1) {
                             /*mail send to user for creating a new account*/
                             try {
                                 $randomid = Helpers::getRandomOTP();
-                                $updateOTP = User::updateOTP($randomid,$userDetails[0]['recovery_email']);
+                                $updateOTP = User::updateOTP($randomid,$userDetails[0]['email']);
                                 /*mail send to user for creating a new account*/
-                                $dats['user'] = ['userName' => $user['user_name'], 'otp' => $randomid];
+                                $dats['user'] = ['userName' => $input['name'], 'otp' => $randomid];
                                 $subject = 'Inboxly App - Account created.';
                                 Helpers::sendEmail('emails.user-otp', $dats,$user['recovery_email'], $user['recovery_email'], $subject);
                    
@@ -537,7 +556,7 @@ class UserRegistrationController extends ApiBaseController
 
                     if(!empty($user)) {
                         try {
-                            $dats = ['name' => ucfirst($user['user_name']), 'password' => $randomid, 'email'=>$email];  
+                            $dats = ['name' => ucfirst($user['user_name']), 'password' => $randomid, 'email'=>$email];
                             $subject = 'Inboxly App - Forgot password.';
                             Helpers::sendEmail('emails.password', $dats, $user['recovery_email'], $email,  $subject);
                         } catch(Exception $ex) {
@@ -579,12 +598,11 @@ class UserRegistrationController extends ApiBaseController
     public function logoutApi()
     {
         try {
-            print_r(Auth::user()); die;
+
             if (Auth::check()) {
                 Auth::user()->AauthAcessToken()->delete();
                 User::where('id',Auth::user()->id)->update(['is_login' => 0]);
                 $data['message'] =config('constant.common.messages.LOGOUT');
-
                 $code = config('constant.common.api_code.UPDATE');
                 return $this->sendSuccessResponse($data,$code);
             } else {
@@ -599,45 +617,3 @@ class UserRegistrationController extends ApiBaseController
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
