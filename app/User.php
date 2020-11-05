@@ -9,15 +9,15 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use OwenIt\Auditing\Contracts\Auditable;
+//use OwenIt\Auditing\Contracts\Auditable;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements Auditable
+class User extends Authenticatable 
 {
     use Notifiable, HasApiTokens, HasRoles;
     use SoftDeletes;
-    use \OwenIt\Auditing\Auditable;
+    //use \OwenIt\Auditing\Auditable;
 
 
     public $table = 'users';
@@ -26,52 +26,52 @@ class User extends Authenticatable implements Auditable
      * @desc Should the audit be strict?
      * @var bool
      */
-    protected $auditStrict = true;
+    //protected $auditStrict = true;
 
     /**
      * @desc Attributes to include in the Audit.
      * @var array
      */
-    protected $auditInclude = [
-        'first_name',
-        'last_name',
-        'user_name',
-        'email',
-        'recovery_email',
-        'mobile_number',
-        'password',
-        'status',
-        'inbox_id',
-        'facebook_token',
-        'device_token',
-        'device_type',
-        'profile_pic',
-        'google_token',
-        'forgot_pass_code',
-        'is_initial_setup',
-        'is_verified',
-        'verification_code',
-        'verification_code_datetime',
-        'created_at',
-        'updated_at',
-        'created_by',
-        'updated_by'
-    ];
+    // protected $auditInclude = [
+    //     'first_name',
+    //     'last_name',
+    //     'user_name',
+    //     'email',
+    //     'recovery_email',
+    //     'mobile_number',
+    //     'password',
+    //     'status',
+    //     'inbox_id',
+    //     'facebook_token',
+    //     'device_token',
+    //     'device_type',
+    //     'profile_pic',
+    //     'google_token',
+    //     'forgot_pass_code',
+    //     'is_initial_setup',
+    //     'is_verified',
+    //     'verification_code',
+    //     'verification_code_datetime',
+    //     'created_at',
+    //     'updated_at',
+    //     'created_by',
+    //     'updated_by'
+    // ];
 
     /**
      * @desc Auditable events.
      * @var array
      */
-    protected $auditEvents = [
-        'deleted',
-        'restored',
-        'created',
-        'saved',
-        'deleted',
-        'updated',
-        'update',
-        'retrieved'
-    ];
+    // protected $auditEvents = [
+    //     'deleted',
+    //     'restored',
+    //     'created',
+    //     'saved',
+    //     'deleted',
+    //     'updated',
+    //     'update',
+    //     'retrieved'
+    // ];
 
     /**
      * @desc The attributes that should be hidden for arrays.
@@ -607,5 +607,64 @@ class User extends Authenticatable implements Auditable
 
         return $email;
     }
+
+    public static function getAllUsers() {
+        return self::leftJoin('model_has_roles', 'model_has_roles.model_id', 'users.id')
+                    ->where('model_has_roles.role_id', 2)
+                    ->get();
+    }
+
+    public static function getActiveUsersCount($customValue) {
+        $records =  self::leftJoin('model_has_roles', 'model_has_roles.model_id', 'users.id')
+                    ->where('model_has_roles.role_id', 2)
+                    ->where('users.status', 1);
+
+        if($customValue == 'daily') {
+           $records = $records->where('created_at', Carbon::now()->startOfDay); 
+        }
+
+        if($customValue == 'weekly') {
+           $records = $records->where('created_at',Carbon::now()->subDays(7)->startOfDay); 
+        }
+
+        if($customValue == 'monthly') {
+           $records = $records->where('created_at', Carbon::now()->subDays(30)->startOfDay); 
+        }
+
+        if(!empty($customValue)) {
+           $records = $records->where('created_at', date('Y-m-d', strtotime($customValue))); 
+        }
+
+        $records = $records->count();
+
+        return $records;
+    }
+
+    public static function getInactiveUsersCount($customValue) {
+        $records =  self::leftJoin('model_has_roles', 'model_has_roles.model_id', 'users.id')
+                    ->where('model_has_roles.role_id', 2)
+                    ->where('users.status', 0);
+
+        if($customValue == 'daily') {
+           $records = $records->where('created_at', Carbon::now()->startOfDay); 
+        }
+
+        if($customValue == 'weekly') {
+           $records = $records->where('created_at',Carbon::now()->subDays(7)->startOfDay); 
+        }
+
+        if($customValue == 'monthly') {
+           $records = $records->where('created_at', Carbon::now()->subDays(30)->startOfDay); 
+        }
+
+        if(!empty($customValue)) {
+           $records = $records->where('created_at', date('Y-m-d', strtotime($customValue))); 
+        }
+
+        $records = $records->count();
+
+        return $records;
+    }
+   
     
 }

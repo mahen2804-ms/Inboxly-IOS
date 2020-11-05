@@ -4,18 +4,22 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use PHPUnit\Framework\TestCase;
 use Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Controllers\ApiBaseController;
 use Illuminate\Support\Facades\Validator;
 use DB;
-use PHPUnit\Framework\TestCase;
 use Storage;
 use App\SenderDetails;
 use App\Newsfeed;
+use App\Categories;
+use App\UserNewsCategory;
+use App\SaveNewsfeed;
+use App\ArchiveNewsfeed;
 
 
-class NewsfeedController extends ApiBaseController
+class NewsfeedController extends ApiBaseController 
 {
     private $_user;
     private $_request;
@@ -33,11 +37,6 @@ class NewsfeedController extends ApiBaseController
         $this->_request = $request;
     }
 
-     /**
-     * create a mailslurp configuration with API_KEY environment variable
-     *
-     * @return void
-     */
      private function getConfig()
     {
         // create a mailslurp configuration with API_KEY environment variable
@@ -46,26 +45,9 @@ class NewsfeedController extends ApiBaseController
             ->setApiKey('x-api-key', config('constant.common.mailslurp_api_key'));
     }
 
-     /**
-         * @OA\Get(
-         *     path="/api/v1/respponse",
-         *     tags={"Fetch all detail of mail content"},
-         *     summary="api fetch all details",
-         *     operationId="fetchNewsfeed",
-         *    @OA\Response(
-         *         response=200,
-         *         description="Ok"
-         *     ),
-         *      @OA\Response(
-         *         response="default",
-         *         description="unexpected error",
-         *         @OA\Schema(ref="#/components/schemas/Error")
-         *     )
-         * )
-         */
-    public function fetchNewsfeed()
+    public function test1(Request $request)
     {    
-        Storage::put('file.txt', json_encode($this->_request->all()));  
+        Storage::put('file.txt', json_encode($request->all()));  
         $emailId = $this->_request->emailId;
         // create an inbox controller
         $emailController = new \MailSlurp\Apis\EmailControllerApi(null, $this->getConfig());
@@ -90,10 +72,10 @@ class NewsfeedController extends ApiBaseController
             $newsfeed->save();
         }
 
-        Storage::put('email.txt', $email);         
+        Storage::put('email.txt', $email);          
     }
 
-      /**
+     /**
          * @OA\Get(
          *     path="/api/v1/newsfeed",
          *     tags={"All Newsfeed List"},
@@ -163,7 +145,7 @@ class NewsfeedController extends ApiBaseController
             }
         }
 
-        /**
+    /**
          * @OA\Get(
          *     path="/api/v1/news-cayegories",
          *     tags={"All active categories List"},
@@ -198,4 +180,451 @@ class NewsfeedController extends ApiBaseController
             }
         }
 
+    /**
+     * @OA\Post(
+     *     path="/api/v1/unsave-categroy",
+     *     tags={"unsave news categroy"},
+     *     summary="Api for unsave news categroy",
+     *     operationId="unsaveCategory",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(property="status",type="string"),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=200,description="OK"),
+     *     @OA\Response(
+     *         response="default",
+     *         description="unexpected error",
+     *         @OA\Schema(ref="#/components/schemas/Error")
+     *     )
+     * )
+     */
+    public function unsaveCategory()
+    {
+        try {                  
+            //register category details
+            $input = $this->_request->all();
+            $userId = Auth::user()->id;
+            $newsfeedId = $input['newsfeed_id'];
+            $categoryId = $input['category_id'];
+            
+            $updateStatus =  UserNewsCategory::unsaveCategory($userId, $newsfeedId, $categoryId);
+
+            if($updateStatus > 0) {
+                $data['message'] = 'success';
+                $data['data'] = ['message' => config('constant.common.messages.RECORDS_UPDATED')];
+                $code = config('constant.common.api_code.UPDATE');
+
+                return $this->sendSuccessResponse($data, $code); 
+            } else {
+                return $this->sendFailureResponse(config('constant.common.messages.RECORD_NOT_FOUND'));
+            }
+            
+        } catch(Exception $ex) {
+            return $this->sendFailureResponse();
+        }
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/assign-categroy",
+     *     tags={"assign news categroy"},
+     *     summary="Api for assign news categroy",
+     *     operationId="assignCategory",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(property="status",type="string"),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=200,description="OK"),
+     *     @OA\Response(
+     *         response="default",
+     *         description="unexpected error",
+     *         @OA\Schema(ref="#/components/schemas/Error")
+     *     )
+     * )
+     */
+    public function assignCategory()
+    {
+        try {                  
+            //register category details
+            $input = $this->_request->all();
+            $userId = Auth::user()->id;
+            $newsfeedId = $input['newsfeed_id'];
+            $categoryId = $input['category_id'];
+            $checkCategroryId = UserNewsCategory::checkCategroryId($userId, $newsfeedId);
+
+            if(empty($checkCategroryId)) {
+               $category = new UserNewsCategory();
+                $category->user_id = $userId;
+                $category->newsfeed_id = $newsfeedId;
+                $category->category_id = $categoryId;
+                $category->save();  
+            } else {
+                $updateCategroryId = UserNewsCategory::updateCategroryId($userId, $newsfeedId, $categoryId);
+            }
+                            
+            DB::commit();
+            $data['message'] = 'success';
+            $data['data'] = ['message' => config('constant.common.messages.RECORD_ADDED_SUCCESSFULLY')];
+            $code = config('constant.common.api_code.CREATE');
+
+            return $this->sendSuccessResponse($data, $code);
+        } catch(Exception $ex) {
+            return $this->sendFailureResponse();
+        }
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/save-news",
+     *     tags={"save newsfeed"},
+     *     summary="Api for save newsfeed",
+     *     operationId="saveNewsfeed",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(property="status",type="string"),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=200,description="OK"),
+     *     @OA\Response(
+     *         response="default",
+     *         description="unexpected error",
+     *         @OA\Schema(ref="#/components/schemas/Error")
+     *     )
+     * )
+     */
+    public function saveNewsfeed()
+    {
+        try {                  
+            //register category details
+            $input = $this->_request->all();
+            $userId = Auth::user()->id;
+            $newsfeedId = $input['newsfeed_id'];
+            $categoryId = $input['category_id'];
+            $checkSavedNews = SaveNewsfeed::checkSavedNews($userId, $newsfeedId, $categoryId);
+
+            if(empty($checkCategroryId)) {
+                $newsfeed = new SaveNewsfeed();
+                $newsfeed->user_id = $userId;
+                $newsfeed->newsfeed_id = $newsfeedId;
+                $newsfeed->category_id = $categoryId;
+                $newsfeed->save(); 
+            } else {
+                $updateCategroryId = SaveNewsfeed::updateSavedNews($userId, $newsfeedId, $categoryId);
+            }
+                
+            DB::commit();
+            $data['message'] = 'success';
+            $data['data'] = ['message' => config('constant.common.messages.RECORD_ADDED_SUCCESSFULLY')];
+            $code = config('constant.common.api_code.CREATE');
+
+                return $this->sendSuccessResponse($data, $code); 
+        } catch(Exception $ex) {
+            return $this->sendFailureResponse();
+        }
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/unsave-news",
+     *     tags={"unsave newsfeed"},
+     *     summary="Api for unsave newsfeed",
+     *     operationId="unsaveNewsfeed",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(property="status",type="string"),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=200,description="OK"),
+     *     @OA\Response(
+     *         response="default",
+     *         description="unexpected error",
+     *         @OA\Schema(ref="#/components/schemas/Error")
+     *     )
+     * )
+     */
+    public function unsaveNewsfeed()
+    {
+        try {                  
+            //register category details
+            $input = $this->_request->all();
+            $userId = Auth::user()->id;
+            $newsfeedId = $input['newsfeed_id'];
+            $categoryId = $input['category_id'];
+            
+            $updateStatus =  SaveNewsfeed::unsaveNews($userId, $newsfeedId, $categoryId);
+
+            if($updateStatus > 0) {
+                $data['message'] = 'success';
+                $data['data'] = ['message' => config('constant.common.messages.RECORDS_UPDATED')];
+                $code = config('constant.common.api_code.UPDATE');
+
+                return $this->sendSuccessResponse($data, $code); 
+            } else {
+                return $this->sendFailureResponse(config('constant.common.messages.RECORD_NOT_FOUND'));
+            }
+
+        } catch(Exception $ex) {
+            return $this->sendFailureResponse();
+        }
+    }
+
+     /**
+     * @OA\Post(
+     *     path="/api/v1/archive-news",
+     *     tags={"archive newsfeed"},
+     *     summary="Api for archive newsfeed",
+     *     operationId="archiveNewsfeed",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(property="status",type="string"),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=200,description="OK"),
+     *     @OA\Response(
+     *         response="default",
+     *         description="unexpected error",
+     *         @OA\Schema(ref="#/components/schemas/Error")
+     *     )
+     * )
+     */
+    public function archiveNewsfeed()
+    {
+        try {                  
+            //register category details
+            $input = $this->_request->all();
+            //register category details
+            $input = $this->_request->all();
+            $userId = Auth::user()->id;
+            $newsfeedId = $input['newsfeed_id'];
+            $categoryId = $input['category_id'];
+            $checkArchivedNews = ArchiveNewsfeed::checkArchivedNews($userId, $newsfeedId, $categoryId);
+
+            if(empty($checkArchivedNews)) {
+                $newsfeed = new ArchiveNewsfeed();
+                $newsfeed->user_id = $userId;
+                $newsfeed->newsfeed_id = $newsfeedId;
+                $newsfeed->category_id = $categoryId;
+                $newsfeed->save(); 
+            } else {
+                $update = ArchiveNewsfeed::updateArchivedNews($userId, $newsfeedId, $categoryId);
+            }
+                
+            DB::commit();
+            $data['message'] = 'success';
+            $data['data'] = ['message' => config('constant.common.messages.RECORD_ADDED_SUCCESSFULLY')];
+            $code = config('constant.common.api_code.CREATE');
+
+            return $this->sendSuccessResponse($data, $code); 
+        } catch(Exception $ex) {
+            return $this->sendFailureResponse();
+        }
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/unarchive-news",
+     *     tags={"unarchive newsfeed"},
+     *     summary="Api for unarchive newsfeed",
+     *     operationId="unarchiveNewsfeed",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(property="status",type="string"),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=200,description="OK"),
+     *     @OA\Response(
+     *         response="default",
+     *         description="unexpected error",
+     *         @OA\Schema(ref="#/components/schemas/Error")
+     *     )
+     * )
+     */
+    public function unarchiveNewsfeed()
+    {
+        try {                  
+            //register category details
+            $input = $this->_request->all();
+            $userId = Auth::user()->id;
+            $newsfeedId = $input['newsfeed_id'];
+            $categoryId = $input['category_id'];
+            
+            $updateStatus =  ArchiveNewsfeed::unarchiveNews($userId, $newsfeedId, $categoryId);
+
+            if($updateStatus > 0) {
+                $data['message'] = 'success';
+                $data['data'] = ['message' => config('constant.common.messages.RECORDS_UPDATED')];
+                $code = config('constant.common.api_code.UPDATE');
+
+                return $this->sendSuccessResponse($data, $code); 
+            } else {
+                return $this->sendFailureResponse(config('constant.common.messages.RECORD_NOT_FOUND'));
+            }
+
+        } catch(Exception $ex) {
+            return $this->sendFailureResponse();
+        }
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/delete-news",
+     *     tags={"delete newsfeed"},
+     *     summary="Api for delete newsfeed",
+     *     operationId="deleteNewsfeed",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(property="status",type="string"),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=200,description="OK"),
+     *     @OA\Response(
+     *         response="default",
+     *         description="unexpected error",
+     *         @OA\Schema(ref="#/components/schemas/Error")
+     *     )
+     * )
+     */
+    public function deleteNewsfeed()
+    {
+        try {                  
+            //register category details
+            $input = $this->_request->all();
+            $userId = Auth::user()->id;
+            $newsfeedId = $input['newsfeed_id'];
+            
+            $updateStatus =  Newsfeed::deleteNews($userId, $newsfeedId);
+
+            if($updateStatus > 0) {
+                $data['message'] = 'success';
+                $data['data'] = ['message' => config('constant.common.messages.RECORDS_DELETED')];
+                $code = config('constant.common.api_code.DELETE');
+
+                return $this->sendSuccessResponse($data, $code); 
+            } else {
+                return $this->sendFailureResponse(config('constant.common.messages.RECORD_NOT_FOUND')); 
+            }
+
+        } catch(Exception $ex) {
+            return $this->sendFailureResponse();
+        }
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/delete-saved-news",
+     *     tags={"delete saved newsfeed"},
+     *     summary="Api for delete saved newsfeed",
+     *     operationId="deleteSavedNewsfeed",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(property="status",type="string"),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=200,description="OK"),
+     *     @OA\Response(
+     *         response="default",
+     *         description="unexpected error",
+     *         @OA\Schema(ref="#/components/schemas/Error")
+     *     )
+     * )
+     */
+    public function deleteSavedNewsfeed()
+    {
+        try {                  
+            //register category details
+            $input = $this->_request->all();
+            $userId = Auth::user()->id;
+            $newsfeedId = $input['newsfeed_id'];
+            $categoryId = $input['category_id'];
+            
+            $updateStatus =  SaveNewsfeed::deleteSavedNews($userId, $newsfeedId, $categoryId);
+
+            if($updateStatus > 0) {
+                $data['message'] = 'success';
+                $data['data'] = ['message' => config('constant.common.messages.RECORDS_DELETED')];
+                $code = config('constant.common.api_code.DELETE');
+
+                return $this->sendSuccessResponse($data, $code); 
+            } else {
+                return $this->sendFailureResponse(config('constant.common.messages.RECORD_NOT_FOUND'));
+            }
+
+        } catch(Exception $ex) {
+            return $this->sendFailureResponse();
+        }
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/delete-archived-news",
+     *     tags={"delete archived newsfeed"},
+     *     summary="Api for delete archived newsfeed",
+     *     operationId="deleteArchivedNewsfeed",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(property="status",type="string"),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=200,description="OK"),
+     *     @OA\Response(
+     *         response="default",
+     *         description="unexpected error",
+     *         @OA\Schema(ref="#/components/schemas/Error")
+     *     )
+     * )
+     */
+    public function deleteArchivedNewsfeed()
+    {
+        try {                  
+            //register category details
+            $input = $this->_request->all();
+            $userId = Auth::user()->id;
+            $newsfeedId = $input['newsfeed_id'];
+            $categoryId = $input['category_id'];
+
+            $updateStatus =  ArchiveNewsfeed::deleteArchivedNews($userId, $newsfeedId, $categoryId);
+
+            if($updateStatus > 0) {
+                $data['message'] = 'success';
+                $data['data'] = ['message' => config('constant.common.messages.RECORDS_DELETED')];
+                $code = config('constant.common.api_code.DELETE');
+
+                return $this->sendSuccessResponse($data, $code); 
+            } else {
+                return $this->sendFailureResponse(config('constant.common.messages.RECORD_NOT_FOUND'));
+            }
+
+        } catch(Exception $ex) {
+            return $this->sendFailureResponse();
+        }
+    }
 }

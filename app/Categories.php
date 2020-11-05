@@ -66,7 +66,7 @@ class Categories extends Model
      * @return mixed
      */
     public static function allCategoriesList() {
-        $column = [
+    	$column = [
                    'id',
                    'name',
                    'created_at',
@@ -74,7 +74,7 @@ class Categories extends Model
                   ];
 
        return self::select($column)
-            ->orderBy('id','desc')
+        	->orderBy('id','desc')
             ->get();
     }
 
