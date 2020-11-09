@@ -50,14 +50,14 @@ class Newsfeed extends Model
 			        'newsfeed.created_at',
 			        'sender_details.name as sender_name',
               'sender_details.email as sender_email',
-              'user_news_catgeory.category_id as category_id',
+              'user_news_category.category_id as category_id',
               'categories.name as category_name'
                 ];
 
        $records =  self::select($column)
        		->join('sender_details', 'newsfeed.sender_id', '=', 'sender_details.id')
-          ->leftJoin('user_news_catgeory', 'user_news_catgeory.newsfeed_id', '=', 'newsfeed.id');
-          ->leftJoin('categories', 'categories.id', '=', 'user_news_catgeory.category_id');
+          ->leftJoin('user_news_category', 'user_news_category.newsfeed_id', '=', 'newsfeed.id')
+           ->leftJoin('categories', 'categories.id', '=', 'user_news_category.category_id');
 
        if(!empty($filter) && $filter) {
        		$records = $records->whereRaw("(newsfeed.title like '%".$filter."%' or newsfeed.description like '%".$filter."%')");
@@ -73,7 +73,7 @@ class Newsfeed extends Model
 
     /**
      * @name newsfeedDetails
-     * @desc   
+     * @desc 
      * @param $email
      * @return mixed
      */
@@ -110,14 +110,13 @@ class Newsfeed extends Model
         return self::where('user_id', $userId)->where('id', $newsfeedId)->update(['status'=>0, 'deleted_at'=>NOW()]);
     }
 
-
-     /**
+    /**
      * @name archivedNewsfeedList 
      * @desc newsfeed a archived records
      * @param $email
      * @return mixed
      */
-    public static function archivedNewsfeedList($filter = '') {
+    public static function archivedNewsfeedList() {
       $column = [
               'newsfeed.id',
               'newsfeed.title',
@@ -137,10 +136,10 @@ class Newsfeed extends Model
 
        $records =  self::select($column)
           ->join('sender_details', 'newsfeed.sender_id', '=', 'sender_details.id')
-          ->leftJoin('archive_newsfeed', 'archive_newsfeed.newsfeed_id', '=', 'newsfeed.id');
+          ->leftJoin('archive_newsfeed', 'archive_newsfeed.newsfeed_id', '=', 'newsfeed.id')
           ->leftJoin('categories', 'categories.id', '=', 'archive_newsfeed.category_id')
-          ->where('newsfeed.user_id', Auth::user()->id)
-          ->where('newsfeed.status', 1)
+          ->where('archive_newsfeed.user_id', Auth::user()->id)
+          ->where('archive_newsfeed.status', 1)
           ->orderBy('newsfeed.id','desc')
             ->get();
 
@@ -153,7 +152,7 @@ class Newsfeed extends Model
      * @param $email
      * @return mixed
      */
-    public static function savedNewsfeedList($filter = '') {
+    public static function savedNewsfeedList() {
       $column = [
               'newsfeed.id',
               'newsfeed.title',
@@ -173,14 +172,17 @@ class Newsfeed extends Model
 
        $records =  self::select($column)
           ->join('sender_details', 'newsfeed.sender_id', '=', 'sender_details.id')
-          ->leftJoin('save_newsfeed', 'save_newsfeed.newsfeed_id', '=', 'newsfeed.id');
+          ->leftJoin('save_newsfeed', 'save_newsfeed.newsfeed_id', '=', 'newsfeed.id')
           ->leftJoin('categories', 'categories.id', '=', 'save_newsfeed.category_id')
-          ->where('newsfeed.user_id', Auth::user()->id)
-          ->where('newsfeed.status', 1)
+          ->where('save_newsfeed.user_id', Auth::user()->id)
+          ->where('save_newsfeed.status', 1)
           ->orderBy('newsfeed.id','desc')
-            ->get();
+          ->get();
 
         return $records;
     }
+
+    
+    
     
 }

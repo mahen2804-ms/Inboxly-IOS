@@ -18,6 +18,7 @@ use App\UserNewsCategory;
 use App\SaveNewsfeed;
 use App\ArchiveNewsfeed;
 use App\UserSenderCategory;
+use App\SenderSnoozeTimer;
 
 
 class NewsfeedController extends ApiBaseController 
@@ -46,7 +47,7 @@ class NewsfeedController extends ApiBaseController
             ->setApiKey('x-api-key', config('constant.common.mailslurp_api_key'));
     }
 
-    public function test1(Request $request)
+    public function WebhookResponse(Request $request)
     {    
         Storage::put('file.txt', json_encode($request->all()));  
         $emailId = $this->_request->emailId;
@@ -181,6 +182,7 @@ class NewsfeedController extends ApiBaseController
             }
         }
 
+    
     /**
      * @OA\Post(
      *     path="/api/v1/unsave-categroy",
@@ -213,7 +215,7 @@ class NewsfeedController extends ApiBaseController
             $categoryId = $input['category_id'];
             $senderId = $input['sender_id'];
             $updateStatus =  UserNewsCategory::unsaveCategory($userId, $newsfeedId, $categoryId);
-            $updateSenderCategory = UserSenderCategory::updateUnsaveSenderCategory($userId, $senderId, $categoryId)
+            $updateSenderCategory = UserSenderCategory::updateUnsaveSenderCategory($userId, $senderId, $categoryId);
 
             if($updateStatus > 0) {
                 $data['message'] = 'success';
@@ -257,7 +259,7 @@ class NewsfeedController extends ApiBaseController
         try {                  
             //register category details
             $input = $this->_request->all();
-            $userId = Auth::user()->id;
+            $userId = Auth::user()->id; 
             $newsfeedId = $input['newsfeed_id'];
             $categoryId = $input['category_id'];
             $senderId = $input['sender_id'];
@@ -269,15 +271,18 @@ class NewsfeedController extends ApiBaseController
                 $category->user_id = $userId;
                 $category->newsfeed_id = $newsfeedId;
                 $category->category_id = $categoryId;
-                $category->save(); 
-                //save details of user sender category
-                $sender = new UserSenderCategory();
-                $sender->user_id = $userId;
-                $sender->sender_id = $senderId;
-                $sender->category_id = $categoryId;
-                $sender->created_by = $userId;
-                $sender->updated_by = $userId;
-                $sender->save(); 
+                
+                if($category->save()) {
+                    //save details of user sender category
+                    $sender = new UserSenderCategory();
+                    $sender->user_id = $userId;
+                    $sender->sender_id = $senderId;
+                    $sender->category_id = $categoryId;
+                    $sender->created_by = $userId;
+                    $sender->updated_by = $userId;
+                    $sender->save(); 
+                } 
+                
             } else {
                 $updateCategroryId = UserNewsCategory::updateCategroryId($userId, $newsfeedId, $categoryId);
             }
@@ -323,7 +328,7 @@ class NewsfeedController extends ApiBaseController
             $userId = Auth::user()->id;
             $newsfeedId = $input['newsfeed_id'];
             $categoryId = $input['category_id'];
-            $checkSavedNews = SaveNewsfeed::checkSavedNews($userId, $newsfeedId, $categoryId);
+            $checkSavedNews = SaveNewsfeed::checkSavedNews($userId, $newsfeedId);
 
             if(empty($checkCategroryId)) {
                 $newsfeed = new SaveNewsfeed();
@@ -337,7 +342,7 @@ class NewsfeedController extends ApiBaseController
                 
             DB::commit();
             $data['message'] = 'success';
-            $data['data'] = ['message' => config('constant.common.messages.RECORD_ADDED_SUCCESSFULLY')];
+            $data['data'] = ['message' => config('constant.common.messages.SAVED_NEWS_SUCCESSFULLY')];
             $code = config('constant.common.api_code.CREATE');
 
                 return $this->sendSuccessResponse($data, $code); 
@@ -426,7 +431,7 @@ class NewsfeedController extends ApiBaseController
             $userId = Auth::user()->id;
             $newsfeedId = $input['newsfeed_id'];
             $categoryId = $input['category_id'];
-            $checkArchivedNews = ArchiveNewsfeed::checkArchivedNews($userId, $newsfeedId, $categoryId);
+            $checkArchivedNews = ArchiveNewsfeed::checkArchivedNews($userId, $newsfeedId);
 
             if(empty($checkArchivedNews)) {
                 $newsfeed = new ArchiveNewsfeed();
@@ -440,7 +445,7 @@ class NewsfeedController extends ApiBaseController
                 
             DB::commit();
             $data['message'] = 'success';
-            $data['data'] = ['message' => config('constant.common.messages.RECORD_ADDED_SUCCESSFULLY')];
+            $data['data'] = ['message' => config('constant.common.messages.ARCHIVED_NEWS_SUCCESSFULLY')];
             $code = config('constant.common.api_code.CREATE');
 
             return $this->sendSuccessResponse($data, $code); 
@@ -484,7 +489,7 @@ class NewsfeedController extends ApiBaseController
 
             if($updateStatus > 0) {
                 $data['message'] = 'success';
-                $data['data'] = ['message' => config('constant.common.messages.RECORDS_UPDATED')];
+                $data['data'] = ['message' => config('constant.common.messages.NEWSFEED_UPDATED')];
                 $code = config('constant.common.api_code.UPDATE');
 
                 return $this->sendSuccessResponse($data, $code); 
@@ -531,7 +536,7 @@ class NewsfeedController extends ApiBaseController
 
             if($updateStatus > 0) {
                 $data['message'] = 'success';
-                $data['data'] = ['message' => config('constant.common.messages.RECORDS_DELETED')];
+                $data['data'] = ['message' => config('constant.common.messages.NEWSFEED_DELETED')];
                 $code = config('constant.common.api_code.DELETE');
 
                 return $this->sendSuccessResponse($data, $code); 
@@ -577,9 +582,9 @@ class NewsfeedController extends ApiBaseController
             
             $updateStatus =  SaveNewsfeed::deleteSavedNews($userId, $newsfeedId, $categoryId);
 
-            if($updateStatus > 0) {
+            if($updateStatus) {
                 $data['message'] = 'success';
-                $data['data'] = ['message' => config('constant.common.messages.RECORDS_DELETED')];
+                $data['data'] = ['message' => config('constant.common.messages.NEWSFEED_DELETED')];
                 $code = config('constant.common.api_code.DELETE');
 
                 return $this->sendSuccessResponse($data, $code); 
@@ -625,9 +630,9 @@ class NewsfeedController extends ApiBaseController
 
             $updateStatus =  ArchiveNewsfeed::deleteArchivedNews($userId, $newsfeedId, $categoryId);
 
-            if($updateStatus > 0) {
+            if($updateStatus) {
                 $data['message'] = 'success';
-                $data['data'] = ['message' => config('constant.common.messages.RECORDS_DELETED')];
+                $data['data'] = ['message' => config('constant.common.messages.NEWSFEED_DELETED')];
                 $code = config('constant.common.api_code.DELETE');
 
                 return $this->sendSuccessResponse($data, $code); 
@@ -641,73 +646,126 @@ class NewsfeedController extends ApiBaseController
     }
 
     /**
-         * @OA\Get(
-         *     path="/api/v1/saved-newsfeed",
-         *     tags={"Saved Newsfeed List"},
-         *     summary="api to get saved newsfeed list",
-         *     operationId="savedNewsfeedList",
-         *    @OA\Response(
-         *         response=200,
-         *         description="Ok"
-         *     ),
-         *      @OA\Response(
-         *         response="default",
-         *         description="unexpected error",
-         *         @OA\Schema(ref="#/components/schemas/Error")
-         *     )
-         * )
-         */
-        public function savedNewsfeedList()
-        {
-            try {
-                //get frequency list
-                $newsfeed = Newsfeed::savedNewsfeedList($this->_request->filterValue);
+     * @OA\Get(
+     *     path="/api/v1/saved-newsfeed",
+     *     tags={"Saved Newsfeed List"},
+     *     summary="api to get saved newsfeed list",
+     *     operationId="savedNewsfeedList",
+     *    @OA\Response(
+     *         response=200,
+     *         description="Ok"
+     *     ),
+     *      @OA\Response(
+     *         response="default",
+     *         description="unexpected error",
+     *         @OA\Schema(ref="#/components/schemas/Error")
+     *     )
+     * )
+     */
+    public function savedNewsfeedList()
+    {
+        try {
+            //get frequency list
+            $newsfeed = Newsfeed::savedNewsfeedList();
 
-                if(count($newsfeed) > 0) {
-                    $data['data'] = $newsfeed;
+            if(count($newsfeed) > 0) {
+                $data['data'] = $newsfeed;
 
-                    return $this->sendSuccessResponse($data);
-                } else {
-                    return $this->sendFailureResponse(config('constant.common.messages.RECORD_NOT_FOUND'));
-                }
-            } catch(Exception $ex) {
-                return $this->sendFailureResponse();
+                return $this->sendSuccessResponse($data);
+            } else {
+                return $this->sendFailureResponse(config('constant.common.messages.RECORD_NOT_FOUND'));
             }
+        } catch(Exception $ex) {
+            return $this->sendFailureResponse();
         }
+    }
 
-        /**
-         * @OA\Get(
-         *     path="/api/v1/archived-newsfeed",
-         *     tags={"All Archived Newsfeed List"},
-         *     summary="api to get all archived newsfeed list",
-         *     operationId="archivedNewsfeedList",
-         *    @OA\Response(
-         *         response=200,
-         *         description="Ok"
-         *     ),
-         *      @OA\Response(
-         *         response="default",
-         *         description="unexpected error",
-         *         @OA\Schema(ref="#/components/schemas/Error")
-         *     )
-         * )
-         */
-        public function archivedNewsfeedList()
-        {
-            try {
-                //get frequency list
-                $newsfeed = Newsfeed::archivedNewsfeedList($this->_request->filterValue);
+    /**
+     * @OA\Get(
+     *     path="/api/v1/archived-newsfeed",
+     *     tags={"All Archived Newsfeed List"},
+     *     summary="api to get all archived newsfeed list",
+     *     operationId="archivedNewsfeedList",
+     *    @OA\Response(
+     *         response=200,
+     *         description="Ok"
+     *     ),
+     *      @OA\Response(
+     *         response="default",
+     *         description="unexpected error",
+     *         @OA\Schema(ref="#/components/schemas/Error")
+     *     )
+     * )
+     */
+    public function archivedNewsfeedList()
+    {
+        try {
+            //get frequency list
+            $newsfeed = Newsfeed::archivedNewsfeedList($this->_request->filterValue);
 
-                if(count($newsfeed) > 0) {
-                    $data['data'] = $newsfeed;
+            if(count($newsfeed) > 0) {
+                $data['data'] = $newsfeed;
 
-                    return $this->sendSuccessResponse($data);
-                } else {
-                    return $this->sendFailureResponse(config('constant.common.messages.RECORD_NOT_FOUND'));
-                }
-            } catch(Exception $ex) {
-                return $this->sendFailureResponse();
+                return $this->sendSuccessResponse($data);
+            } else {
+                return $this->sendFailureResponse(config('constant.common.messages.RECORD_NOT_FOUND'));
             }
+        } catch(Exception $ex) {
+            return $this->sendFailureResponse();
         }
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/snooze-timer",
+     *     tags={"snooze-timer newsfeed"},
+     *     summary="Api for snooze-timer newsfeed",
+     *     operationId="snoozeTimer",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(property="status",type="string"),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=200,description="OK"),
+     *     @OA\Response(
+     *         response="default",
+     *         description="unexpected error",
+     *         @OA\Schema(ref="#/components/schemas/Error")
+     *     )
+     * )
+     */
+    public function snoozeTimer()
+    {
+        try {                  
+            //register category details
+            $input = $this->_request->all();
+            $userId = Auth::user()->id;
+            $senderId = $input['sender_id'];
+            $durationId = $input['duration_id'];
+            $checkSender = SenderSnoozeTimer::checkSender($userId, $senderId);
+
+            if(empty($checkSender)) {
+                $newsfeed = new SenderSnoozeTimer();
+                $newsfeed->user_id = $userId;
+                $newsfeed->sender_id = $senderId;
+                $newsfeed->duration_id = $durationId;
+                $newsfeed->save(); 
+            } else {
+                $update = SenderSnoozeTimer::updateSenderTimer($userId, $senderId, $durationId);
+            }
+                
+            DB::commit();
+            $data['message'] = 'success';
+            $data['data'] = ['message' => config('constant.common.messages.SNOOZE_TIMER_SUCCESSFULLY')];
+            $code = config('constant.common.api_code.CREATE');
+
+            return $this->sendSuccessResponse($data, $code); 
+        } catch(Exception $ex) {
+            return $this->sendFailureResponse();
+        }
+    }
 
 }
