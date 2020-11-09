@@ -47,10 +47,12 @@ Route::group(['prefix' => 'v1'], function () {
         // Route for user's listing
         Route::post('manage-status', 'Api\V1\CategoriesController@manageStatus');
 
+        // Route for saved newsfeed listing
+        Route::get('saved-newsfeed', 'Api\V1\NewsfeedController@savedNewsfeedList');
+        // Route for archived newsfeed listing
+        Route::get('archived-newsfeed', 'Api\V1\NewsfeedController@archivedNewsfeedList');
+
         // Apply middleware for routes which will need authentication
-         Route::get('test', 'Api\V1\NewsfeedController@testMailSlurp');
-        // Route for registration of user
-        Route::get('response', 'Api\V1\NewsfeedController@test');
         Route::post('respponse', 'Api\V1\NewsfeedController@test1');
 
          // Route for forgot password

@@ -17,6 +17,7 @@ use App\Categories;
 use App\UserNewsCategory;
 use App\SaveNewsfeed;
 use App\ArchiveNewsfeed;
+use App\UserSenderCategory;
 
 
 class NewsfeedController extends ApiBaseController 
@@ -210,8 +211,9 @@ class NewsfeedController extends ApiBaseController
             $userId = Auth::user()->id;
             $newsfeedId = $input['newsfeed_id'];
             $categoryId = $input['category_id'];
-            
+            $senderId = $input['sender_id'];
             $updateStatus =  UserNewsCategory::unsaveCategory($userId, $newsfeedId, $categoryId);
+            $updateSenderCategory = UserSenderCategory::updateUnsaveSenderCategory($userId, $senderId, $categoryId)
 
             if($updateStatus > 0) {
                 $data['message'] = 'success';
@@ -258,14 +260,24 @@ class NewsfeedController extends ApiBaseController
             $userId = Auth::user()->id;
             $newsfeedId = $input['newsfeed_id'];
             $categoryId = $input['category_id'];
+            $senderId = $input['sender_id'];
             $checkCategroryId = UserNewsCategory::checkCategroryId($userId, $newsfeedId);
 
             if(empty($checkCategroryId)) {
-               $category = new UserNewsCategory();
+                //save details of user newsfeed category
+                $category = new UserNewsCategory();
                 $category->user_id = $userId;
                 $category->newsfeed_id = $newsfeedId;
                 $category->category_id = $categoryId;
-                $category->save();  
+                $category->save(); 
+                //save details of user sender category
+                $sender = new UserSenderCategory();
+                $sender->user_id = $userId;
+                $sender->sender_id = $senderId;
+                $sender->category_id = $categoryId;
+                $sender->created_by = $userId;
+                $sender->updated_by = $userId;
+                $sender->save(); 
             } else {
                 $updateCategroryId = UserNewsCategory::updateCategroryId($userId, $newsfeedId, $categoryId);
             }
@@ -627,4 +639,75 @@ class NewsfeedController extends ApiBaseController
             return $this->sendFailureResponse();
         }
     }
+
+    /**
+         * @OA\Get(
+         *     path="/api/v1/saved-newsfeed",
+         *     tags={"Saved Newsfeed List"},
+         *     summary="api to get saved newsfeed list",
+         *     operationId="savedNewsfeedList",
+         *    @OA\Response(
+         *         response=200,
+         *         description="Ok"
+         *     ),
+         *      @OA\Response(
+         *         response="default",
+         *         description="unexpected error",
+         *         @OA\Schema(ref="#/components/schemas/Error")
+         *     )
+         * )
+         */
+        public function savedNewsfeedList()
+        {
+            try {
+                //get frequency list
+                $newsfeed = Newsfeed::savedNewsfeedList($this->_request->filterValue);
+
+                if(count($newsfeed) > 0) {
+                    $data['data'] = $newsfeed;
+
+                    return $this->sendSuccessResponse($data);
+                } else {
+                    return $this->sendFailureResponse(config('constant.common.messages.RECORD_NOT_FOUND'));
+                }
+            } catch(Exception $ex) {
+                return $this->sendFailureResponse();
+            }
+        }
+
+        /**
+         * @OA\Get(
+         *     path="/api/v1/archived-newsfeed",
+         *     tags={"All Archived Newsfeed List"},
+         *     summary="api to get all archived newsfeed list",
+         *     operationId="archivedNewsfeedList",
+         *    @OA\Response(
+         *         response=200,
+         *         description="Ok"
+         *     ),
+         *      @OA\Response(
+         *         response="default",
+         *         description="unexpected error",
+         *         @OA\Schema(ref="#/components/schemas/Error")
+         *     )
+         * )
+         */
+        public function archivedNewsfeedList()
+        {
+            try {
+                //get frequency list
+                $newsfeed = Newsfeed::archivedNewsfeedList($this->_request->filterValue);
+
+                if(count($newsfeed) > 0) {
+                    $data['data'] = $newsfeed;
+
+                    return $this->sendSuccessResponse($data);
+                } else {
+                    return $this->sendFailureResponse(config('constant.common.messages.RECORD_NOT_FOUND'));
+                }
+            } catch(Exception $ex) {
+                return $this->sendFailureResponse();
+            }
+        }
+
 }
