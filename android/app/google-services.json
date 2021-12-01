@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "735714931084",
+    "project_id": "inboxly-1a5d6",
+    "storage_bucket": "inboxly-1a5d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:735714931084:android:c148074340a978554126a9",
+        "android_client_info": {
+          "package_name": "com.inboxly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "735714931084-kdihho82j69a98m9pd1n66kukjha3l2f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCP2c7SlthavNTKTvkFTOQcDIB6mSg1QTc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "735714931084-kdihho82j69a98m9pd1n66kukjha3l2f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "735714931084-akqecr03j53d39qml1hl1nok7erfaqa0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.myinboxly"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

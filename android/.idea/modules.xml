@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/inboxly.iml" filepath="$PROJECT_DIR$/.idea/modules/inboxly.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/inboxly.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/inboxly.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-882691647/inboxly.react-native-community_async-storage.iml" filepath="$PROJECT_DIR$/.idea/modules/-882691647/inboxly.react-native-community_async-storage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1638141182/inboxly.react-native-community_masked-view.iml" filepath="$PROJECT_DIR$/.idea/modules/1638141182/inboxly.react-native-community_masked-view.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1834107298/inboxly.react-native-community_netinfo.iml" filepath="$PROJECT_DIR$/.idea/modules/1834107298/inboxly.react-native-community_netinfo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1140271896/inboxly.react-native-device-info.iml" filepath="$PROJECT_DIR$/.idea/modules/1140271896/inboxly.react-native-device-info.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-526331204/inboxly.react-native-firebase_app.iml" filepath="$PROJECT_DIR$/.idea/modules/-526331204/inboxly.react-native-firebase_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1149767860/inboxly.react-native-firebase_crashlytics.iml" filepath="$PROJECT_DIR$/.idea/modules/1149767860/inboxly.react-native-firebase_crashlytics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1702615969/inboxly.react-native-firebase_messaging.iml" filepath="$PROJECT_DIR$/.idea/modules/-1702615969/inboxly.react-native-firebase_messaging.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1193985639/inboxly.react-native-gesture-handler.iml" filepath="$PROJECT_DIR$/.idea/modules/-1193985639/inboxly.react-native-gesture-handler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1831841779/inboxly.react-native-image-picker.iml" filepath="$PROJECT_DIR$/.idea/modules/-1831841779/inboxly.react-native-image-picker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1626276567/inboxly.react-native-permissions.iml" filepath="$PROJECT_DIR$/.idea/modules/1626276567/inboxly.react-native-permissions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1007826223/inboxly.react-native-push-notification.iml" filepath="$PROJECT_DIR$/.idea/modules/-1007826223/inboxly.react-native-push-notification.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/546703587/inboxly.react-native-reanimated.iml" filepath="$PROJECT_DIR$/.idea/modules/546703587/inboxly.react-native-reanimated.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-12562494/inboxly.react-native-safe-area-context.iml" filepath="$PROJECT_DIR$/.idea/modules/-12562494/inboxly.react-native-safe-area-context.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-333047206/inboxly.react-native-screens.iml" filepath="$PROJECT_DIR$/.idea/modules/-333047206/inboxly.react-native-screens.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-24328846/inboxly.react-native-share.iml" filepath="$PROJECT_DIR$/.idea/modules/-24328846/inboxly.react-native-share.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1287519781/inboxly.react-native-splash-screen.iml" filepath="$PROJECT_DIR$/.idea/modules/1287519781/inboxly.react-native-splash-screen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-206574371/inboxly.react-native-vector-icons.iml" filepath="$PROJECT_DIR$/.idea/modules/-206574371/inboxly.react-native-vector-icons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1074104628/inboxly.react-native-webview.iml" filepath="$PROJECT_DIR$/.idea/modules/-1074104628/inboxly.react-native-webview.iml" />
+    </modules>
+  </component>
+</project>

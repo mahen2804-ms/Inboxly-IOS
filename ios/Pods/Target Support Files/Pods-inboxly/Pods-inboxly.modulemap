@@ -1,0 +1,6 @@
+module Pods_inboxly {
+  umbrella header "Pods-inboxly-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,574 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<!-- <manifest xmlns:android="http://schemas.android.com/apk/res/android" -->
+3<!-- package="com.inboxly"> -->
+4<!-- <uses-permission android:name="android.permission.INTERNET" /> -->
+5<!-- <application -->
+6<!-- android:name=".MainApplication" -->
+7<!-- android:label="@string/app_name" -->
+8<!-- android:icon="@mipmap/ic_launcher" -->
+9<!-- android:roundIcon="@mipmap/ic_launcher_round" -->
+10<!-- android:allowBackup="false" -->
+11<!-- android:theme="@style/AppTheme"> -->
+12<!-- <activity -->
+13<!-- android:name=".MainActivity" -->
+14<!-- android:label="@string/app_name" -->
+15<!-- android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode" -->
+16<!-- android:launchMode="singleTask" -->
+17<!-- android:windowSoftInputMode="adjustResize"> -->
+18<!-- <intent-filter> -->
+19<!-- <action android:name="android.intent.action.MAIN" /> -->
+20<!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+21<!-- </intent-filter> -->
+22<!-- </activity> -->
+23<!-- <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" /> -->
+24<!-- </application> -->
+25<!-- </manifest> -->
+26<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+27    package="com.inboxly"
+28    android:versionCode="1"
+29    android:versionName="1.0" >
+30
+31    <uses-sdk
+32        android:minSdkVersion="21"
+32-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml
+33        android:targetSdkVersion="29" />
+33-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml
+34
+35    <uses-permission android:name="android.permission.INTERNET" />
+35-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:34:5-67
+35-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:34:22-64
+36    <uses-permission android:name="android.permission.VIBRATE" />
+36-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:36:5-66
+36-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:36:22-63
+37    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+37-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:37:5-80
+37-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:37:22-78
+38    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+38-->[:react-native-community_netinfo] /Users/praful/Downloads/src/node_modules/@react-native-community/netinfo/android/build/intermediates/library_manifest/release/AndroidManifest.xml:9:5-79
+38-->[:react-native-community_netinfo] /Users/praful/Downloads/src/node_modules/@react-native-community/netinfo/android/build/intermediates/library_manifest/release/AndroidManifest.xml:9:22-76
+39    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+39-->[:react-native-community_netinfo] /Users/praful/Downloads/src/node_modules/@react-native-community/netinfo/android/build/intermediates/library_manifest/release/AndroidManifest.xml:10:5-76
+39-->[:react-native-community_netinfo] /Users/praful/Downloads/src/node_modules/@react-native-community/netinfo/android/build/intermediates/library_manifest/release/AndroidManifest.xml:10:22-73
+40    <uses-permission android:name="android.permission.WAKE_LOCK" />
+40-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:12:5-68
+40-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:12:22-65
+41    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+41-->[:react-native-share] /Users/praful/Downloads/src/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:9:5-81
+41-->[:react-native-share] /Users/praful/Downloads/src/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:9:22-78
+42    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+42-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:25:5-82
+42-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:25:22-79
+43    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" /> <!-- for android -->
+43-->[com.google.android.gms:play-services-measurement:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/c36e502b8c76ab215425960151c784cb/play-services-measurement-17.6.0/AndroidManifest.xml:26:5-110
+43-->[com.google.android.gms:play-services-measurement:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/c36e502b8c76ab215425960151c784cb/play-services-measurement-17.6.0/AndroidManifest.xml:26:22-107
+44    <!-- <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/> -->
+45    <!-- <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS"/> -->
+46    <!-- <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" /> -->
+47    <!-- <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" /> -->
+48    <!-- for Samsung -->
+49    <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
+49-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:19:5-86
+49-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:19:22-83
+50    <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" /> <!-- for htc -->
+50-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:20:5-87
+50-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:20:22-84
+51    <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" />
+51-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:23:5-81
+51-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:23:22-78
+52    <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT" /> <!-- for sony -->
+52-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:24:5-83
+52-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:24:22-80
+53    <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE" />
+53-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:27:5-88
+53-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:27:22-85
+54    <uses-permission android:name="com.sonymobile.home.permission.PROVIDER_INSERT_BADGE" /> <!-- for apex -->
+54-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:28:5-92
+54-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:28:22-89
+55    <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT" /> <!-- for solid -->
+55-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:31:5-84
+55-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:31:22-81
+56    <uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE" /> <!-- for huawei -->
+56-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:34:5-83
+56-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:34:22-80
+57    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
+57-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:37:5-91
+57-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:37:22-88
+58    <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS" />
+58-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:38:5-92
+58-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:38:22-89
+59    <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS" /> <!-- for ZUK -->
+59-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:39:5-93
+59-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:39:22-90
+60    <uses-permission android:name="android.permission.READ_APP_BADGE" /> <!-- for OPPO -->
+60-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:42:5-73
+60-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:42:22-70
+61    <uses-permission android:name="com.oppo.launcher.permission.READ_SETTINGS" />
+61-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:45:5-82
+61-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:45:22-79
+62    <uses-permission android:name="com.oppo.launcher.permission.WRITE_SETTINGS" /> <!-- for EvMe -->
+62-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:46:5-83
+62-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:46:22-80
+63    <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_READ" />
+63-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:49:5-88
+63-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:49:22-85
+64    <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_WRITE" />
+64-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:50:5-89
+64-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:50:22-86
+65
+66    <application
+66-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:39:5-107:19
+67        android:name="com.inboxly.MainApplication"
+67-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:41:9-40
+68        android:allowBackup="false"
+68-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:45:9-36
+69        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+69-->[androidx.core:core:1.3.2] /Users/praful/.gradle/caches/transforms-2/files-2.1/277260e55280a0f231c6ea51b68d6232/core-1.3.2/AndroidManifest.xml:24:18-86
+70        android:icon="@mipmap/ic_launcher"
+70-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:43:9-43
+71        android:label="@string/app_name"
+71-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:42:9-41
+72        android:roundIcon="@mipmap/ic_launcher_round"
+72-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:44:9-54
+73        android:theme="@style/AppTheme"
+73-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:46:9-40
+74        android:usesCleartextTraffic="true" >
+74-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:40:9-44
+75        <meta-data
+75-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:50:9-52:75
+76            android:name="com.google.firebase.messaging.default_notification_icon"
+76-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:51:13-83
+77            android:resource="@drawable/ic_stat_microsoftteams_image_2" />
+77-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:52:13-72
+78        <meta-data
+78-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:54:2-55:43
+79            android:name="com.dieam.reactnativepushnotification.notification_foreground"
+79-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:54:14-90
+80            android:value="true" />
+80-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:55:21-41
+81        <meta-data
+81-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:56:21-57:64
+82            android:name="com.dieam.reactnativepushnotification.notification_color"
+82-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:56:33-104
+83            android:resource="@color/splashscreen_bg" /> <!-- or @android:color/{name} to use a standard color -->
+83-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:57:21-62
+84        <meta-data
+84-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:58:9-59:75
+85            android:name="com.dieam.reactnativepushnotification.default_notification_icon"
+85-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:58:21-99
+86            android:resource="@drawable/ic_stat_microsoftteams_image_2" />
+86-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:59:13-72
+87
+88        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationActions" />
+88-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:62:2-101
+88-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:62:12-98
+89        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher" />
+89-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:63:9-110
+89-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:63:19-107
+90        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationBootEventReceiver" >
+90-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:64:9-70:20
+90-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:64:19-115
+91            <intent-filter>
+91-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:65:13-69:29
+92                <action android:name="android.intent.action.BOOT_COMPLETED" />
+92-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:66:17-79
+92-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:66:25-76
+93                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+93-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:67:17-82
+93-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:67:25-79
+94                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+94-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:68:17-81
+94-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:68:25-79
+95            </intent-filter>
+96        </receiver>
+97
+98        <service
+98-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:72:10-78:19
+99            android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService"
+99-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:73:13-107
+100            android:exported="false" >
+100-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:74:13-37
+101            <intent-filter>
+101-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:75:13-77:29
+102                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+102-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:76:17-78
+102-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:76:25-75
+103            </intent-filter>
+104        </service>
+105        <!-- <meta-data android:name="com.google.firebase.messaging.default_notification_color" -->
+106        <!-- android:resource="@color/dummy" -->
+107        <!-- tools:replace="android:resource" /> -->
+108
+109        <activity
+109-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:83:9-92:20
+110            android:name="com.inboxly.SplashActivity"
+110-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:84:13-43
+111            android:label="@string/app_name"
+111-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:86:13-45
+112            android:launchMode="singleTask"
+112-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:87:13-44
+113            android:theme="@style/SplashTheme" >
+113-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:85:13-47
+114            <intent-filter>
+114-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:88:13-91:29
+115                <action android:name="android.intent.action.MAIN" />
+115-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:89:17-69
+115-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:89:25-66
+116
+117                <category android:name="android.intent.category.LAUNCHER" />
+117-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:90:17-77
+117-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:90:27-74
+118            </intent-filter>
+119        </activity>
+120        <activity
+120-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:94:9-102:20
+121            android:name="com.inboxly.MainActivity"
+121-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:95:13-41
+122            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+122-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:98:13-90
+123            android:exported="true"
+123-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:101:13-36
+124            android:label="@string/app_name"
+124-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:96:13-45
+125            android:launchMode="singleTask"
+125-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:99:13-44
+126            android:screenOrientation="portrait"
+126-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:97:13-49
+127            android:windowSoftInputMode="adjustPan" >
+127-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:100:13-52
+128        </activity>
+129        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+129-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:106:9-86
+129-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:106:19-83
+130        <!-- Disable crashlytics by default so we can custom init with CrashlyticsNdk support -->
+131        <meta-data
+131-->[:react-native-firebase_crashlytics] /Users/praful/Downloads/src/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:14:9-16:37
+132            android:name="firebase_crashlytics_collection_enabled"
+132-->[:react-native-firebase_crashlytics] /Users/praful/Downloads/src/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:15:13-67
+133            android:value="false" />
+133-->[:react-native-firebase_crashlytics] /Users/praful/Downloads/src/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:13-34
+134
+135        <provider
+135-->[:react-native-firebase_crashlytics] /Users/praful/Downloads/src/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:18:9-22:38
+136            android:name="io.invertase.firebase.crashlytics.ReactNativeFirebaseCrashlyticsInitProvider"
+136-->[:react-native-firebase_crashlytics] /Users/praful/Downloads/src/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:19:13-104
+137            android:authorities="com.inboxly.reactnativefirebasecrashlyticsinitprovider"
+137-->[:react-native-firebase_crashlytics] /Users/praful/Downloads/src/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:20:13-94
+138            android:exported="false"
+138-->[:react-native-firebase_crashlytics] /Users/praful/Downloads/src/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:21:13-37
+139            android:initOrder="98" />
+139-->[:react-native-firebase_crashlytics] /Users/praful/Downloads/src/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:22:13-35
+140
+141        <service android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingHeadlessService" />
+141-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:9-111
+141-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:18-108
+142        <service
+142-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:17:9-23:19
+143            android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingService"
+143-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:18:13-95
+144            android:exported="false" >
+144-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:19:13-37
+145            <intent-filter>
+145-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:75:13-77:29
+146                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+146-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:76:17-78
+146-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:76:25-75
+147            </intent-filter>
+148        </service>
+149
+150        <receiver
+150-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:25:9-32:20
+151            android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingReceiver"
+151-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:26:13-96
+152            android:exported="true"
+152-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:27:13-36
+153            android:permission="com.google.android.c2dm.permission.SEND" >
+153-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:28:13-73
+154            <intent-filter>
+154-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:29:13-31:29
+155                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+155-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:30:17-81
+155-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:30:25-78
+156            </intent-filter>
+157        </receiver>
+158
+159        <meta-data
+159-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:34:9-36:37
+160            android:name="firebase_messaging_auto_init_enabled"
+160-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:35:13-64
+161            android:value="false" />
+161-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:36:13-34
+162        <meta-data
+162-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:37:9-39:43
+163            android:name="com.google.firebase.messaging.default_notification_channel_id"
+163-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:38:13-89
+164            android:value="inboxly-app" />
+164-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:39:13-40
+165        <meta-data
+165-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:40:9-42:46
+166            android:name="com.google.firebase.messaging.default_notification_color"
+166-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:41:13-84
+167            android:resource="@color/blue" />
+167-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:42:13-43
+168
+169        <provider
+169-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:10:9-18:20
+170            android:name="com.imagepicker.FileProvider"
+170-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:11:13-56
+171            android:authorities="com.inboxly.provider"
+171-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:12:13-60
+172            android:exported="false"
+172-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:13:13-37
+173            android:grantUriPermissions="true" >
+173-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:14:13-47
+174            <meta-data
+174-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:15:13-17:58
+175                android:name="android.support.FILE_PROVIDER_PATHS"
+175-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:17-67
+176                android:resource="@xml/provider_paths" />
+176-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:17:17-55
+177        </provider>
+178        <provider
+178-->[:react-native-share] /Users/praful/Downloads/src/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:12:9-20:20
+179            android:name="cl.json.RNShareFileProvider"
+179-->[:react-native-share] /Users/praful/Downloads/src/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:13:13-55
+180            android:authorities="com.inboxly.rnshare.fileprovider"
+180-->[:react-native-share] /Users/praful/Downloads/src/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:14:13-72
+181            android:exported="false"
+181-->[:react-native-share] /Users/praful/Downloads/src/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:15:13-37
+182            android:grantUriPermissions="true" >
+182-->[:react-native-share] /Users/praful/Downloads/src/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:13-47
+183            <meta-data
+183-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:15:13-17:58
+184                android:name="android.support.FILE_PROVIDER_PATHS"
+184-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:17-67
+185                android:resource="@xml/share_download_paths" />
+185-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:17:17-55
+186        </provider>
+187        <provider
+187-->[:react-native-webview] /Users/praful/Downloads/src/node_modules/react-native-webview/android/build/intermediates/library_manifest/release/AndroidManifest.xml:12:9-20:20
+188            android:name="com.reactnativecommunity.webview.RNCWebViewFileProvider"
+188-->[:react-native-webview] /Users/praful/Downloads/src/node_modules/react-native-webview/android/build/intermediates/library_manifest/release/AndroidManifest.xml:13:13-83
+189            android:authorities="com.inboxly.fileprovider"
+189-->[:react-native-webview] /Users/praful/Downloads/src/node_modules/react-native-webview/android/build/intermediates/library_manifest/release/AndroidManifest.xml:14:13-64
+190            android:exported="false"
+190-->[:react-native-webview] /Users/praful/Downloads/src/node_modules/react-native-webview/android/build/intermediates/library_manifest/release/AndroidManifest.xml:15:13-37
+191            android:grantUriPermissions="true" >
+191-->[:react-native-webview] /Users/praful/Downloads/src/node_modules/react-native-webview/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:13-47
+192            <meta-data
+192-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:15:13-17:58
+193                android:name="android.support.FILE_PROVIDER_PATHS"
+193-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:17-67
+194                android:resource="@xml/file_provider_paths" />
+194-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:17:17-55
+195        </provider>
+196
+197        <receiver
+197-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:28:9-35:20
+198            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+198-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:29:13-78
+199            android:exported="true"
+199-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:30:13-36
+200            android:permission="com.google.android.c2dm.permission.SEND" >
+200-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:31:13-73
+201            <intent-filter>
+201-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:29:13-31:29
+202                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+202-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:30:17-81
+202-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:30:25-78
+203            </intent-filter>
+204        </receiver>
+205        <!--
+206             FirebaseMessagingService performs security checks at runtime,
+207             but set to not exported to explicitly avoid allowing another app to call it.
+208        -->
+209        <service
+209-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:41:9-48:19
+210            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+210-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:42:13-82
+211            android:directBootAware="true"
+211-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:43:13-43
+212            android:exported="false" >
+212-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:44:13-37
+213            <intent-filter android:priority="-500" >
+213-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:75:13-77:29
+214                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+214-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:76:17-78
+214-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:76:25-75
+215            </intent-filter>
+216        </service>
+217        <service
+217-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:49:9-55:19
+218            android:name="com.google.firebase.components.ComponentDiscoveryService"
+218-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:50:13-84
+219            android:directBootAware="true"
+219-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/5aeaaed4254c394d4eded10e48793a3f/jetified-firebase-common-19.5.0/AndroidManifest.xml:35:13-43
+220            android:exported="false" >
+220-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:51:13-37
+221            <meta-data
+221-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:52:13-54:85
+222                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+222-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:53:17-119
+223                android:value="com.google.firebase.components.ComponentRegistrar" />
+223-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:54:17-82
+224            <meta-data
+224-->[com.google.firebase:firebase-datatransport:17.0.10] /Users/praful/.gradle/caches/transforms-2/files-2.1/b771f2f3842fc97658cba780252c7b7f/firebase-datatransport-17.0.10/AndroidManifest.xml:28:13-30:85
+225                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+225-->[com.google.firebase:firebase-datatransport:17.0.10] /Users/praful/.gradle/caches/transforms-2/files-2.1/b771f2f3842fc97658cba780252c7b7f/firebase-datatransport-17.0.10/AndroidManifest.xml:29:17-115
+226                android:value="com.google.firebase.components.ComponentRegistrar" />
+226-->[com.google.firebase:firebase-datatransport:17.0.10] /Users/praful/.gradle/caches/transforms-2/files-2.1/b771f2f3842fc97658cba780252c7b7f/firebase-datatransport-17.0.10/AndroidManifest.xml:30:17-82
+227            <meta-data
+227-->[com.google.firebase:firebase-crashlytics-ndk:17.2.2] /Users/praful/.gradle/caches/transforms-2/files-2.1/d66415c2a795414a8c98a4b9d2deba5d/firebase-crashlytics-ndk-17.2.2/AndroidManifest.xml:35:13-37:85
+228                android:name="com.google.firebase.components:com.google.firebase.crashlytics.ndk.CrashlyticsNdkRegistrar"
+228-->[com.google.firebase:firebase-crashlytics-ndk:17.2.2] /Users/praful/.gradle/caches/transforms-2/files-2.1/d66415c2a795414a8c98a4b9d2deba5d/firebase-crashlytics-ndk-17.2.2/AndroidManifest.xml:36:17-122
+229                android:value="com.google.firebase.components.ComponentRegistrar" />
+229-->[com.google.firebase:firebase-crashlytics-ndk:17.2.2] /Users/praful/.gradle/caches/transforms-2/files-2.1/d66415c2a795414a8c98a4b9d2deba5d/firebase-crashlytics-ndk-17.2.2/AndroidManifest.xml:37:17-82
+230            <meta-data
+230-->[com.google.firebase:firebase-crashlytics:17.2.2] /Users/praful/.gradle/caches/transforms-2/files-2.1/fb3317f9e2bdb8ea4168050be8d119ee/firebase-crashlytics-17.2.2/AndroidManifest.xml:16:13-18:85
+231                android:name="com.google.firebase.components:com.google.firebase.crashlytics.CrashlyticsRegistrar"
+231-->[com.google.firebase:firebase-crashlytics:17.2.2] /Users/praful/.gradle/caches/transforms-2/files-2.1/fb3317f9e2bdb8ea4168050be8d119ee/firebase-crashlytics-17.2.2/AndroidManifest.xml:17:17-115
+232                android:value="com.google.firebase.components.ComponentRegistrar" />
+232-->[com.google.firebase:firebase-crashlytics:17.2.2] /Users/praful/.gradle/caches/transforms-2/files-2.1/fb3317f9e2bdb8ea4168050be8d119ee/firebase-crashlytics-17.2.2/AndroidManifest.xml:18:17-82
+233            <meta-data
+233-->[com.google.firebase:firebase-iid:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/b818e1f13adaf8813a070e5ef392ea54/firebase-iid-21.1.0/AndroidManifest.xml:32:13-34:85
+234                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+234-->[com.google.firebase:firebase-iid:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/b818e1f13adaf8813a070e5ef392ea54/firebase-iid-21.1.0/AndroidManifest.xml:33:17-96
+235                android:value="com.google.firebase.components.ComponentRegistrar" />
+235-->[com.google.firebase:firebase-iid:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/b818e1f13adaf8813a070e5ef392ea54/firebase-iid-21.1.0/AndroidManifest.xml:34:17-82
+236            <meta-data
+236-->[com.google.android.gms:play-services-measurement-api:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/f6e9904020430df25eef3ddd13ed448a/play-services-measurement-api-17.6.0/AndroidManifest.xml:30:13-32:85
+237                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+237-->[com.google.android.gms:play-services-measurement-api:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/f6e9904020430df25eef3ddd13ed448a/play-services-measurement-api-17.6.0/AndroidManifest.xml:31:17-139
+238                android:value="com.google.firebase.components.ComponentRegistrar" />
+238-->[com.google.android.gms:play-services-measurement-api:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/f6e9904020430df25eef3ddd13ed448a/play-services-measurement-api-17.6.0/AndroidManifest.xml:32:17-82
+239            <meta-data
+239-->[com.google.firebase:firebase-installations:16.3.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/8e81ed6072921348d11b63de6bc67c67/firebase-installations-16.3.5/AndroidManifest.xml:18:13-20:85
+240                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+240-->[com.google.firebase:firebase-installations:16.3.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/8e81ed6072921348d11b63de6bc67c67/firebase-installations-16.3.5/AndroidManifest.xml:19:17-127
+241                android:value="com.google.firebase.components.ComponentRegistrar" />
+241-->[com.google.firebase:firebase-installations:16.3.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/8e81ed6072921348d11b63de6bc67c67/firebase-installations-16.3.5/AndroidManifest.xml:20:17-82
+242            <!--
+243                This registrar is not defined in the dynamic-module-support sdk itself to allow non-firebase
+244                clients to use it as well, by defining this registrar in their own core/common library.
+245            -->
+246            <meta-data
+246-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/5aeaaed4254c394d4eded10e48793a3f/jetified-firebase-common-19.5.0/AndroidManifest.xml:43:13-45:85
+247                android:name="com.google.firebase.components:com.google.firebase.dynamicloading.DynamicLoadingRegistrar"
+247-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/5aeaaed4254c394d4eded10e48793a3f/jetified-firebase-common-19.5.0/AndroidManifest.xml:44:17-121
+248                android:value="com.google.firebase.components.ComponentRegistrar" />
+248-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/5aeaaed4254c394d4eded10e48793a3f/jetified-firebase-common-19.5.0/AndroidManifest.xml:45:17-82
+249        </service>
+250        <service
+250-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/praful/.gradle/caches/transforms-2/files-2.1/ef1d82fbf8a023ec911d78b66b19b610/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:29:9-35:19
+251            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+251-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/praful/.gradle/caches/transforms-2/files-2.1/ef1d82fbf8a023ec911d78b66b19b610/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:30:13-103
+252            android:exported="false" >
+252-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/praful/.gradle/caches/transforms-2/files-2.1/ef1d82fbf8a023ec911d78b66b19b610/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:31:13-37
+253            <meta-data
+253-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/praful/.gradle/caches/transforms-2/files-2.1/ef1d82fbf8a023ec911d78b66b19b610/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:32:13-34:39
+254                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+254-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/praful/.gradle/caches/transforms-2/files-2.1/ef1d82fbf8a023ec911d78b66b19b610/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:33:17-94
+255                android:value="cct" />
+255-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/praful/.gradle/caches/transforms-2/files-2.1/ef1d82fbf8a023ec911d78b66b19b610/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:34:17-36
+256        </service>
+257        <service
+257-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/4506981eb1137d0950e32f44812942b9/jetified-transport-runtime-2.2.5/AndroidManifest.xml:26:9-30:19
+258            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+258-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/4506981eb1137d0950e32f44812942b9/jetified-transport-runtime-2.2.5/AndroidManifest.xml:27:13-117
+259            android:exported="false"
+259-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/4506981eb1137d0950e32f44812942b9/jetified-transport-runtime-2.2.5/AndroidManifest.xml:28:13-37
+260            android:permission="android.permission.BIND_JOB_SERVICE" >
+260-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/4506981eb1137d0950e32f44812942b9/jetified-transport-runtime-2.2.5/AndroidManifest.xml:29:13-69
+261        </service>
+262
+263        <receiver
+263-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/4506981eb1137d0950e32f44812942b9/jetified-transport-runtime-2.2.5/AndroidManifest.xml:32:9-34:40
+264            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+264-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/4506981eb1137d0950e32f44812942b9/jetified-transport-runtime-2.2.5/AndroidManifest.xml:33:13-132
+265            android:exported="false" />
+265-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/4506981eb1137d0950e32f44812942b9/jetified-transport-runtime-2.2.5/AndroidManifest.xml:34:13-37
+266
+267        <activity
+267-->[com.google.android.gms:play-services-auth:18.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/09e81faee4d657a7e1530b179260b054/play-services-auth-18.1.0/AndroidManifest.xml:23:9-27:75
+268            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+268-->[com.google.android.gms:play-services-auth:18.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/09e81faee4d657a7e1530b179260b054/play-services-auth-18.1.0/AndroidManifest.xml:24:13-93
+269            android:excludeFromRecents="true"
+269-->[com.google.android.gms:play-services-auth:18.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/09e81faee4d657a7e1530b179260b054/play-services-auth-18.1.0/AndroidManifest.xml:25:13-46
+270            android:exported="false"
+270-->[com.google.android.gms:play-services-auth:18.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/09e81faee4d657a7e1530b179260b054/play-services-auth-18.1.0/AndroidManifest.xml:26:13-37
+271            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+271-->[com.google.android.gms:play-services-auth:18.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/09e81faee4d657a7e1530b179260b054/play-services-auth-18.1.0/AndroidManifest.xml:27:13-72
+272        <!--
+273            Service handling Google Sign-In user revocation. For apps that do not integrate with
+274            Google Sign-In, this service will never be started.
+275        -->
+276        <service
+276-->[com.google.android.gms:play-services-auth:18.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/09e81faee4d657a7e1530b179260b054/play-services-auth-18.1.0/AndroidManifest.xml:33:9-37:51
+277            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+277-->[com.google.android.gms:play-services-auth:18.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/09e81faee4d657a7e1530b179260b054/play-services-auth-18.1.0/AndroidManifest.xml:34:13-89
+278            android:exported="true"
+278-->[com.google.android.gms:play-services-auth:18.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/09e81faee4d657a7e1530b179260b054/play-services-auth-18.1.0/AndroidManifest.xml:35:13-36
+279            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+279-->[com.google.android.gms:play-services-auth:18.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/09e81faee4d657a7e1530b179260b054/play-services-auth-18.1.0/AndroidManifest.xml:36:13-107
+280            android:visibleToInstantApps="true" />
+280-->[com.google.android.gms:play-services-auth:18.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/09e81faee4d657a7e1530b179260b054/play-services-auth-18.1.0/AndroidManifest.xml:37:13-48
+281
+282        <receiver
+282-->[com.google.android.gms:play-services-measurement:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/c36e502b8c76ab215425960151c784cb/play-services-measurement-17.6.0/AndroidManifest.xml:29:9-33:20
+283            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+283-->[com.google.android.gms:play-services-measurement:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/c36e502b8c76ab215425960151c784cb/play-services-measurement-17.6.0/AndroidManifest.xml:30:13-85
+284            android:enabled="true"
+284-->[com.google.android.gms:play-services-measurement:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/c36e502b8c76ab215425960151c784cb/play-services-measurement-17.6.0/AndroidManifest.xml:31:13-35
+285            android:exported="false" >
+285-->[com.google.android.gms:play-services-measurement:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/c36e502b8c76ab215425960151c784cb/play-services-measurement-17.6.0/AndroidManifest.xml:32:13-37
+286        </receiver>
+287
+288        <service
+288-->[com.google.android.gms:play-services-measurement:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/c36e502b8c76ab215425960151c784cb/play-services-measurement-17.6.0/AndroidManifest.xml:35:9-38:40
+289            android:name="com.google.android.gms.measurement.AppMeasurementService"
+289-->[com.google.android.gms:play-services-measurement:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/c36e502b8c76ab215425960151c784cb/play-services-measurement-17.6.0/AndroidManifest.xml:36:13-84
+290            android:enabled="true"
+290-->[com.google.android.gms:play-services-measurement:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/c36e502b8c76ab215425960151c784cb/play-services-measurement-17.6.0/AndroidManifest.xml:37:13-35
+291            android:exported="false" />
+291-->[com.google.android.gms:play-services-measurement:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/c36e502b8c76ab215425960151c784cb/play-services-measurement-17.6.0/AndroidManifest.xml:38:13-37
+292        <service
+292-->[com.google.android.gms:play-services-measurement:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/c36e502b8c76ab215425960151c784cb/play-services-measurement-17.6.0/AndroidManifest.xml:39:9-43:72
+293            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+293-->[com.google.android.gms:play-services-measurement:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/c36e502b8c76ab215425960151c784cb/play-services-measurement-17.6.0/AndroidManifest.xml:40:13-87
+294            android:enabled="true"
+294-->[com.google.android.gms:play-services-measurement:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/c36e502b8c76ab215425960151c784cb/play-services-measurement-17.6.0/AndroidManifest.xml:41:13-35
+295            android:exported="false"
+295-->[com.google.android.gms:play-services-measurement:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/c36e502b8c76ab215425960151c784cb/play-services-measurement-17.6.0/AndroidManifest.xml:42:13-37
+296            android:permission="android.permission.BIND_JOB_SERVICE" />
+296-->[com.google.android.gms:play-services-measurement:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/c36e502b8c76ab215425960151c784cb/play-services-measurement-17.6.0/AndroidManifest.xml:43:13-69
+297
+298        <provider
+298-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/5aeaaed4254c394d4eded10e48793a3f/jetified-firebase-common-19.5.0/AndroidManifest.xml:26:9-31:39
+299            android:name="com.google.firebase.provider.FirebaseInitProvider"
+299-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/5aeaaed4254c394d4eded10e48793a3f/jetified-firebase-common-19.5.0/AndroidManifest.xml:27:13-77
+300            android:authorities="com.inboxly.firebaseinitprovider"
+300-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/5aeaaed4254c394d4eded10e48793a3f/jetified-firebase-common-19.5.0/AndroidManifest.xml:28:13-72
+301            android:directBootAware="true"
+301-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/5aeaaed4254c394d4eded10e48793a3f/jetified-firebase-common-19.5.0/AndroidManifest.xml:29:13-43
+302            android:exported="false"
+302-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/5aeaaed4254c394d4eded10e48793a3f/jetified-firebase-common-19.5.0/AndroidManifest.xml:30:13-37
+303            android:initOrder="100" />
+303-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/5aeaaed4254c394d4eded10e48793a3f/jetified-firebase-common-19.5.0/AndroidManifest.xml:31:13-36
+304
+305        <activity
+305-->[com.google.android.gms:play-services-base:17.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/f2f2fe211f4cd817dac4d0c4979683c4/play-services-base-17.1.0/AndroidManifest.xml:23:9-26:75
+306            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+306-->[com.google.android.gms:play-services-base:17.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/f2f2fe211f4cd817dac4d0c4979683c4/play-services-base-17.1.0/AndroidManifest.xml:24:13-79
+307            android:exported="false"
+307-->[com.google.android.gms:play-services-base:17.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/f2f2fe211f4cd817dac4d0c4979683c4/play-services-base-17.1.0/AndroidManifest.xml:25:13-37
+308            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+308-->[com.google.android.gms:play-services-base:17.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/f2f2fe211f4cd817dac4d0c4979683c4/play-services-base-17.1.0/AndroidManifest.xml:26:13-72
+309
+310        <meta-data
+310-->[com.google.android.gms:play-services-basement:17.1.1] /Users/praful/.gradle/caches/transforms-2/files-2.1/d7a1cc9a8315801b88741845d180eed9/jetified-play-services-basement-17.1.1/AndroidManifest.xml:23:9-25:69
+311            android:name="com.google.android.gms.version"
+311-->[com.google.android.gms:play-services-basement:17.1.1] /Users/praful/.gradle/caches/transforms-2/files-2.1/d7a1cc9a8315801b88741845d180eed9/jetified-play-services-basement-17.1.1/AndroidManifest.xml:24:13-58
+312            android:value="@integer/google_play_services_version" />
+312-->[com.google.android.gms:play-services-basement:17.1.1] /Users/praful/.gradle/caches/transforms-2/files-2.1/d7a1cc9a8315801b88741845d180eed9/jetified-play-services-basement-17.1.1/AndroidManifest.xml:25:13-66
+313    </application>
+314
+315</manifest>
