@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/praful/Downloads/src/android/app/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-night-v8/values-night-v8.xml",
+            "outputFile": "/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-night-v8/values-night-v8.xml",
             "map": [
                 {
                     "source": "/Users/praful/.gradle/caches/transforms-2/files-2.1/21fadc891a52f7f89b9d42ab85b96a4e/material-1.1.0/res/values-night-v8/values-night-v8.xml",

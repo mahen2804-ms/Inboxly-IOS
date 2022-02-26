@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/praful/Downloads/src/android/app/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-watch-v20/values-watch-v20.xml",
+            "outputFile": "/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
                     "source": "/Users/praful/.gradle/caches/transforms-2/files-2.1/e1e74b5a128266df09508ff14249976d/appcompat-1.1.0/res/values-watch-v20/values-watch-v20.xml",

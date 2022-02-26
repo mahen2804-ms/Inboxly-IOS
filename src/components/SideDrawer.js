@@ -1,74 +1,90 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, Image, Platform, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from "react";
 import {
-    Title,
-    Subtitle,
-    Icon,
-    Container,
-} from 'native-base';
-import axios from 'axios';
-import { DrawerContentScrollView } from '@react-navigation/drawer';
-import AsyncStorage from '@react-native-community/async-storage';
-import { connect } from 'react-redux';
-import { Fonts } from '../utils/Fonts';
-import { GLOBLE } from '../constant/utility.constant';
-import { LABELS } from '../constant/LanguageConstants';
-import { userLogoutAction, getUserDetailAction } from '../redux/actions';
-
-import Loader from './Loader';
-import { STATUS_CODES } from '../config';
+    View,
+    Text,
+    StyleSheet,
+    SafeAreaView,
+    Image,
+    Platform,
+    TouchableOpacity,
+} from "react-native";
+import { Title, Subtitle, Icon, Container } from "native-base";
+import axios from "axios";
+import { DrawerContentScrollView } from "@react-navigation/drawer";
+import AsyncStorage from "@react-native-community/async-storage";
+import { connect } from "react-redux";
+import { Fonts } from "../utils/Fonts";
+import { GLOBLE } from "../constant/utility.constant";
+import { LABELS } from "../constant/LanguageConstants";
+import { userLogoutAction, getUserDetailAction } from "../redux/actions";
+import EventBus  from "react-native-event-bus";
+import Loader from "./Loader";
+import { STATUS_CODES } from "../config";
 
 function SideDrawer(props) {
     const [isLoading, setIsLoading] = React.useState(false);
     const [profileFields, setUpdateProfileFields] = useState({
-        name: '',
-        inboxlyEmail: '',
+        name: "",
+        inboxlyEmail: "",
         feedUnreadCount: 0,
         senderUnreadCount: 0,
         categoryUnreadCount: 0,
-        notificationUnreadCount: 0
+        notificationUnreadCount: 0,
     });
 
     useEffect(() => {
         userDetails();
+        EventBus.getInstance().addListener("fromDashboardPageCount", (data) => {
+            // handle the event
+            userDetails();
+        });
+
+        EventBus.getInstance().removeListener("fromDashboardPage");
     }, []);
 
     const onPresslogout = () => {
         setIsLoading(true);
         props.userLogoutAction(() => {
-            axios.defaults.headers.common.Authorization = '';
-            AsyncStorage.removeItem('@LOGGEDUSER');
-            AsyncStorage.removeItem('@USERTOKEN');
+            axios.defaults.headers.common.Authorization = "";
+            AsyncStorage.removeItem("@LOGGEDUSER");
+            AsyncStorage.removeItem("@USERTOKEN");
             props.navigation.closeDrawer();
-            setIsLoading(false)
-            handleNavigation('Auth');
+            setIsLoading(false);
+            handleNavigation("Auth");
         });
     };
 
     const userDetails = async () => {
-        props.getUserDetailAction(res => {
+        props.getUserDetailAction((res) => {
             if (res.status === STATUS_CODES.OK) {
-                if (res && res.data && res.data.success && res.data.success.data) {
+                if (
+                    res &&
+                    res.data &&
+                    res.data.success &&
+                    res.data.success.data
+                ) {
                     const { data } = res.data.success;
+                    console.log("print count>>>>>>", data);
                     setUpdateProfileFields({
                         name: data.user_name,
                         inboxlyEmail: data.email,
                         feedUnreadCount: data.feed_unread_count,
                         senderUnreadCount: data.sender_unread_count,
                         categoryUnreadCount: data.category_unread_count,
-                        notificationUnreadCount: data.notification_unread_count
-                    })
+                        notificationUnreadCount: data.notification_unread_count,
+                    });
                 }
             }
         });
     };
 
     const handleNavigation = (screen) => {
+        console.log("const handleNavigation = (screen) => {");
         props.navigation.closeDrawer();
         props.navigation.reset({
             index: 0,
             routes: [{ name: screen }],
-        })
+        });
     };
 
     return (
@@ -79,103 +95,221 @@ function SideDrawer(props) {
                 <View style={styles.userInfoSection}>
                     <View style={styles.profileContentStyle}>
                         <Image
-                            source={require('../assets/images/logo.png')}
+                            source={require("../assets/images/logo.png")}
                             style={styles.logoImage}
-                            resizeMode='contain'
+                            resizeMode="contain"
                         />
                         <View style={styles.userInfoStyle}>
-                            <Title style={styles.title}>{profileFields.name}</Title>
-                            <Subtitle style={styles.caption}>{profileFields.inboxlyEmail}</Subtitle>
+                            <Title style={styles.title}>
+                                {profileFields.name}
+                            </Title>
+                            <Subtitle style={styles.caption}>
+                                {profileFields.inboxlyEmail}
+                            </Subtitle>
                         </View>
                     </View>
                 </View>
             </View>
             <DrawerContentScrollView>
-                <View style={{ marginTop: 10, bottom: Platform.OS == 'ios' ? 30 : 0 }}>
+                <View
+                    style={{
+                        marginTop: 10,
+                        bottom: Platform.OS == "ios" ? 30 : 0,
+                    }}
+                >
                     <TouchableOpacity
-                        onPress={() => handleNavigation('Dashboard')}
-                        style={styles.menuItemContainer}>
-                        {profileFields.feedUnreadCount !=="00" && <View style={{ position: 'absolute', zIndex: 999, left: 30, bottom: 15 }}>
-                            <View style={{ backgroundColor: 'red', alignItems: 'center', justifyContent: 'center', padding: 2, borderRadius: 10 }}>
-                                <Text style={{ fontSize: 12, color: '#fff', fontWeight: 'bold' }}>{profileFields.feedUnreadCount}</Text>
+                        onPress={() => handleNavigation("Dashboard")}
+                        style={styles.menuItemContainer}
+                    >
+                        {profileFields.feedUnreadCount !== "00" && (
+                            <View
+                                style={{
+                                    position: "absolute",
+                                    zIndex: 999,
+                                    left: 30,
+                                    bottom: 15,
+                                }}
+                            >
+                                <View
+                                    style={{
+                                        backgroundColor: "red",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        padding: 2,
+                                        borderRadius: 10,
+                                    }}
+                                >
+                                    <Text
+                                        style={{
+                                            fontSize: 11,
+                                            color: "#fff",
+                                            fontWeight: "bold",
+                                            margin: 1.5,
+                                        }}
+                                    >
+                                        {profileFields.feedUnreadCount}
+                                    </Text>
+                                </View>
                             </View>
-                        </View>}
+                        )}
                         <View style={styles.iconContainer}>
                             <Image
-                                source={require('../assets/images/emailwhite.png')}
+                                source={require("../assets/images/emailwhite.png")}
                                 style={{ height: 20, width: 20, top: 2 }}
                             />
                         </View>
-                        <Text style={[styles.menuTextStyle, { marginLeft: 0, marginTop: 5 }]}>{LABELS.INBOX}</Text>
+                        <Text
+                            style={[
+                                styles.menuTextStyle,
+                                { marginLeft: 0, marginTop: 5 },
+                            ]}
+                        >
+                            {LABELS.INBOX}
+                        </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={() => props.navigation.navigate('Categories')}
-                        style={styles.menuItemContainer}>
-                        {profileFields.categoryUnreadCount !== '00' && <View style={{ position: 'absolute', zIndex: 999, left: 30, bottom: 15 }}>
-                            <View style={{ backgroundColor: 'red', alignItems: 'center', justifyContent: 'center', padding: 2, borderRadius: 10 }}>
-                                <Text style={{ fontSize: 12, color: '#fff', fontWeight: 'bold' }}>{profileFields.categoryUnreadCount}</Text>
+                        onPress={() => props.navigation.navigate("Categories")}
+                        style={styles.menuItemContainer}
+                    >
+                        {profileFields.categoryUnreadCount !== "00" && (
+                            <View
+                                style={{
+                                    position: "absolute",
+                                    zIndex: 999,
+                                    left: 30,
+                                    bottom: 15,
+                                }}
+                            >
+                                <View
+                                    style={{
+                                        backgroundColor: "red",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        padding: 2,
+                                        borderRadius: 10,
+                                    }}
+                                >
+                                    <Text
+                                        style={{
+                                            fontSize: 11,
+                                            color: "#fff",
+                                            fontWeight: "bold",
+                                            margin: 1.5,
+                                        }}
+                                    >
+                                        {profileFields.categoryUnreadCount}
+                                    </Text>
+                                </View>
                             </View>
-                        </View>}
+                        )}
                         <View style={styles.iconContainer}>
                             <Image
-                                source={require('../assets/images/social1.png')}
+                                source={require("../assets/images/social1.png")}
                                 style={{ height: 20, width: 20, right: 0 }}
                             />
                         </View>
-                        <Text style={[styles.menuTextStyle, { right: 1 }]}>{LABELS.MANAGE_CATEGORY}</Text>
+                        <Text style={[styles.menuTextStyle, { right: 1 }]}>
+                            {LABELS.MANAGE_CATEGORY}
+                        </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={() => props.navigation.navigate('NewsSenders')}
-                        style={styles.menuItemContainer}>
-                        {profileFields.senderUnreadCount !== '00' && <View style={{ position: 'absolute', zIndex: 999, left: 30, bottom: 15 }}>
-                            <View style={{ backgroundColor: 'red', alignItems: 'center', justifyContent: 'center', padding: 2, borderRadius: 10 }}>
-                                <Text style={{ fontSize: 12, color: '#fff', fontWeight: 'bold' }}>{profileFields.senderUnreadCount}</Text>
+                        onPress={() => props.navigation.navigate("NewsSenders")}
+                        style={styles.menuItemContainer}
+                    >
+                        {profileFields.senderUnreadCount !== "00" && (
+                            <View
+                                style={{
+                                    position: "absolute",
+                                    zIndex: 999,
+                                    left: 30,
+                                    bottom: 15,
+                                }}
+                            >
+                                <View
+                                    style={{
+                                        backgroundColor: "red",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        padding: 2,
+                                        borderRadius: 10,
+                                    }}
+                                >
+                                    <Text
+                                        style={{
+                                            fontSize: 11,
+                                            color: "#fff",
+                                            fontWeight: "bold",
+                                            margin: 1.5,
+                                        }}
+                                    >
+                                        {profileFields.senderUnreadCount}
+                                    </Text>
+                                </View>
                             </View>
-                        </View>}
+                        )}
                         <View style={styles.iconContainer}>
                             <Image
-                                source={require('../assets/images/at.png')}
+                                source={require("../assets/images/at.png")}
                                 style={{ height: 21, width: 21, right: 0 }}
                             />
                         </View>
-                        <Text style={styles.menuTextStyle}>{LABELS.MANAGE_SENDER}</Text>
+                        <Text style={styles.menuTextStyle}>
+                            {LABELS.MANAGE_SENDER}
+                        </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={() => props.navigation.navigate('SavedNews')}
-                        style={styles.menuItemContainer}>
+                        onPress={() => props.navigation.navigate("SavedNews")}
+                        style={styles.menuItemContainer}
+                    >
                         <View style={styles.iconContainer}>
                             <Image
-                                source={require('../assets/images/savedEmail.png')}
+                                source={require("../assets/images/savedEmail.png")}
                                 style={{ height: 30, width: 30 }}
-                                resizeMode='contain'
+                                resizeMode="contain"
                             />
                         </View>
-                        <Text style={[styles.menuTextStyle, { right: 8, marginBottom: 2 }]}>{LABELS.SAVED_EMAIL}</Text>
+                        <Text
+                            style={[
+                                styles.menuTextStyle,
+                                { right: 8, marginBottom: 2 },
+                            ]}
+                        >
+                            {LABELS.SAVED_EMAIL}
+                        </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={() => props.navigation.navigate('ArchivedNews')}
-                        style={styles.menuItemContainer}>
+                        onPress={() =>
+                            props.navigation.navigate("ArchivedNews")
+                        }
+                        style={styles.menuItemContainer}
+                    >
                         <View style={styles.iconContainer}>
                             <Image
-                                source={require('../assets/images/archive.png')}
+                                source={require("../assets/images/archive.png")}
                                 style={styles.iconStyle}
-                                resizeMode='contain'
+                                resizeMode="contain"
                             />
                         </View>
-                        <Text style={[styles.menuTextStyle, { right: 4 }]}>{LABELS.ARCHIVE_EMAIL}</Text>
+                        <Text style={[styles.menuTextStyle, { right: 4 }]}>
+                            {LABELS.ARCHIVE_EMAIL}
+                        </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={() => props.navigation.navigate('AccountSettings')}
-                        style={styles.menuItemContainer}>
+                        onPress={() =>
+                            props.navigation.navigate("AccountSettings")
+                        }
+                        style={styles.menuItemContainer}
+                    >
                         <View style={styles.iconContainer}>
                             <Image
-                                source={require('../assets/images/settings.png')}
+                                source={require("../assets/images/settings.png")}
                                 style={styles.iconStyle}
-                                resizeMode='contain'
+                                resizeMode="contain"
                             />
                         </View>
-                        <Text style={[styles.menuTextStyle, { right: 4 }]}>{LABELS.ACCOUNT_SETTINGS
-                        }</Text>
+                        <Text style={[styles.menuTextStyle, { right: 4 }]}>
+                            {LABELS.ACCOUNT_SETTINGS}
+                        </Text>
                     </TouchableOpacity>
                     {/*
                     <TouchableOpacity
@@ -198,32 +332,44 @@ function SideDrawer(props) {
                     */}
                 </View>
                 <View style={styles.bottomContainer}>
-                    <TouchableOpacity style={[styles.menuItemContainer, { marginTop: 15 }]}>
+                    <TouchableOpacity
+                        style={[styles.menuItemContainer, { marginTop: 15 }]}
+                    >
                         <View style={styles.iconContainer}>
                             <Image
-                                source={require('../assets/images/rateus.png')}
+                                source={require("../assets/images/rateus.png")}
                                 style={styles.rateIconStyle}
-                                resizeMode='contain'
+                                resizeMode="contain"
                             />
                         </View>
-                        <Text style={styles.menuTextStyle}>{LABELS.RATE_US}</Text>
+                        <Text style={styles.menuTextStyle}>
+                            {LABELS.RATE_US}
+                        </Text>
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.menuItemContainer} onPress={() => onPresslogout()}>
+                <TouchableOpacity
+                    style={styles.menuItemContainer}
+                    onPress={() => onPresslogout()}
+                >
                     <View style={styles.iconContainer}>
                         <Image
-                            source={require('../assets/images/logout.png')}
+                            source={require("../assets/images/logout.png")}
                             style={styles.logoutStyle}
-                            resizeMode='contain'
+                            resizeMode="contain"
                         />
                     </View>
                     <Text style={styles.menuTextStyle}>{LABELS.LOGOUT}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.menuItemContainer}
-                    onPress={() => props.navigation.navigate('Legal')}>
+                    onPress={() => props.navigation.navigate("Legal")}
+                >
                     <View style={styles.iconContainer}>
-                        <Icon type="FontAwesome" name='legal' style={styles.iconStyle1} />
+                        <Icon
+                            type="FontAwesome"
+                            name="legal"
+                            style={styles.iconStyle1}
+                        />
                     </View>
                     <Text style={styles.menuTextStyle}>{LABELS.LEGEL}</Text>
                 </TouchableOpacity>
@@ -234,31 +380,31 @@ function SideDrawer(props) {
 
 const styles = StyleSheet.create({
     iconStyle1: {
-        color: '#fff',
+        color: "#fff",
         fontSize: 25,
-        top: 3
+        top: 3,
     },
     drawerContent: {
         height: 180,
-        backgroundColor: '#034CBB',
+        backgroundColor: "#034CBB",
         borderBottomWidth: 1,
-        borderBottomColor: '#C0CCDA'
+        borderBottomColor: "#C0CCDA",
     },
     iconStyle: {
         height: 22,
         width: 22,
-        right: 3
+        right: 3,
     },
     logoutStyle: {
         height: 22,
         width: 22,
         right: 3,
-        top: 2
+        top: 2,
     },
     rateIconStyle: {
         height: 22,
         width: 22,
-        right: 2
+        right: 2,
     },
     logoImage: {
         width: 120,
@@ -270,38 +416,38 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 0.06 * GLOBLE.DEVICE_WIDTH,
         marginTop: 3,
-        color: '#FFFFFF',
+        color: "#FFFFFF",
         fontFamily: Fonts.RobotoRegular,
     },
     caption: {
         padding: 5,
         fontSize: 0.05 * GLOBLE.DEVICE_WIDTH,
-        color: '#FFFFFF',
+        color: "#FFFFFF",
         fontFamily: Fonts.RobotoRegular,
     },
     containerStyle: {
         flex: 1,
-        backgroundColor: '#034CBB'
+        backgroundColor: "#034CBB",
     },
     safeViewStyle: {
-        backgroundColor: '#034CBB',
+        backgroundColor: "#034CBB",
     },
     profileContentStyle: {
         marginTop: 10,
     },
     userInfoStyle: {
         marginLeft: 12,
-        alignItems: 'flex-start'
+        alignItems: "flex-start",
     },
     menuTextStyle: {
         fontSize: 0.05 * GLOBLE.DEVICE_WIDTH,
-        color: '#FFFFFF',
+        color: "#FFFFFF",
         fontFamily: Fonts.RobotoMedium,
         top: 0,
     },
     menuItemContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
+        flexDirection: "row",
+        alignItems: "center",
         marginTop: 10,
         marginBottom: 10,
     },
@@ -314,7 +460,7 @@ const styles = StyleSheet.create({
         width: 25,
     },
     bottomContainer: {
-        borderTopColor: '#C0CCDA',
+        borderTopColor: "#C0CCDA",
         borderTopWidth: 1,
     },
 });
@@ -322,7 +468,7 @@ const styles = StyleSheet.create({
 /** @method mapStateToProps
  * @description return state to component as props
  * @param {*} state
-*/
+ */
 const mapStateToProps = ({ auth }) => {
     const { loggedUserData, authLoader } = auth;
     return { loggedUserData, authLoader };
@@ -333,5 +479,8 @@ const mapStateToProps = ({ auth }) => {
  * @description connect with redux
  * @param {function} mapStateToProps
  * @param {function} mapDispatchToProps
-*/
-export default connect(mapStateToProps, { userLogoutAction, getUserDetailAction })(SideDrawer);
+ */
+export default connect(mapStateToProps, {
+    userLogoutAction,
+    getUserDetailAction,
+})(SideDrawer);

@@ -30,34 +30,34 @@
 30
 31    <uses-sdk
 32        android:minSdkVersion="21"
-32-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml
+32-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml
 33        android:targetSdkVersion="29" />
-33-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml
+33-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml
 34
 35    <uses-permission android:name="android.permission.INTERNET" />
-35-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:34:5-67
-35-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:34:22-64
+35-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:34:5-67
+35-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:34:22-64
 36    <uses-permission android:name="android.permission.VIBRATE" />
-36-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:36:5-66
-36-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:36:22-63
+36-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:36:5-66
+36-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:36:22-63
 37    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-37-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:37:5-80
-37-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:37:22-78
+37-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:37:5-80
+37-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:37:22-78
 38    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-38-->[:react-native-community_netinfo] /Users/praful/Downloads/src/node_modules/@react-native-community/netinfo/android/build/intermediates/library_manifest/release/AndroidManifest.xml:9:5-79
-38-->[:react-native-community_netinfo] /Users/praful/Downloads/src/node_modules/@react-native-community/netinfo/android/build/intermediates/library_manifest/release/AndroidManifest.xml:9:22-76
+38-->[:react-native-community_netinfo] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-community/netinfo/android/build/intermediates/library_manifest/release/AndroidManifest.xml:9:5-79
+38-->[:react-native-community_netinfo] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-community/netinfo/android/build/intermediates/library_manifest/release/AndroidManifest.xml:9:22-76
 39    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-39-->[:react-native-community_netinfo] /Users/praful/Downloads/src/node_modules/@react-native-community/netinfo/android/build/intermediates/library_manifest/release/AndroidManifest.xml:10:5-76
-39-->[:react-native-community_netinfo] /Users/praful/Downloads/src/node_modules/@react-native-community/netinfo/android/build/intermediates/library_manifest/release/AndroidManifest.xml:10:22-73
+39-->[:react-native-community_netinfo] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-community/netinfo/android/build/intermediates/library_manifest/release/AndroidManifest.xml:10:5-76
+39-->[:react-native-community_netinfo] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-community/netinfo/android/build/intermediates/library_manifest/release/AndroidManifest.xml:10:22-73
 40    <uses-permission android:name="android.permission.WAKE_LOCK" />
-40-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:12:5-68
-40-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:12:22-65
+40-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:12:5-68
+40-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:12:22-65
 41    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Required by older versions of Google Play services to create IID tokens -->
-41-->[:react-native-share] /Users/praful/Downloads/src/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:9:5-81
-41-->[:react-native-share] /Users/praful/Downloads/src/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:9:22-78
+41-->[:react-native-share] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:9:5-81
+41-->[:react-native-share] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:9:22-78
 42    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-42-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:25:5-82
-42-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:25:22-79
+42-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/451de09e5ad9ca354c3a4dca9bac37ab/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:25:5-82
+42-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/451de09e5ad9ca354c3a4dca9bac37ab/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:25:22-79
 43    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" /> <!-- for android -->
 43-->[com.google.android.gms:play-services-measurement:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/c36e502b8c76ab215425960151c784cb/play-services-measurement-17.6.0/AndroidManifest.xml:26:5-110
 43-->[com.google.android.gms:play-services-measurement:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/c36e502b8c76ab215425960151c784cb/play-services-measurement-17.6.0/AndroidManifest.xml:26:22-107
@@ -116,82 +116,82 @@
 64-->[me.leolin:ShortcutBadger:1.1.22] /Users/praful/.gradle/caches/transforms-2/files-2.1/0bd7cc36f01332e8def5d87caaf573dd/ShortcutBadger-1.1.22/AndroidManifest.xml:50:22-86
 65
 66    <application
-66-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:39:5-107:19
+66-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:39:5-107:19
 67        android:name="com.inboxly.MainApplication"
-67-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:41:9-40
+67-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:41:9-40
 68        android:allowBackup="false"
-68-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:45:9-36
+68-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:45:9-36
 69        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 69-->[androidx.core:core:1.3.2] /Users/praful/.gradle/caches/transforms-2/files-2.1/277260e55280a0f231c6ea51b68d6232/core-1.3.2/AndroidManifest.xml:24:18-86
 70        android:icon="@mipmap/ic_launcher"
-70-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:43:9-43
+70-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:43:9-43
 71        android:label="@string/app_name"
-71-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:42:9-41
+71-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:42:9-41
 72        android:roundIcon="@mipmap/ic_launcher_round"
-72-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:44:9-54
+72-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:44:9-54
 73        android:theme="@style/AppTheme"
-73-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:46:9-40
+73-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:46:9-40
 74        android:usesCleartextTraffic="true" >
-74-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:40:9-44
+74-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:40:9-44
 75        <meta-data
-75-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:50:9-52:75
+75-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:50:9-52:75
 76            android:name="com.google.firebase.messaging.default_notification_icon"
-76-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:51:13-83
+76-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:51:13-83
 77            android:resource="@drawable/ic_stat_microsoftteams_image_2" />
-77-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:52:13-72
+77-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:52:13-72
 78        <meta-data
-78-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:54:2-55:43
+78-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:54:2-55:43
 79            android:name="com.dieam.reactnativepushnotification.notification_foreground"
-79-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:54:14-90
+79-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:54:14-90
 80            android:value="true" />
-80-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:55:21-41
+80-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:55:21-41
 81        <meta-data
-81-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:56:21-57:64
+81-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:56:21-57:64
 82            android:name="com.dieam.reactnativepushnotification.notification_color"
-82-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:56:33-104
+82-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:56:33-104
 83            android:resource="@color/splashscreen_bg" /> <!-- or @android:color/{name} to use a standard color -->
-83-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:57:21-62
+83-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:57:21-62
 84        <meta-data
-84-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:58:9-59:75
+84-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:58:9-59:75
 85            android:name="com.dieam.reactnativepushnotification.default_notification_icon"
-85-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:58:21-99
+85-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:58:21-99
 86            android:resource="@drawable/ic_stat_microsoftteams_image_2" />
-86-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:59:13-72
+86-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:59:13-72
 87
 88        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationActions" />
-88-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:62:2-101
-88-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:62:12-98
+88-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:62:2-101
+88-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:62:12-98
 89        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher" />
-89-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:63:9-110
-89-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:63:19-107
+89-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:63:9-110
+89-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:63:19-107
 90        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationBootEventReceiver" >
-90-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:64:9-70:20
-90-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:64:19-115
+90-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:64:9-70:20
+90-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:64:19-115
 91            <intent-filter>
-91-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:65:13-69:29
+91-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:65:13-69:29
 92                <action android:name="android.intent.action.BOOT_COMPLETED" />
-92-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:66:17-79
-92-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:66:25-76
+92-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:66:17-79
+92-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:66:25-76
 93                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-93-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:67:17-82
-93-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:67:25-79
+93-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:67:17-82
+93-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:67:25-79
 94                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
-94-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:68:17-81
-94-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:68:25-79
+94-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:68:17-81
+94-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:68:25-79
 95            </intent-filter>
 96        </receiver>
 97
 98        <service
-98-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:72:10-78:19
+98-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:72:10-78:19
 99            android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService"
-99-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:73:13-107
+99-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:73:13-107
 100            android:exported="false" >
-100-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:74:13-37
+100-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:74:13-37
 101            <intent-filter>
-101-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:75:13-77:29
+101-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:75:13-77:29
 102                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-102-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:76:17-78
-102-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:76:25-75
+102-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:76:17-78
+102-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:76:25-75
 103            </intent-filter>
 104        </service>
 105        <!-- <meta-data android:name="com.google.firebase.messaging.default_notification_color" -->
@@ -199,182 +199,182 @@
 107        <!-- tools:replace="android:resource" /> -->
 108
 109        <activity
-109-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:83:9-92:20
+109-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:83:9-92:20
 110            android:name="com.inboxly.SplashActivity"
-110-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:84:13-43
+110-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:84:13-43
 111            android:label="@string/app_name"
-111-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:86:13-45
+111-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:86:13-45
 112            android:launchMode="singleTask"
-112-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:87:13-44
+112-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:87:13-44
 113            android:theme="@style/SplashTheme" >
-113-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:85:13-47
+113-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:85:13-47
 114            <intent-filter>
-114-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:88:13-91:29
+114-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:88:13-91:29
 115                <action android:name="android.intent.action.MAIN" />
-115-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:89:17-69
-115-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:89:25-66
+115-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:89:17-69
+115-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:89:25-66
 116
 117                <category android:name="android.intent.category.LAUNCHER" />
-117-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:90:17-77
-117-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:90:27-74
+117-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:90:17-77
+117-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:90:27-74
 118            </intent-filter>
 119        </activity>
 120        <activity
-120-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:94:9-102:20
+120-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:94:9-102:20
 121            android:name="com.inboxly.MainActivity"
-121-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:95:13-41
+121-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:95:13-41
 122            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-122-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:98:13-90
+122-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:98:13-90
 123            android:exported="true"
-123-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:101:13-36
+123-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:101:13-36
 124            android:label="@string/app_name"
-124-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:96:13-45
+124-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:96:13-45
 125            android:launchMode="singleTask"
-125-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:99:13-44
+125-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:99:13-44
 126            android:screenOrientation="portrait"
-126-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:97:13-49
+126-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:97:13-49
 127            android:windowSoftInputMode="adjustPan" >
-127-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:100:13-52
+127-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:100:13-52
 128        </activity>
 129        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-129-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:106:9-86
-129-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:106:19-83
+129-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:106:9-86
+129-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:106:19-83
 130        <!-- Disable crashlytics by default so we can custom init with CrashlyticsNdk support -->
 131        <meta-data
-131-->[:react-native-firebase_crashlytics] /Users/praful/Downloads/src/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:14:9-16:37
+131-->[:react-native-firebase_crashlytics] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:14:9-16:37
 132            android:name="firebase_crashlytics_collection_enabled"
-132-->[:react-native-firebase_crashlytics] /Users/praful/Downloads/src/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:15:13-67
+132-->[:react-native-firebase_crashlytics] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:15:13-67
 133            android:value="false" />
-133-->[:react-native-firebase_crashlytics] /Users/praful/Downloads/src/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:13-34
+133-->[:react-native-firebase_crashlytics] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:13-34
 134
 135        <provider
-135-->[:react-native-firebase_crashlytics] /Users/praful/Downloads/src/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:18:9-22:38
+135-->[:react-native-firebase_crashlytics] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:18:9-22:38
 136            android:name="io.invertase.firebase.crashlytics.ReactNativeFirebaseCrashlyticsInitProvider"
-136-->[:react-native-firebase_crashlytics] /Users/praful/Downloads/src/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:19:13-104
+136-->[:react-native-firebase_crashlytics] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:19:13-104
 137            android:authorities="com.inboxly.reactnativefirebasecrashlyticsinitprovider"
-137-->[:react-native-firebase_crashlytics] /Users/praful/Downloads/src/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:20:13-94
+137-->[:react-native-firebase_crashlytics] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:20:13-94
 138            android:exported="false"
-138-->[:react-native-firebase_crashlytics] /Users/praful/Downloads/src/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:21:13-37
+138-->[:react-native-firebase_crashlytics] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:21:13-37
 139            android:initOrder="98" />
-139-->[:react-native-firebase_crashlytics] /Users/praful/Downloads/src/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:22:13-35
+139-->[:react-native-firebase_crashlytics] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/crashlytics/android/build/intermediates/library_manifest/release/AndroidManifest.xml:22:13-35
 140
 141        <service android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingHeadlessService" />
-141-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:9-111
-141-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:18-108
+141-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:9-111
+141-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:18-108
 142        <service
-142-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:17:9-23:19
+142-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:17:9-23:19
 143            android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingService"
-143-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:18:13-95
+143-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:18:13-95
 144            android:exported="false" >
-144-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:19:13-37
+144-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:19:13-37
 145            <intent-filter>
-145-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:75:13-77:29
+145-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:75:13-77:29
 146                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-146-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:76:17-78
-146-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:76:25-75
+146-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:76:17-78
+146-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:76:25-75
 147            </intent-filter>
 148        </service>
 149
 150        <receiver
-150-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:25:9-32:20
+150-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:25:9-32:20
 151            android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingReceiver"
-151-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:26:13-96
+151-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:26:13-96
 152            android:exported="true"
-152-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:27:13-36
+152-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:27:13-36
 153            android:permission="com.google.android.c2dm.permission.SEND" >
-153-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:28:13-73
+153-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:28:13-73
 154            <intent-filter>
-154-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:29:13-31:29
+154-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:29:13-31:29
 155                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-155-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:30:17-81
-155-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:30:25-78
+155-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:30:17-81
+155-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:30:25-78
 156            </intent-filter>
 157        </receiver>
 158
 159        <meta-data
-159-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:34:9-36:37
+159-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:34:9-36:37
 160            android:name="firebase_messaging_auto_init_enabled"
-160-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:35:13-64
+160-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:35:13-64
 161            android:value="false" />
-161-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:36:13-34
+161-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:36:13-34
 162        <meta-data
-162-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:37:9-39:43
+162-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:37:9-39:43
 163            android:name="com.google.firebase.messaging.default_notification_channel_id"
-163-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:38:13-89
+163-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:38:13-89
 164            android:value="inboxly-app" />
-164-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:39:13-40
+164-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:39:13-40
 165        <meta-data
-165-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:40:9-42:46
+165-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:40:9-42:46
 166            android:name="com.google.firebase.messaging.default_notification_color"
-166-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:41:13-84
+166-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:41:13-84
 167            android:resource="@color/blue" />
-167-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:42:13-43
+167-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:42:13-43
 168
 169        <provider
-169-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:10:9-18:20
+169-->[:react-native-image-picker] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:10:9-18:20
 170            android:name="com.imagepicker.FileProvider"
-170-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:11:13-56
+170-->[:react-native-image-picker] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:11:13-56
 171            android:authorities="com.inboxly.provider"
-171-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:12:13-60
+171-->[:react-native-image-picker] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:12:13-60
 172            android:exported="false"
-172-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:13:13-37
+172-->[:react-native-image-picker] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:13:13-37
 173            android:grantUriPermissions="true" >
-173-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:14:13-47
+173-->[:react-native-image-picker] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:14:13-47
 174            <meta-data
-174-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:15:13-17:58
+174-->[:react-native-image-picker] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:15:13-17:58
 175                android:name="android.support.FILE_PROVIDER_PATHS"
-175-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:17-67
+175-->[:react-native-image-picker] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:17-67
 176                android:resource="@xml/provider_paths" />
-176-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:17:17-55
+176-->[:react-native-image-picker] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:17:17-55
 177        </provider>
 178        <provider
-178-->[:react-native-share] /Users/praful/Downloads/src/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:12:9-20:20
+178-->[:react-native-share] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:12:9-20:20
 179            android:name="cl.json.RNShareFileProvider"
-179-->[:react-native-share] /Users/praful/Downloads/src/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:13:13-55
+179-->[:react-native-share] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:13:13-55
 180            android:authorities="com.inboxly.rnshare.fileprovider"
-180-->[:react-native-share] /Users/praful/Downloads/src/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:14:13-72
+180-->[:react-native-share] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:14:13-72
 181            android:exported="false"
-181-->[:react-native-share] /Users/praful/Downloads/src/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:15:13-37
+181-->[:react-native-share] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:15:13-37
 182            android:grantUriPermissions="true" >
-182-->[:react-native-share] /Users/praful/Downloads/src/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:13-47
+182-->[:react-native-share] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-share/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:13-47
 183            <meta-data
-183-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:15:13-17:58
+183-->[:react-native-image-picker] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:15:13-17:58
 184                android:name="android.support.FILE_PROVIDER_PATHS"
-184-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:17-67
+184-->[:react-native-image-picker] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:17-67
 185                android:resource="@xml/share_download_paths" />
-185-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:17:17-55
+185-->[:react-native-image-picker] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:17:17-55
 186        </provider>
 187        <provider
-187-->[:react-native-webview] /Users/praful/Downloads/src/node_modules/react-native-webview/android/build/intermediates/library_manifest/release/AndroidManifest.xml:12:9-20:20
+187-->[:react-native-webview] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-webview/android/build/intermediates/library_manifest/release/AndroidManifest.xml:12:9-20:20
 188            android:name="com.reactnativecommunity.webview.RNCWebViewFileProvider"
-188-->[:react-native-webview] /Users/praful/Downloads/src/node_modules/react-native-webview/android/build/intermediates/library_manifest/release/AndroidManifest.xml:13:13-83
+188-->[:react-native-webview] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-webview/android/build/intermediates/library_manifest/release/AndroidManifest.xml:13:13-83
 189            android:authorities="com.inboxly.fileprovider"
-189-->[:react-native-webview] /Users/praful/Downloads/src/node_modules/react-native-webview/android/build/intermediates/library_manifest/release/AndroidManifest.xml:14:13-64
+189-->[:react-native-webview] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-webview/android/build/intermediates/library_manifest/release/AndroidManifest.xml:14:13-64
 190            android:exported="false"
-190-->[:react-native-webview] /Users/praful/Downloads/src/node_modules/react-native-webview/android/build/intermediates/library_manifest/release/AndroidManifest.xml:15:13-37
+190-->[:react-native-webview] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-webview/android/build/intermediates/library_manifest/release/AndroidManifest.xml:15:13-37
 191            android:grantUriPermissions="true" >
-191-->[:react-native-webview] /Users/praful/Downloads/src/node_modules/react-native-webview/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:13-47
+191-->[:react-native-webview] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-webview/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:13-47
 192            <meta-data
-192-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:15:13-17:58
+192-->[:react-native-image-picker] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:15:13-17:58
 193                android:name="android.support.FILE_PROVIDER_PATHS"
-193-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:17-67
+193-->[:react-native-image-picker] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:16:17-67
 194                android:resource="@xml/file_provider_paths" />
-194-->[:react-native-image-picker] /Users/praful/Downloads/src/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:17:17-55
+194-->[:react-native-image-picker] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/release/AndroidManifest.xml:17:17-55
 195        </provider>
 196
 197        <receiver
-197-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:28:9-35:20
+197-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/451de09e5ad9ca354c3a4dca9bac37ab/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:28:9-35:20
 198            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
-198-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:29:13-78
+198-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/451de09e5ad9ca354c3a4dca9bac37ab/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:29:13-78
 199            android:exported="true"
-199-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:30:13-36
+199-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/451de09e5ad9ca354c3a4dca9bac37ab/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:30:13-36
 200            android:permission="com.google.android.c2dm.permission.SEND" >
-200-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:31:13-73
+200-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/451de09e5ad9ca354c3a4dca9bac37ab/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:31:13-73
 201            <intent-filter>
-201-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:29:13-31:29
+201-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:29:13-31:29
 202                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-202-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:30:17-81
-202-->[:react-native-firebase_messaging] /Users/praful/Downloads/src/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:30:25-78
+202-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:30:17-81
+202-->[:react-native-firebase_messaging] /Volumes/Data Disk1/inboxly_01dec/inboxly-app/node_modules/@react-native-firebase/messaging/android/build/intermediates/library_manifest/release/AndroidManifest.xml:30:25-78
 203            </intent-filter>
 204        </receiver>
 205        <!--
@@ -382,34 +382,34 @@
 207             but set to not exported to explicitly avoid allowing another app to call it.
 208        -->
 209        <service
-209-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:41:9-48:19
+209-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/451de09e5ad9ca354c3a4dca9bac37ab/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:41:9-48:19
 210            android:name="com.google.firebase.messaging.FirebaseMessagingService"
-210-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:42:13-82
+210-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/451de09e5ad9ca354c3a4dca9bac37ab/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:42:13-82
 211            android:directBootAware="true"
-211-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:43:13-43
+211-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/451de09e5ad9ca354c3a4dca9bac37ab/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:43:13-43
 212            android:exported="false" >
-212-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:44:13-37
+212-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/451de09e5ad9ca354c3a4dca9bac37ab/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:44:13-37
 213            <intent-filter android:priority="-500" >
-213-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:75:13-77:29
+213-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:75:13-77:29
 214                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-214-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:76:17-78
-214-->/Users/praful/Downloads/src/android/app/src/main/AndroidManifest.xml:76:25-75
+214-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:76:17-78
+214-->/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/src/main/AndroidManifest.xml:76:25-75
 215            </intent-filter>
 216        </service>
 217        <service
-217-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:49:9-55:19
+217-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/451de09e5ad9ca354c3a4dca9bac37ab/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:49:9-55:19
 218            android:name="com.google.firebase.components.ComponentDiscoveryService"
-218-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:50:13-84
+218-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/451de09e5ad9ca354c3a4dca9bac37ab/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:50:13-84
 219            android:directBootAware="true"
-219-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/5aeaaed4254c394d4eded10e48793a3f/jetified-firebase-common-19.5.0/AndroidManifest.xml:35:13-43
+219-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/6dec717517b047d542fd41e2bb4a1dd6/jetified-firebase-common-19.5.0/AndroidManifest.xml:35:13-43
 220            android:exported="false" >
-220-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:51:13-37
+220-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/451de09e5ad9ca354c3a4dca9bac37ab/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:51:13-37
 221            <meta-data
-221-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:52:13-54:85
+221-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/451de09e5ad9ca354c3a4dca9bac37ab/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:52:13-54:85
 222                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
-222-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:53:17-119
+222-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/451de09e5ad9ca354c3a4dca9bac37ab/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:53:17-119
 223                android:value="com.google.firebase.components.ComponentRegistrar" />
-223-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/3f1670b51cb234b4ba3f5b453fee5439/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:54:17-82
+223-->[com.google.firebase:firebase-messaging:21.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/451de09e5ad9ca354c3a4dca9bac37ab/jetified-firebase-messaging-21.1.0/AndroidManifest.xml:54:17-82
 224            <meta-data
 224-->[com.google.firebase:firebase-datatransport:17.0.10] /Users/praful/.gradle/caches/transforms-2/files-2.1/b771f2f3842fc97658cba780252c7b7f/firebase-datatransport-17.0.10/AndroidManifest.xml:28:13-30:85
 225                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
@@ -451,41 +451,41 @@
 244                clients to use it as well, by defining this registrar in their own core/common library.
 245            -->
 246            <meta-data
-246-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/5aeaaed4254c394d4eded10e48793a3f/jetified-firebase-common-19.5.0/AndroidManifest.xml:43:13-45:85
+246-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/6dec717517b047d542fd41e2bb4a1dd6/jetified-firebase-common-19.5.0/AndroidManifest.xml:43:13-45:85
 247                android:name="com.google.firebase.components:com.google.firebase.dynamicloading.DynamicLoadingRegistrar"
-247-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/5aeaaed4254c394d4eded10e48793a3f/jetified-firebase-common-19.5.0/AndroidManifest.xml:44:17-121
+247-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/6dec717517b047d542fd41e2bb4a1dd6/jetified-firebase-common-19.5.0/AndroidManifest.xml:44:17-121
 248                android:value="com.google.firebase.components.ComponentRegistrar" />
-248-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/5aeaaed4254c394d4eded10e48793a3f/jetified-firebase-common-19.5.0/AndroidManifest.xml:45:17-82
+248-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/6dec717517b047d542fd41e2bb4a1dd6/jetified-firebase-common-19.5.0/AndroidManifest.xml:45:17-82
 249        </service>
 250        <service
-250-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/praful/.gradle/caches/transforms-2/files-2.1/ef1d82fbf8a023ec911d78b66b19b610/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:29:9-35:19
+250-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/praful/.gradle/caches/transforms-2/files-2.1/fa570a11556ea5355afe3741d6fa4e77/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:29:9-35:19
 251            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
-251-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/praful/.gradle/caches/transforms-2/files-2.1/ef1d82fbf8a023ec911d78b66b19b610/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:30:13-103
+251-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/praful/.gradle/caches/transforms-2/files-2.1/fa570a11556ea5355afe3741d6fa4e77/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:30:13-103
 252            android:exported="false" >
-252-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/praful/.gradle/caches/transforms-2/files-2.1/ef1d82fbf8a023ec911d78b66b19b610/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:31:13-37
+252-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/praful/.gradle/caches/transforms-2/files-2.1/fa570a11556ea5355afe3741d6fa4e77/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:31:13-37
 253            <meta-data
-253-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/praful/.gradle/caches/transforms-2/files-2.1/ef1d82fbf8a023ec911d78b66b19b610/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:32:13-34:39
+253-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/praful/.gradle/caches/transforms-2/files-2.1/fa570a11556ea5355afe3741d6fa4e77/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:32:13-34:39
 254                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
-254-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/praful/.gradle/caches/transforms-2/files-2.1/ef1d82fbf8a023ec911d78b66b19b610/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:33:17-94
+254-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/praful/.gradle/caches/transforms-2/files-2.1/fa570a11556ea5355afe3741d6fa4e77/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:33:17-94
 255                android:value="cct" />
-255-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/praful/.gradle/caches/transforms-2/files-2.1/ef1d82fbf8a023ec911d78b66b19b610/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:34:17-36
+255-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /Users/praful/.gradle/caches/transforms-2/files-2.1/fa570a11556ea5355afe3741d6fa4e77/jetified-transport-backend-cct-2.3.3/AndroidManifest.xml:34:17-36
 256        </service>
 257        <service
-257-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/4506981eb1137d0950e32f44812942b9/jetified-transport-runtime-2.2.5/AndroidManifest.xml:26:9-30:19
+257-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/7094475e2b5a22649e11b778f441e8ef/jetified-transport-runtime-2.2.5/AndroidManifest.xml:26:9-30:19
 258            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
-258-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/4506981eb1137d0950e32f44812942b9/jetified-transport-runtime-2.2.5/AndroidManifest.xml:27:13-117
+258-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/7094475e2b5a22649e11b778f441e8ef/jetified-transport-runtime-2.2.5/AndroidManifest.xml:27:13-117
 259            android:exported="false"
-259-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/4506981eb1137d0950e32f44812942b9/jetified-transport-runtime-2.2.5/AndroidManifest.xml:28:13-37
+259-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/7094475e2b5a22649e11b778f441e8ef/jetified-transport-runtime-2.2.5/AndroidManifest.xml:28:13-37
 260            android:permission="android.permission.BIND_JOB_SERVICE" >
-260-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/4506981eb1137d0950e32f44812942b9/jetified-transport-runtime-2.2.5/AndroidManifest.xml:29:13-69
+260-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/7094475e2b5a22649e11b778f441e8ef/jetified-transport-runtime-2.2.5/AndroidManifest.xml:29:13-69
 261        </service>
 262
 263        <receiver
-263-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/4506981eb1137d0950e32f44812942b9/jetified-transport-runtime-2.2.5/AndroidManifest.xml:32:9-34:40
+263-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/7094475e2b5a22649e11b778f441e8ef/jetified-transport-runtime-2.2.5/AndroidManifest.xml:32:9-34:40
 264            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
-264-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/4506981eb1137d0950e32f44812942b9/jetified-transport-runtime-2.2.5/AndroidManifest.xml:33:13-132
+264-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/7094475e2b5a22649e11b778f441e8ef/jetified-transport-runtime-2.2.5/AndroidManifest.xml:33:13-132
 265            android:exported="false" />
-265-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/4506981eb1137d0950e32f44812942b9/jetified-transport-runtime-2.2.5/AndroidManifest.xml:34:13-37
+265-->[com.google.android.datatransport:transport-runtime:2.2.5] /Users/praful/.gradle/caches/transforms-2/files-2.1/7094475e2b5a22649e11b778f441e8ef/jetified-transport-runtime-2.2.5/AndroidManifest.xml:34:13-37
 266
 267        <activity
 267-->[com.google.android.gms:play-services-auth:18.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/09e81faee4d657a7e1530b179260b054/play-services-auth-18.1.0/AndroidManifest.xml:23:9-27:75
@@ -542,17 +542,17 @@
 296-->[com.google.android.gms:play-services-measurement:17.6.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/c36e502b8c76ab215425960151c784cb/play-services-measurement-17.6.0/AndroidManifest.xml:43:13-69
 297
 298        <provider
-298-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/5aeaaed4254c394d4eded10e48793a3f/jetified-firebase-common-19.5.0/AndroidManifest.xml:26:9-31:39
+298-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/6dec717517b047d542fd41e2bb4a1dd6/jetified-firebase-common-19.5.0/AndroidManifest.xml:26:9-31:39
 299            android:name="com.google.firebase.provider.FirebaseInitProvider"
-299-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/5aeaaed4254c394d4eded10e48793a3f/jetified-firebase-common-19.5.0/AndroidManifest.xml:27:13-77
+299-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/6dec717517b047d542fd41e2bb4a1dd6/jetified-firebase-common-19.5.0/AndroidManifest.xml:27:13-77
 300            android:authorities="com.inboxly.firebaseinitprovider"
-300-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/5aeaaed4254c394d4eded10e48793a3f/jetified-firebase-common-19.5.0/AndroidManifest.xml:28:13-72
+300-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/6dec717517b047d542fd41e2bb4a1dd6/jetified-firebase-common-19.5.0/AndroidManifest.xml:28:13-72
 301            android:directBootAware="true"
-301-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/5aeaaed4254c394d4eded10e48793a3f/jetified-firebase-common-19.5.0/AndroidManifest.xml:29:13-43
+301-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/6dec717517b047d542fd41e2bb4a1dd6/jetified-firebase-common-19.5.0/AndroidManifest.xml:29:13-43
 302            android:exported="false"
-302-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/5aeaaed4254c394d4eded10e48793a3f/jetified-firebase-common-19.5.0/AndroidManifest.xml:30:13-37
+302-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/6dec717517b047d542fd41e2bb4a1dd6/jetified-firebase-common-19.5.0/AndroidManifest.xml:30:13-37
 303            android:initOrder="100" />
-303-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/5aeaaed4254c394d4eded10e48793a3f/jetified-firebase-common-19.5.0/AndroidManifest.xml:31:13-36
+303-->[com.google.firebase:firebase-common:19.5.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/6dec717517b047d542fd41e2bb4a1dd6/jetified-firebase-common-19.5.0/AndroidManifest.xml:31:13-36
 304
 305        <activity
 305-->[com.google.android.gms:play-services-base:17.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/f2f2fe211f4cd817dac4d0c4979683c4/play-services-base-17.1.0/AndroidManifest.xml:23:9-26:75
@@ -564,11 +564,11 @@
 308-->[com.google.android.gms:play-services-base:17.1.0] /Users/praful/.gradle/caches/transforms-2/files-2.1/f2f2fe211f4cd817dac4d0c4979683c4/play-services-base-17.1.0/AndroidManifest.xml:26:13-72
 309
 310        <meta-data
-310-->[com.google.android.gms:play-services-basement:17.1.1] /Users/praful/.gradle/caches/transforms-2/files-2.1/d7a1cc9a8315801b88741845d180eed9/jetified-play-services-basement-17.1.1/AndroidManifest.xml:23:9-25:69
+310-->[com.google.android.gms:play-services-basement:17.1.1] /Users/praful/.gradle/caches/transforms-2/files-2.1/540f9e12e39b144270290a878965f636/jetified-play-services-basement-17.1.1/AndroidManifest.xml:23:9-25:69
 311            android:name="com.google.android.gms.version"
-311-->[com.google.android.gms:play-services-basement:17.1.1] /Users/praful/.gradle/caches/transforms-2/files-2.1/d7a1cc9a8315801b88741845d180eed9/jetified-play-services-basement-17.1.1/AndroidManifest.xml:24:13-58
+311-->[com.google.android.gms:play-services-basement:17.1.1] /Users/praful/.gradle/caches/transforms-2/files-2.1/540f9e12e39b144270290a878965f636/jetified-play-services-basement-17.1.1/AndroidManifest.xml:24:13-58
 312            android:value="@integer/google_play_services_version" />
-312-->[com.google.android.gms:play-services-basement:17.1.1] /Users/praful/.gradle/caches/transforms-2/files-2.1/d7a1cc9a8315801b88741845d180eed9/jetified-play-services-basement-17.1.1/AndroidManifest.xml:25:13-66
+312-->[com.google.android.gms:play-services-basement:17.1.1] /Users/praful/.gradle/caches/transforms-2/files-2.1/540f9e12e39b144270290a878965f636/jetified-play-services-basement-17.1.1/AndroidManifest.xml:25:13-66
 313    </application>
 314
 315</manifest>

@@ -1,7 +1,7 @@
-#Wed Dec 01 16:46:37 IST 2021
-base.0=/Users/praful/Downloads/src/android/app/build/intermediates/dex/release/mergeDexRelease/out/classes.dex
+#Thu Jan 27 19:00:27 IST 2022
+base.0=/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/build/intermediates/dex/release/mergeDexRelease/out/classes.dex
 path.1=classes2.dex
 renamed.1=classes2.dex
 path.0=classes.dex
 renamed.0=classes.dex
-base.1=/Users/praful/Downloads/src/android/app/build/intermediates/dex/release/mergeDexRelease/out/classes2.dex
+base.1=/Volumes/Data Disk1/inboxly_01dec/inboxly-app/android/app/build/intermediates/dex/release/mergeDexRelease/out/classes2.dex
