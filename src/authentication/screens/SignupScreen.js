@@ -59,6 +59,7 @@ function SignupScreen(props) {
   }
 
   const onPressCreateAccount = (values) => {
+    console.log("onpress",values);
     Keyboard.dismiss();
     let requestData = {
       name: values.name,
@@ -73,6 +74,7 @@ function SignupScreen(props) {
     props.signupUserAction(requestData, res => {
       setIsLoading(props.authLoader);
       if (res.status === STATUS_CODES.CREATED) {
+        console.log("ValidateOTP in signup screen",res.data.success.data);
         props.navigation.navigate('ValidateOTP', {
           verificationParams: res.data.success.data,
         });
@@ -100,7 +102,7 @@ function SignupScreen(props) {
       <Loader isLoading={isLoading} />
       <View style={innerStyle.logoView}>
         <Image
-          source={require('../../assets/images/logo.png')}
+          source={require('../../assets/images/inboldlogo.png')}
           style={innerStyle.logoImage}
           resizeMode='contain'
         />
@@ -135,6 +137,7 @@ function SignupScreen(props) {
                         required
                         isDisabled={false}
                         label={LABELS.LABLE_NAME}
+                        title={"*"}
                         placeholder={'Enter your full name here'}
                         placeholderTextColor={'#969FAA'}
                         maxLength={50}
@@ -152,7 +155,7 @@ function SignupScreen(props) {
                         <InputBox
                           isDisabled={false}
                           label={LABELS.USERNAME}
-                          placeholder={''}
+                          placeholder={'Enter your email/username'}
                           placeholderTextColor={'#969FAA'}
                           maxLength={20}
                           style={innerStyle.usernameStyle}
@@ -173,6 +176,7 @@ function SignupScreen(props) {
                         required
                         isDisabled={false}
                         label={LABELS.SIGNUP_LABLE_RECOVERY_EMAIL}
+                        title={"*"}
                         message={'This will be only used to recover your account if you forget your password.'}
                         placeholder={'Your personal email address'}
                         placeholderTextColor={'#969FAA'}
@@ -190,7 +194,7 @@ function SignupScreen(props) {
                       <InputBox
                         label={LABELS.PASSWORD_PLACHOLDER}
                         style={innerStyle.usernameStyle}
-                        placeholder={''}
+                        placeholder={'Enter your password'}
                         infoData={'Atleast 1 lowercase,1 uppercase,1 number & 1 special character'}
                         placeholderTextColor={'#969FAA'}
                         returnKeyType="default"
@@ -368,13 +372,14 @@ const innerStyle = StyleSheet.create({
     width: GLOBLE.DEVICE_WIDTH / 2.05,
   },
   usernameStyle: {
-    height: 35,
+    height: GLOBLE.DEVICE_HEIGHT / 19,
     borderColor: '#000',
     borderRadius: 5,
     color: '#000',
     paddingLeft: 7,
     fontSize: 14,
     fontFamily: Fonts.RobotoMedium,
+    alignSelf:'center'
   },
   iconView: {
     position: 'absolute',

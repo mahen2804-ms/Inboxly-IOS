@@ -37,9 +37,7 @@ import { Toast } from "../../helper";
 import { DATE_FORMAT, STATUS_CODES } from "../../config";
 import { WebView } from "react-native-webview";
 import AsyncStorage from "@react-native-community/async-storage";
-
 let typingTimeout = null;
-
 class Dashboard extends Component {
     _isMounted = false;
     constructor() {
@@ -54,56 +52,50 @@ class Dashboard extends Component {
             selectedItem: "",
             senderId: "",
             listItem: [],
-            isLoading: true,
+            isLoading: false,
             modalVisible: false,
             refreshItem: "",
             refreshValue: "",
             firstTimeLoginVar: false,
+            page: 1,
+            filter: false,
+            categoryName : '',
+            token : ''
         };
     }
-
     componentDidMount() {
-        AsyncStorage.getItem("LoginFirstTime")
-            .then((value) => {
-                console.log("LoginFirstTime LoginFirstTime,", value);
-                this.setState({ firstTimeLoginVar: value });
-                console.log(
-                    " this.setState firstTimeLoginVar",
-                    this.state.firstTimeLoginVar
-                );
-            })
-            .done();
-
+        this.setState({ isLoading: true });
+        let requestData = { page: 1 } // this.state.page
         this.backHandler = BackHandler.addEventListener(
             "hardwareBackPress",
             this.backAction
         );
-        if (this.props && this.props.route && this.props.route.params) {
+        if (this.props && this.props.route && this.props.route.params) { 
             const { item, key } = this.props.route.params;
+            this.setState({ isLoading: false ,categoryName : item});
             this.handleFilterItem(item, key);
         } else {
-            this.props.newsfeedListAction((res) => {
-                console.log(
-                    "hhihihashahsjasasahjghjsaghjsgahjgshasas",
-                    res.data.success.data.length
-                );
-                // console.log('NEWWWWWWWW',JSON.stringify(res));
-            });
-            this._isMounted = true;
-            if (this._isMounted) {
+            this.props.newsfeedListAction(requestData, (res) => {
+                this.setState({ listItem: res.data.success.data })
+                this._isMounted = true;
+                if (this._isMounted) {
+                    this.setState({ isLoading: false });
+                }
                 this.setState({ isLoading: false });
-            }
+                AsyncStorage.getItem("LoginFirstTime")
+                    .then((value) => {
+                        this.setState({ firstTimeLoginVar: value });
+
+                    })
+                    .done();
+            });
         }
         EventBus.getInstance().addListener(
             "fromNewsFeedDetailsScreen",
             (this.listener = (data) => {
-                console.log("print  EventBus.getInstance().addListener(");
-                this.props.newsfeedListAction((res) => {
-                    console.log(
-                        "hhihihashahsjasasahjghjsaghjsgahjgshasas",
-                        res.data.success.data.length
-                    );
-                    // console.log('NEWWWWWWWW',JSON.stringify(res));
+                let requestData = { page: 1 }
+                this.props.newsfeedListAction(requestData, (res) => {
+
                 });
                 this._isMounted = true;
                 if (this._isMounted) {
@@ -112,7 +104,6 @@ class Dashboard extends Component {
             })
         );
     }
-
     backAction = () => {
         if (!this.props.navigation.isFocused()) {
             // The screen is not focused, so don't do anything
@@ -129,37 +120,36 @@ class Dashboard extends Component {
             return true;
         }
     };
-
     setModalVisible = (visible) => {
         this.setState({ modalVisible: visible });
     };
-
     onRefresh() {
+        let requestData = { page: 1 }
         this.setState({ isFetching: true }, () => {
-            this.props.newsfeedListAction((res) => {
+            this.props.newsfeedListAction(requestData, (res) => {
                 this.setState({
                     isFetching: false,
                     refreshItem: "",
                     refreshValue: "",
+                    listItem: res.data.success.data
                 });
             });
         });
     }
-
     handleRefresh() {
-        this.props.newsfeedListAction((res) => {
+        let requestData = { page: 1 }
+        this.props.newsfeedListAction(requestData, (res) => {
             this.setState({
                 isFetching: false,
                 refreshItem: "",
                 refreshValue: "",
+                listItem: res.data.success.data
             });
         });
     }
-
     pullDownRefresh = () => {
         const { refreshItem, refreshValue } = this.state;
         if (refreshItem !== "" && refreshValue !== "") {
-            console.log("value ", refreshValue, refreshItem);
             if (refreshItem !== "") {
                 let obj;
                 if (refreshValue === "senderName") {
@@ -178,23 +168,72 @@ class Dashboard extends Component {
                 this.props.newsfeedSearchAction(obj);
             }
         } else {
-            console.log("value 2", refreshValue, refreshItem);
             this.onRefresh();
         }
     };
+    paginationNewsFeed = () => {
+        this.setState({isLoading : true})
+        if (this.state.filter) {
+            let requestData = { page: this.state.page };
+            var myHeaders = new Headers();
+            myHeaders.append("Authorization", "Bearer " + this.state.token);
+            var formdata = new FormData();
+            formdata.append("categoryName", this.state.categoryName);
 
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: formdata,
+                redirect: 'follow'
+            };
+
+            fetch("https://app.myinboxly.com/api/v1/newsfeed?page=" + requestData.page, requestOptions)
+                .then(response => response.json())
+                .then(result => { if (result.success.data.length) {
+                    let { listItem } = this.state
+                    let moreData = [...listItem, ...result.success.data]
+                    this.setState({ listItem: moreData, isLoading: false })
+                }else{
+                    this.setState({ isLoading: false });
+                }
+                   })
+                 
+               // this.setState({ listItem: result.success.data })
+                .catch(error => console.log('error', error));
+        }
+        else {
+            let requestData = { page: this.state.page };
+            this.props.newsfeedListAction(requestData, (res) => {
+                if (res.data.success.data.length > 0) {
+                    let { listItem } = this.state
+                    let moreData = [...listItem, ...res.data.success.data]
+                    this.setState({ listItem: moreData, isLoading: false })
+                    // this.setState({ listItem: [...this.state.listItem, ...res.data.success.data], isLoading: false })
+                    // let updatedList = this.state.itemList.concat(
+                    //     res.data.success.data
+                    // );
+                    // this.setState({
+                    //     itemList: updatedList,
+                    //     isFetching: false,
+                    //     refreshItem: "",
+                    //     refreshValue: "",
+                    // });
+                }
+                else {
+                    this.setState({ isLoading: false });
+                }
+            });
+        }
+
+    };
     componentWillUnmount() {
         EventBus.getInstance().removeListener("fromNewsFeedDetailsScreen");
         this.backHandler.remove();
         this._isMounted = false;
         //  AsyncStorage.setItem("LoginFirstTime", JSON.stringify(false));
-        console.log("PRINT METHOD IN componentWillUnmount......");
     }
-
     componentDidUpdate() {
-        console.log("PRINT METHOD IN componentDidUpdate......");
         AsyncStorage.setItem("LoginFirstTime", JSON.stringify(false));
-        // AsyncStorage.setItem('LoginFirstTime', JSON.stringify(false));
     }
     handleDot = (index, id) => {
         const { selectedItem, showInfo } = this.state;
@@ -204,7 +243,6 @@ class Dashboard extends Component {
             this.setState({ selectedItem: id, showInfo: !showInfo });
         }
     };
-
     handleAssignCategory = (item) => {
         this.setState({ showInfo: false });
         this.props.navigation.navigate("AssignCategoryList", {
@@ -215,7 +253,28 @@ class Dashboard extends Component {
             refreshValue: this.state.refreshValue,
         });
     };
+    filterlist = async (item) => {
+        const result = await AsyncStorage.getItem("loginToken");
+        this.setState({ token: result })
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization",
+            "Bearer " + result);
 
+        var formdata = new FormData();
+        formdata.append("categoryName", item);
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: formdata,
+            redirect: 'follow'
+        };
+
+        fetch("https://app.myinboxly.com/api/v1/newsfeed", requestOptions)
+            .then(response => response.json())
+            .then(result => this.setState({ listItem: result.success.data }))
+            .catch(error => console.log('error', error));
+    }
     handleOptions = (item) => {
         return (
             <View>
@@ -263,7 +322,7 @@ class Dashboard extends Component {
                                 innerStyle.boxTextViewStyle,
                                 { marginBottom: 10 },
                             ]}
-                            onPress={() => this.handleAssignCategory(item)}
+                            onPress={() => { this.handleAssignCategory(item) }}
                         >
                             <Text style={innerStyle.talkBubbleMessage}>
                                 {LABELS.ASSIGN_CATEGORY}
@@ -274,7 +333,6 @@ class Dashboard extends Component {
             </View>
         );
     };
-
     handleFilterOption = (item) => {
         return (
             <View>
@@ -333,9 +391,7 @@ class Dashboard extends Component {
             </View>
         );
     };
-
     handleFilterItem = (item, key) => {
-        console.log("item", item);
         this.setState({
             showFilter: false,
             refreshItem: item,
@@ -356,13 +412,22 @@ class Dashboard extends Component {
                     filterValue: item,
                 };
             }
-            this.props.newsfeedSearchAction(obj);
-        } else {
-            this.props.newsfeedListAction((res) => {
-                this.setState({ refreshItem: "", refreshValue: "" });
+            this.filterlist(item)
+            this.setState({
+                filter: true,
+            });
+            // this.props.newsfeedSearchAction(obj, (res) => {
+            //     this.setState({ listItem: res.data.success.data })
+            // });
+        }
+        else {
+            let requestData = { page: 1 }
+            this.props.newsfeedListAction(requestData, (res) => {
+                this.setState({ refreshItem: "", refreshValue: "", listItem: res.data.success.data });
             });
         }
     };
+
 
     handleSnooze = (item) => {
         this.setState({
@@ -371,7 +436,6 @@ class Dashboard extends Component {
             senderId: item.sender_id,
         });
     };
-
     handleSnooozeSubmit = (val, id, value) => {
         this.setState({ showModal: val });
         let requestData = {
@@ -379,6 +443,7 @@ class Dashboard extends Component {
             duration_id: id,
         };
         this.props.snoozSenderAction(requestData, (res) => {
+            let requestData = { page: 1 }
             if (res.status === STATUS_CODES.CREATED) {
                 if (
                     res &&
@@ -388,12 +453,11 @@ class Dashboard extends Component {
                     res.data.success.data
                 ) {
                     Toast.showToast(res.data.success.data.message, "success");
-                    this.props.newsfeedListAction((res) => {});
+                    this.props.newsfeedListAction(requestData, (res) => { });
                 }
             }
         });
     };
-
     handleSave = (item) => {
         this.setState({ showInfo: false });
         let requestData = {
@@ -414,7 +478,6 @@ class Dashboard extends Component {
             }
         });
     };
-
     handleDeleteAlert = (item) => {
         Alert.alert(
             "Alert",
@@ -430,7 +493,6 @@ class Dashboard extends Component {
             { cancelable: false }
         );
     };
-
     handleDelete = (item) => {
         this.setState({ showInfo: false });
         let requestData = {
@@ -438,6 +500,7 @@ class Dashboard extends Component {
             category_id: item.category_id ? item.category_id : "",
         };
         this.props.deleteNewsfeedAction(requestData, (res) => {
+            let requestData = { page: 1 }
             if (
                 res &&
                 res.data &&
@@ -446,12 +509,12 @@ class Dashboard extends Component {
                 res.data.success.data
             ) {
                 Toast.showToast(res.data.success.data.message, "success");
-
-                this.props.newsfeedListAction((res) => {});
+                this.props.newsfeedListAction(requestData, (res) => {
+                    
+                 });
             }
         });
     };
-
     handleArchive = (item) => {
         this.setState({ showInfo: false });
         let requestData = {
@@ -459,6 +522,7 @@ class Dashboard extends Component {
             category_id: item.category_id ? item.category_id : "",
         };
         this.props.archiveNewsfeedAction(requestData, (res) => {
+            let requestData = { page: 1 }
             if (res.status === STATUS_CODES.CREATED) {
                 if (
                     res &&
@@ -468,12 +532,11 @@ class Dashboard extends Component {
                     res.data.success.data
                 ) {
                     Toast.showToast(res.data.success.data.message, "success");
-                    this.props.newsfeedListAction((res) => {});
+                    this.props.newsfeedListAction(requestData, (res) => { });
                 }
             }
         });
     };
-
     searchFilterFunction(text) {
         if (text.length >= 1) {
             if (typingTimeout) {
@@ -483,20 +546,23 @@ class Dashboard extends Component {
                 let obj = {
                     filterValue: text,
                 };
-                this.props.newsfeedSearchAction(obj);
+                // this.props.newsfeedSearchAction(obj);
+                this.props.newsfeedSearchAction((obj) => {
+                    this.setState({ listItem: res.data.success.data })
+                });
             }, 1000);
         } else {
-            this.props.newsfeedListAction((res) => {});
+            let requestData = { page: 1 }
+            this.props.newsfeedListAction(requestData, (res) => {
+                this.setState({ listItem: res.data.success.data })
+            });
         }
     }
-
     onBlur() {
         this.searchFilterFunction(this.state.searchText);
     }
-
     ListEmptyView = () => {
         const { firstTimeLoginVar } = this.state;
-        console.log(" this.setState firstTimeLoginVar", firstTimeLoginVar);
         return (
             <View
                 style={{
@@ -524,17 +590,13 @@ class Dashboard extends Component {
             </View>
         );
     };
-
     handleFilter = () => {
         this.setState({ showFilter: !this.state.showFilter });
     };
-
     handleNavigation = (item) => {
         this.setState({ showInfo: false, showFilter: false });
-        console.log("PRINT ITEM ARRAY>>>>", item);
         this.props.navigation.navigate("NewsfeedDetails", { itemData: item });
     };
-
     _renderRow = (rowData) => {
         const { item, index } = rowData;
         const { showInfo, selectedItem, modalVisible } = this.state;
@@ -600,9 +662,9 @@ class Dashboard extends Component {
                             </View>
                         </TouchableOpacity>
                         {item.category_name &&
-                        item.category_name !== "" &&
-                        item.category_name !== null &&
-                        item.category_name !== undefined ? (
+                            item.category_name !== "" &&
+                            item.category_name !== null &&
+                            item.category_name !== undefined ? (
                             <TouchableOpacity
                                 style={[
                                     innerStyle.innerView,
@@ -615,11 +677,11 @@ class Dashboard extends Component {
                                     )
                                 }
                             >
-                                <Image
+                                {/* <Image
                                     source={require("../../assets/images/social.png")}
                                     style={innerStyle.optionIconStyle}
                                     resizeMode="contain"
-                                />
+                                /> */}
                                 <Text
                                     style={[
                                         innerStyle.categoryText,
@@ -687,25 +749,22 @@ class Dashboard extends Component {
                         </Text>
                     </View>
                     {/* <WebView
-            javaScriptEnabled={true}
-            domStorageEnabled={true}
-            scalesPageToFit={true}
-            source={{ html: item.description }}
-            style={innerStyle.webView}
-            startInLoadingState={true}
-          /> */}
+                        javaScriptEnabled={true}
+                        domStorageEnabled={true}
+                        scalesPageToFit={true}
+                        source={{ html: item.description }}
+                        style={innerStyle.webView}
+                        startInLoadingState={true}
+                    /> */}
                 </View>
                 <View style={innerStyle.bottomLine} />
             </View>
         );
     };
-
     render() {
         const { searchText, showModal, listItem, showFilter } = this.state;
-
         return (
             <Container>
-                <Loader isLoading={this.props.feedLoader} />
                 <MainHeader
                     leftButtonType={"menu"}
                     leftButton={true}
@@ -714,6 +773,7 @@ class Dashboard extends Component {
                     onPress={() => this.handleFilter()}
                     onImagePress={() => this.handleRefresh()}
                 />
+                <Loader isLoading={this.state.isLoading} />
                 <View
                     style={{
                         zIndex: 999,
@@ -752,13 +812,15 @@ class Dashboard extends Component {
                             </View>
                         )}
                     <View style={innerStyle.mainView}>
+
                         <FlatList
-                            data={
-                                this.props.newsfeedData &&
-                                this.props.newsfeedData.length > 0
-                                    ? this.props.newsfeedData
-                                    : listItem
-                            }
+                            data={listItem}
+                            // data={
+                            //     this.props.newsfeedData &&
+                            //         this.props.newsfeedData.length > 0
+                            //         ? this.props.newsfeedData
+                            //         : listItem
+                            // }
                             keyExtractor={(item, index) => index.toString()}
                             refreshControl={
                                 <RefreshControl
@@ -768,9 +830,15 @@ class Dashboard extends Component {
                             }
                             style={{ marginBottom: GLOBLE.DEVICE_WIDTH / 3 }}
                             renderItem={this._renderRow}
-                            extraData={this.state}
                             showsVerticalScrollIndicator={false}
-                            ListEmptyComponent={this.ListEmptyView}
+                            onEndReached={() => {
+                                this.setState({ page: this.state.page + 1 }, () => {
+                                    // this.state.listItem.length < 30 ? null :
+                                    this.paginationNewsFeed()
+                                })
+                            }
+                            }
+                            onEndReachedThreshold={"0.05"}
                         />
                     </View>
                 </View>
@@ -781,11 +849,11 @@ class Dashboard extends Component {
                         this.handleSnooozeSubmit(val, id, value)
                     }
                 />
+
             </Container>
         );
     }
 }
-
 const innerStyle = StyleSheet.create({
     modal: {
         justifyContent: "flex-start",
@@ -814,7 +882,6 @@ const innerStyle = StyleSheet.create({
         marginTop: 22,
         backgroundColor: "red",
     },
-
     openButton: {
         backgroundColor: "#F194FF",
         borderRadius: 20,
@@ -977,7 +1044,7 @@ const innerStyle = StyleSheet.create({
     },
     mainView: {
         // marginTop: 5,
-        marginBottom: 50,
+        // marginBottom: 50,
     },
     usernameStyle: {
         height: 45,
@@ -1042,6 +1109,7 @@ const innerStyle = StyleSheet.create({
     },
 });
 
+
 const mapStateToProps = ({ newsFeed }) => {
     const { newsfeedData, feedLoader } = newsFeed;
     return {
@@ -1058,3 +1126,4 @@ export default connect(mapStateToProps, {
     deleteNewsfeedAction,
     snoozSenderAction,
 })(Dashboard);
+

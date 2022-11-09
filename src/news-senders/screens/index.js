@@ -17,7 +17,7 @@ import {
     MainHeader,
     NoContentFound,
     SnoozeModal,
-    SnoozeSwipeList,
+    SnoozeSwipeList,                  
 } from "../../components";
 import { Fonts } from "../../utils/Fonts";
 import {
@@ -53,7 +53,7 @@ class NewsSenders extends Component {
 
     componentDidMount() {
         this.props.getSenderListAction((res) => {});
-        console.log("newsender screen called...");
+        // console.log("newsender screen called...");
     }
 
     /**
@@ -191,7 +191,7 @@ class NewsSenders extends Component {
     };
 
     handleSnoozeStatus = (item) => {
-        console.log("called the method", item);
+        // console.log("called the method", item);
         let requestData = {
             timer_id: item.timer_id,
         };
@@ -219,7 +219,7 @@ class NewsSenders extends Component {
      * @description used for open model
      */
     defineModelBehaviour = (modalSelector, item) => {
-        console.log("called data", item);
+        // console.log("called data", item);
         if (modalSelector === "disableCategory") {
             this.setState({ showFilter: !this.state.showFilter }, () => {
                 this.handleSnoozeStatus(item);
@@ -294,7 +294,7 @@ class NewsSenders extends Component {
         };
         return (
             <Container>
-                <Loader isLoading={this.props.senderLoader} />
+                {/* <Loader isLoading={this.props.senderLoader} /> */}
                 <MainHeader
                     leftButtonType={"menu"}
                     leftButton={true}
@@ -407,6 +407,7 @@ const innerStyle = StyleSheet.create({
         alignItems: "center",
         marginTop: 25,
         justifyContent: "center",
+
     },
     bottomOptionStyle: {
         width: 20,

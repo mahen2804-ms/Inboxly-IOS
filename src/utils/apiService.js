@@ -2,12 +2,15 @@ import axios from 'axios';
 
 class ApiService {
     fetchApi = (url, timeout) => {
+        console.log('Fetch API-1',url);
         return new Promise((resolve, reject) => {
+            console.log('Fetch API-2',timeout);
             axios.get(url, {
-                timeout: timeout,
             }).then(response => {
+                console.log('Fetch API-3',timeout);
                 return resolve(response);
             }).catch(error => {
+                console.log('Fetch API-4');
                 return reject(error);
             });
         });

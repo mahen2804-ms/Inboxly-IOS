@@ -4,6 +4,7 @@ import {
     Text,
     View,
 } from 'react-native';
+import axios from 'axios';
 import { Container, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { LABELS } from '../../constant/LanguageConstants';
@@ -14,6 +15,9 @@ import { deleteUserAction } from '../../redux/actions';
 import { STATUS_CODES } from '../../config';
 import { Toast } from '../../helper';
 import { Fonts } from '../../utils/Fonts';
+import AsyncStorage from '@react-native-community/async-storage';
+import NavigationService, { navigationRef } from '../../utils/navigator';
+
 
 function DeleteAccount(props) {
 
@@ -25,7 +29,14 @@ function DeleteAccount(props) {
                 if (res.status === STATUS_CODES.OK) {
                     if (res && res.data && res.data.success) {
                         Toast.showToast(res.data.success.message, 'success');
-                        props.navigation.navigate('AccountSettings')
+                        axios.defaults.headers.common.Authorization = '';
+                        axios.defaults.headers.common.Token = '';
+                        AsyncStorage.removeItem('@LOGGEDUSER');
+                        AsyncStorage.removeItem('@USERTOKEN');
+                        AsyncStorage.removeItem('isLogin');
+                        AsyncStorage.removeItem('LoginFirstTime');
+                        props.navigation.navigate('Auth');
+                        // NavigationService.navigate('AuthLoading');
                     }
                 }
             });
@@ -45,11 +56,11 @@ function DeleteAccount(props) {
                     <Text style={innerStyle.deleteTextStyle}>
                         {LABELS.DELETE_MSG}
                     </Text>
-                    <Text style={[innerStyle.deleteTextStyle, {marginTop: 20}]}>
+                    <Text style={[innerStyle.deleteTextStyle, { marginTop: 20 }]}>
                         {LABELS.DELETE_INFO}
                     </Text>
-                    <Text style={[innerStyle.deleteTextStyle, {marginTop: 20}]}>
-                        <Text style={{fontWeight: 'bold'}}>
+                    <Text style={[innerStyle.deleteTextStyle, { marginTop: 20 }]}>
+                        <Text style={{ fontWeight: 'bold' }}>
                             Please note:
                         </Text>
                         {LABELS.DELETE_NOTE}
@@ -93,10 +104,11 @@ const innerStyle = StyleSheet.create({
         fontSize: 18,
         fontFamily: Fonts.RobotoMedium,
         textAlign: 'left',
+        fontWeight: 'bold'
     },
     deleteTextStyle: {
         color: '#171819',
-        fontSize: 0.043*GLOBLE.DEVICE_WIDTH,
+        fontSize: 0.043 * GLOBLE.DEVICE_WIDTH,
         fontWeight: '400',
         fontFamily: Fonts.RobotoRegular,
         textAlign: 'left',
@@ -122,7 +134,7 @@ const innerStyle = StyleSheet.create({
     },
     buttonTextStyle: {
         color: '#FFFFFF',
-        fontSize: 0.04*GLOBLE.DEVICE_WIDTH,
+        fontSize: 0.04 * GLOBLE.DEVICE_WIDTH,
         fontWeight: 'bold',
     },
 });

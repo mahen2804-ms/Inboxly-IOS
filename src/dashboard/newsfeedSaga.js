@@ -3,16 +3,14 @@ import { API, STATUS_CODES } from "../config";
 import { apiErrors, Toast } from "../helper";
 import { NEWSFEED_LIST_SAGA_REQUEST, NEWSFEED_LIST_REQUEST, NEWSFEED_LIST_FAILURE, NEWSFEED_LIST_SUCCESS, NEWSFEED_SEARCH_SAGA_REQUEST, NEWSFEED_SEARCH_SUCCESS, ASSIGN_CATEGORY_SAGA_REQUEST, ASSIGN_CATEGORY_SUCCESS, CATEGORY_API_REQUEST, CATEGORY_API_FAILURE, SAVE_NEWSFEED_SAGA_REQUEST, SAVE_NEWSFEED_SUCCESS, ARCHIVE_NEWSFEED_SAGA_REQUEST, DELETE_NEWSFEED_SAGA_REQUEST, ARCHIVE_NEWSFEED_SUCCESS, DELETE_NEWSFEED_SUCCESS, NEWSFEED_DETAIL_SUCCESS, NEWSFEED_DETAIL_SAGA_REQUEST } from '../redux/actionType';
 import apiService from '../utils/apiService';
-
+import moment from "moment";
 function* newsfeedListRequestSaga(action) {
-    const { fetchApi } = apiService;
-    try {
+    const { postApi } = apiService;
+    try {   
         yield put({ type: NEWSFEED_LIST_REQUEST });
-        const newsfeedList = yield call(
-            fetchApi,
-            ...[`${API.newsfeedList}`],
-        );
-       // console.log('newsfeed list response', newsfeedList);
+        const newsfeedList = 
+        yield call(postApi, ...["https://app.myinboxly.com/api/v1/newsfeed?page=" + action.requestData.page],);
+            // yield call(fetchApi, ...[`${API.newsfeed}` + `?page=` + action.requestData.page ]);
         yield put({ type: NEWSFEED_LIST_SUCCESS, payload: newsfeedList && newsfeedList.data && newsfeedList.data.success && newsfeedList.data.success.data });
         action.callback(newsfeedList);
     } catch (error) {
@@ -22,7 +20,32 @@ function* newsfeedListRequestSaga(action) {
         action.callback(error);
     }
 }
-
+// function* senderListRequestSaga(action) {
+//     console.log("senderList" , `${API.senderList}` + `?page =` + action.requestData.page );
+//     // console.log("senderList" , action.requestData.page)
+//     const { fetchApi } = apiService;
+//     try {
+//         yield put({ type: SENDER_LIST_REQUEST });
+//         // const senderList = yield call(fetchApi, ...[`${API.senderList}`]);
+//          const senderList = yield call(fetchApi, ...[`${API.senderList}` + `?page=` + action.requestData.page ]);
+//         //    console.log('sender list response bvhfdvbfhdvgfhdgvfh', senderList);
+//         yield put({
+//             type: SENDER_LIST_SUCCESS,
+//             payload:
+//                 senderList &&
+//                 senderList.data &&
+//                 senderList.data.success &&
+//                 senderList.data.success.data,
+//         });
+//         console.log("sender list response", senderList.data.success.data);
+//         action.callback(senderList);
+//     } catch (error) {
+//         yield put({ type: SENDER_LIST_FAILURE });
+//         console.log("sender list error", error);
+//         apiErrors(error);
+//         action.callback(error);
+//     }
+// }
 function* newsfeedSearchRequestSaga(action) {
     const { postApi } = apiService;
     try {
@@ -31,17 +54,16 @@ function* newsfeedSearchRequestSaga(action) {
             postApi,
             ...[API.searchNewsfeed, action.requestData],
         );
-        console.log('newsfeed search response', newsfeedSearch);
+        // console.log('newsfeed search response', newsfeedSearch);
         yield put({ type: NEWSFEED_SEARCH_SUCCESS, payload: newsfeedSearch && newsfeedSearch.data && newsfeedSearch.data.success && newsfeedSearch.data.success.data });
-        
+        action.callback(newsfeedSearch);
     } catch (error) {
         yield put({ type: NEWSFEED_LIST_FAILURE });
         console.log('newsfeed search error ', error);
         apiErrors(error);
-        // action.callback(error);
+        action.callback(error);
     }
 }
-
 function* assignCategoryRequestSaga(action) {
     const { postApi } = apiService;
     try {
@@ -60,7 +82,6 @@ function* assignCategoryRequestSaga(action) {
         action.callback(error);
     }
 }
-
 function* saveNewsfeedRequestSaga(action) {
     const { postApi } = apiService;
     try {
@@ -79,7 +100,6 @@ function* saveNewsfeedRequestSaga(action) {
         action.callback(error);
     }
 }
-
 function* archiveNewsfeedRequestSaga(action) {
     const { postApi } = apiService;
     try {
@@ -98,7 +118,6 @@ function* archiveNewsfeedRequestSaga(action) {
         action.callback(error);
     }
 }
-
 function* deleteNewsfeedRequestSaga(action) {
     const { postApi } = apiService;
     try {
@@ -117,7 +136,6 @@ function* deleteNewsfeedRequestSaga(action) {
         action.callback(error);
     }
 }
-
 function* newsfeedDetailRequestSaga(action) {
     const { postApi } = apiService;
     try {
@@ -126,7 +144,7 @@ function* newsfeedDetailRequestSaga(action) {
             postApi,
             ...[API.newsfeedDetail, action.requestData],
         );
-        console.log('feed detail response', deleteFeed);
+        // console.log('feed detail response', deleteFeed);
         yield put({ type: NEWSFEED_DETAIL_SUCCESS });
         action.callback(deleteFeed);
     } catch (error) {
@@ -136,7 +154,6 @@ function* newsfeedDetailRequestSaga(action) {
         action.callback(error);
     }
 }
-
 export default function* newsfeedSaga() {
     yield all([
         yield takeLatest(NEWSFEED_LIST_SAGA_REQUEST, newsfeedListRequestSaga),

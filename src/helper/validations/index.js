@@ -31,13 +31,15 @@ export const SignupValidationSchema = Yup.object().shape({
         .test(
             'alphaNumeric-only',
             'Only alphabets and Number are allowed.',
-            alphaNumeric,
+            alphaNumeric, 
         ),
-    secondaryEmail: Yup.string().required('This field is required.').test(
-        'valid-email',
-        'Please enter a valid email address.',
-        checkEmail,
-    ),
+    secondaryEmail: Yup.string()
+       .required('This field is required.')
+        .test(
+            'valid-email',
+            'Please enter a valid email address.',
+            checkEmail,
+        ),
     password: Yup.string().required('This field is required.').test('valid-password', 'Password must be min 8 characters, and have 1 Special Character, 1 Uppercase, 1 Number and 1 Lowercase', checkPassWord),
     
     acceptTerms: Yup.bool()
@@ -47,7 +49,8 @@ export const SignupValidationSchema = Yup.object().shape({
 });
 
 export const LoginValidationSchema = Yup.object().shape({
-    // inboxlyEmail: Yup.string().required('This field is required.')
+    // inboxlyEmail: Yup.string()
+    //.required('This field is required.')
     //     .test(
     //         'valid-email',
     //         'Please enter a valid email address.',

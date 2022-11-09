@@ -29,7 +29,7 @@ function ValidateOTP(props) {
     const handleNavigation = () => {
         props.navigation.reset({
             index: 0,
-            routes: [{name: 'LoginScreen'}],
+            routes: [{ name: 'LoginScreen' }],
         })
     };
 
@@ -50,8 +50,10 @@ function ValidateOTP(props) {
             };
             setIsLoading(true);
             props.validateOTPAction(requestData, res => {
+                console.log("validateOTPAction res",res.data.success);
                 setIsLoading(props.authLoader);
                 if (res && res.response && res.response.data && res.response.data.error) {
+                    console.log("inside vliad top if");
                     codeInputRef1.current.clear();
                 } else {
                     if (res.status === STATUS_CODES.OK) {
@@ -73,14 +75,15 @@ function ValidateOTP(props) {
    */
     const resendOTP = () => {
         codeInputRef1.current.clear();
+        Keyboard.dismiss();
         setIsLoading(true);
         const { recovery_email } = props.route.params.verificationParams;
         const requestData = {
             email: recovery_email,
         };
         props.reSendOTPAction(requestData, res => {
+            console.log("pressed threee");
             if (res.status === STATUS_CODES.OK) {
-                Keyboard.dismiss();
                 setVerificationCode('');
                 Toast.showToast(TOASTER_LABEL.OTP_RECEIVED, 'success');
                 setIsLoading(props.authLoader);
@@ -93,7 +96,7 @@ function ValidateOTP(props) {
             <Loader isLoading={isLoading} />
             <View style={innerStyle.logoView}>
                 <Image
-                    source={require('../../assets/images/logo.png')}
+                    source={require('../../assets/images/inboldlogo.png')}
                     style={innerStyle.logoImage}
                     resizeMode='contain'
                 />
@@ -143,7 +146,10 @@ function ValidateOTP(props) {
                                                     buttonTextStyle={innerStyle.buttonTextStyle}
                                                 />
                                             </View>
-                                            <TouchableOpacity style={innerStyle.backToLoginViewStyle} onPress={() => resendOTP()}>
+                                            <TouchableOpacity style={innerStyle.backToLoginViewStyle}
+                                                onPress={() => {
+                                                    resendOTP()
+                                                }}>
                                                 <Text style={innerStyle.backToLoginTextStyle}>
                                                     {LABELS.RESEND_OTP_BUTTON}
                                                 </Text>
@@ -249,7 +255,7 @@ const innerStyle = StyleSheet.create({
 
 const mapStateToProps = ({ auth }) => {
     const { loggedUserData, authLoader } = auth;
-  return { loggedUserData, authLoader };
+    return { loggedUserData, authLoader };
 };
 
 export default connect(mapStateToProps, { validateOTPAction, reSendOTPAction })(ValidateOTP);

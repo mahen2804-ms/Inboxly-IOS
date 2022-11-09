@@ -7,6 +7,7 @@ import * as Animatable from "react-native-animatable";
 import { GLOBLE } from "../constant/utility.constant";
 import { Fonts } from "../utils/Fonts";
 import { DATE_FORMAT } from "../config";
+import AsyncStorage from '@react-native-community/async-storage';
 const images = {
     time: require("../assets/images/edit.png"),
     cross: require("../assets/images/delete.png"),
@@ -17,6 +18,7 @@ export const Separator = () => <View style={styles.separator} />;
 const pressHandler = (id, defineModelBehaviour, item) => {
     defineModelBehaviour(id, item);
 };
+
 
 const RightActions = ({ progress, defineModelBehaviour, item }) => {
     return (
@@ -141,12 +143,13 @@ const SwipableListItem = (item) => (
             <View style={styles.mainView}>
                 <View style={styles.gridViewContainer}>
                     <TouchableOpacity
-                        onPress={() =>
+                        onPress={() => {
                             pressHandler(
                                 item.id,
                                 item.defineModelBehaviour,
                                 item
                             )
+                        }
                         }
                     >
                         <View

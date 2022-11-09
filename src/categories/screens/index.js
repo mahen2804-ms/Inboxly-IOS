@@ -38,7 +38,8 @@ class Categories extends Component {
     }
 
     componentDidMount() {
-        this.props.categoryListAction((res) => {});
+        this.props.categoryListAction((res) => {
+        });
     }
 
     /**
@@ -46,7 +47,6 @@ class Categories extends Component {
      * @description used for open model
      */
     defineModelBehaviour = (modalSelector, item) => {
-        console.log("called data", item);
         if (modalSelector === "disableCategory") {
             this.setState(
                 { categoryStatus: !this.state.categoryStatus },
@@ -176,7 +176,8 @@ class Categories extends Component {
                     <SwipableListItem
                         {...item}
                         defineModelBehaviour={(id, item) =>
-                            this.defineModelBehaviour(id, item)
+                            {this.defineModelBehaviour(id, item)
+                        }
                         }
                         navigation={this.props.navigation}
                     />
@@ -207,7 +208,7 @@ class Categories extends Component {
                     <View style={innerStyle.container}>
                         {}
                         <View style={innerStyle.mainView}>
-                            {this.renderListSection()}
+                            {this.renderListSection()}                        
                         </View>
                     </View>
                 </Content>

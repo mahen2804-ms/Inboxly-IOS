@@ -25,7 +25,7 @@ function Legal(props) {
             </View>
             <Text style={innerStyle.textStyle}
                 onPress={() => props.navigation.navigate('LegalDetails', {
-                    url: 'https://inboxymobileapp.systematixwebsolutions.com/privacy.php',
+                    url: 'https://app.myinboxly.com/privacy-policy',
                     header: 'Privacy policy'
                 })}>
                 {'Click to View'}
@@ -43,8 +43,26 @@ function Legal(props) {
             <Text
                 style={innerStyle.textStyle}
                 onPress={() => props.navigation.navigate('LegalDetails', {
-                    url: 'https://inboxymobileapp.systematixwebsolutions.com/policy.php',
+                    url: 'https://app.myinboxly.com/terms-and-condition',
                     header: 'Terms & End User License Agreement'
+                })}>
+                {'Click to View'}
+            </Text>
+            <View style={{ marginTop: 10, justifyContent: 'center' }}>
+                <View style={innerStyle.listStyle}>
+                    <Icon
+                        type="MaterialIcons"
+                        name="policy"
+                        style={{ fontSize: 28, color: '#034CBB' }}
+                    />
+                    <Text style={innerStyle.mainLableStyle}>{'Open Source Licenses'}</Text>
+                </View>
+            </View>
+            <Text
+                style={innerStyle.textStyle}
+                onPress={() => props.navigation.navigate('LegalDetails', {
+                    url: 'https://inboxymobileapp.systematixwebsolutions.com/policy.php',
+                    header: 'Open Source Licenses'
                 })}>
                 {'Click to View'}
             </Text>
@@ -72,6 +90,7 @@ const innerStyle = StyleSheet.create({
         color: '#000',
         textDecorationLine: 'underline',
         fontSize: 14,
+        width:90
     },
 });
 

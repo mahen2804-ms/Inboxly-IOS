@@ -2,6 +2,7 @@ import { Input as InputText, Icon } from 'native-base';
 import React, { Component } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Fonts } from '../utils/Fonts';
+import { LABELS } from "../constant/LanguageConstants";
 
 export default class InputBox extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ export default class InputBox extends Component {
       selection: null,
     };
   }
+  
 
   render() {
     const {
@@ -18,6 +20,7 @@ export default class InputBox extends Component {
       label,
       message,
       value,
+      title,
       onChangeText,
       placeholder,
       secureTextEntry = false,
@@ -35,7 +38,7 @@ export default class InputBox extends Component {
     } = this.props;
     let customWords = '';
     if (keyboardType === 'default') {
-      customWords = 'sentences';
+      customWords = 'sentences';  
     } else if (keyboardType == 'email-address') {
       customWords = 'none';
     }
@@ -49,11 +52,12 @@ export default class InputBox extends Component {
         <View>
           <Text style={innerStyles.headingTextStyle}>
             {label}
-            {info && <Text style={{ fontSize: 12, color: '#87939F' }}>
+            {<Text style={{color:'red'}}>{title}</Text>}
+           {info && <Text style={{ fontSize: 12, color: 'red' }}>
               {' '+ info}
-            </Text>}
-          </Text>
-          {message && <Text style={innerStyles.msgStyle}>
+            </Text>}</Text>
+        
+          {message && <Text style={[innerStyles.msgStyle,{}]}>
             {message}
           </Text>}
         </View>
@@ -119,8 +123,9 @@ const innerStyles = StyleSheet.create({
     marginTop: 5,
     marginBottom: 5,
     flexDirection: 'row',
-    height: 35,
+    height:'auto',
     width: '100%',
+    // height
   },
   inputIcon: {
     color: '#87939F',
@@ -140,7 +145,7 @@ const innerStyles = StyleSheet.create({
   },
   msgStyle: {
     color: '#87939F',
-    fontSize: 12.5,
+    fontSize: 11,
     marginTop: 2,
     marginBottom: 2,
     textAlign: 'left',

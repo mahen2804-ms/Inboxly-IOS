@@ -34,7 +34,8 @@ class SavedNews extends Component {
     }
 
     componentDidMount() {
-        this.props.saveNewsListAction(res => { });
+        this.props.saveNewsListAction(res => { 
+        });
         this._isMounted = true;
         if (this._isMounted) {
             this.setState({ isLoading: false })

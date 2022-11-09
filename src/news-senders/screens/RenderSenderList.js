@@ -26,7 +26,7 @@ export default class RenderCategory extends Component {
         snoozeValue,
         timerValue
     ) => {
-        console.log("test cat", id, senderName, categories, selectedCatId);
+        // console.log("test cat", id, senderName, categories, selectedCatId);
         this.props.setSelected(
             id,
             senderName,
@@ -150,9 +150,9 @@ export default class RenderCategory extends Component {
                                 <View>
                                     <Text style={innerStyle.categoryText}>
                                         {item.sender_name +
-                                            "(" +
-                                            item.category_name +
-                                            ")"}
+                                            
+                                            (item.category_name == null ? "" : "(" + item.category_name +  ")") 
+                                           }
                                     </Text>
                                     <Text
                                         style={innerStyle.emailTextEmailId}

@@ -7,38 +7,54 @@ import {
     TouchableOpacity,
     ScrollView,
     Platform,
+    Alert
 } from "react-native";
 import { connect } from "react-redux";
 import { Container, Content, Icon } from "native-base";
 import { LABELS } from "../../constant/LanguageConstants";
-import { MainHeader } from "../../components";
+import { MainHeader, SnoozeModal } from "../../components";
 import { Fonts } from "../../utils/Fonts";
 import { GLOBLE } from "../../constant/utility.constant";
 import { WebView } from "react-native-webview";
-import { newsfeedDetailAction } from "../../redux/actions";
+import { STATUS_CODES } from "../../config";
+import { Toast } from "../../helper";
+// import { newsfeedDetailAction } from "../../redux/actions";
 import EventBus from "react-native-event-bus";
+import {
+    newsfeedListAction,
+    newsfeedDetailAction,
+    newsfeedSearchAction,
+    saveNewsfeedAction,
+    archiveNewsfeedAction,
+    deleteNewsfeedAction,
+    snoozSenderAction,
+} from "../../redux/actions";
 
 class NewsfeedDetails extends Component {
     constructor() {
+        console.log("constructor in newsfeedDetail");
         super();
         this.state = {
             searchText: "",
             showInfo: false,
             error: false,
             item: {},
+            selectedItem: "",
+            showModal: false,
         };
     }
 
     componentDidMount() {
+        console.log("componentDidMount in newsfeedDetail");
         const item = this.props.route.params.itemData;
-        console.log("my item", item);
         if (item) {
-            this.setState({ item: item });
+            // this.setState({ item: item });
+            console.log("fgfgbbb",item);
             let requestData = {
                 id: item.id,
             };
             this.props.newsfeedDetailAction(requestData, (res) => {
-                console.log("detail res", res);
+                this.setState({ item: res.data.success.data[0] });
                 // if (res.status === STATUS_CODES.OK) {
                 //     if (res && res.data && res.data.success) {
                 //         Toast.showToast(res.data.success.message, 'success');
@@ -48,15 +64,129 @@ class NewsfeedDetails extends Component {
         }
     }
     onPressMethod = () => {
-        // alert("dfdf");
         EventBus.getInstance().fireEvent("fromNewsFeedDetailsScreen");
         this.props.navigation.goBack();
     };
-    handleIconPress = () => {
-        this.setState({ showInfo: !this.state.showInfo });
+
+    handleSnooze = (item) => {
+        this.setState({
+            showInfo: false,
+            showModal: true,
+            senderId: item.sender_id,
+        });
     };
 
-    handleOptions = () => {
+    handleSnooozeSubmit = (val, id, value) => {
+        this.setState({ showModal: val });
+        let requestData = {
+            sender_id: this.state.senderId,
+            duration_id: id,
+        };
+        this.props.snoozSenderAction(requestData, (res) => {
+            let requestData = { page: 1 }
+            if (res.status === STATUS_CODES.CREATED) {
+                if (
+                    res &&
+                    res.data &&
+                    res.data.success &&
+                    res.data.success.data &&
+                    res.data.success.data
+                ) {
+                    Toast.showToast(res.data.success.data.message, "success");
+                    this.props.newsfeedDetailAction(requestData, (res) => { });
+                }
+            }
+        });
+    };
+    handleSave = (item) => {
+        this.setState({ showInfo: false });
+        let requestData = {
+            newsfeed_id: item.id,
+            category_id: item.category_id ? item.category_id : "",
+        };
+        this.props.saveNewsfeedAction(requestData, (res) => {
+            if (res.status === STATUS_CODES.CREATED) {
+                if (
+                    res &&
+                    res.data &&
+                    res.data.success &&
+                    res.data.success.data &&
+                    res.data.success.data
+                ) {
+                    Toast.showToast(res.data.success.data.message, "success");
+                }
+            }
+        });
+    };
+    handleDeleteAlert = (item) => {
+        Alert.alert(
+            "Alert",
+            "Are you sure you want to delete this email?",
+            [
+                {
+                    text: "No",
+                    onPress: () => this.setState({ showInfo: false }),
+                    style: "cancel",
+                },
+                { text: "Yes", onPress: () => this.handleDelete(item) },
+            ],
+            { cancelable: false }
+        );
+    };
+    handleDelete = (item) => {
+        this.setState({ showInfo: false });
+        let requestData = {
+            newsfeed_id: item.id,
+            category_id: item.category_id ? item.category_id : "",
+        };
+        this.props.deleteNewsfeedAction(requestData, (res) => {
+            let requestData = { page: 1 }
+            if (
+                res &&
+                res.data &&
+                res.data.success &&
+                res.data.success.data &&
+                res.data.success.data
+            ) {
+                Toast.showToast(res.data.success.data.message, "success");
+                this.props.newsfeedDetailAction(requestData, (res) => { });
+            }
+        });
+    };
+    handleArchive = (item) => {
+        this.setState({ showInfo: false });
+        let requestData = {
+            newsfeed_id: item.id,
+            category_id: item.category_id ? item.category_id : "",
+        };
+        this.props.archiveNewsfeedAction(requestData, (res) => {
+            let requestData = { page: 1 }
+            if (res.status === STATUS_CODES.CREATED) {
+                if (
+                    res &&
+                    res.data &&
+                    res.data.success &&
+                    res.data.success.data &&
+                    res.data.success.data
+                ) {
+                    Toast.showToast(res.data.success.data.message, "success");
+                    this.props.newsfeedDetailAction(requestData, (res) => { });
+                }
+            }
+        });
+    };
+    handleAssignCategory = (item) => {
+        this.setState({ showInfo: false });
+        this.props.navigation.navigate("AssignCategoryList", {
+            feedId: item.id,
+            senderId: item.sender_id,
+            news_category_id: item.news_category_id,
+            refreshItem: this.state.refreshItem,
+            refreshValue: this.state.refreshValue,
+        });
+    };
+
+    handleOptions = (item) => {
         return (
             <View>
                 <View style={innerStyle.talkBubbleTriangle}>
@@ -71,6 +201,7 @@ class NewsfeedDetails extends Component {
                         <View style={innerStyle.boxMainView}>
                             <TouchableOpacity
                                 style={innerStyle.boxTextViewStyle}
+                                onPress={() => this.handleSave(item)}
                             >
                                 <Text style={innerStyle.talkBubbleMessage}>
                                     {LABELS.SAVE_NEWS}
@@ -78,6 +209,7 @@ class NewsfeedDetails extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={innerStyle.boxTextViewStyle}
+                                onPress={() => this.handleDeleteAlert(item)}
                             >
                                 <Text style={innerStyle.talkBubbleMessage}>
                                     {LABELS.DELETE_NEWS}
@@ -85,6 +217,7 @@ class NewsfeedDetails extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={innerStyle.boxTextViewStyle}
+                                onPress={() => this.handleArchive(item)}
                             >
                                 <Text style={innerStyle.talkBubbleMessage}>
                                     {LABELS.ARCHIVE_NEWS}
@@ -92,6 +225,7 @@ class NewsfeedDetails extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={innerStyle.boxTextViewStyle}
+                                onPress={() => this.handleSnooze(item)}
                             >
                                 <Text style={innerStyle.talkBubbleMessage}>
                                     {LABELS.SNOOZE_SENDER}
@@ -99,6 +233,7 @@ class NewsfeedDetails extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={innerStyle.boxTextViewStyle}
+                                onPress={() => { this.handleAssignCategory(item) }}
                             >
                                 <Text style={innerStyle.talkBubbleMessage}>
                                     {LABELS.ASSIGN_CATEGORY}
@@ -111,87 +246,106 @@ class NewsfeedDetails extends Component {
         );
     };
 
+    handleDot = (id) => {
+        const { selectedItem, showInfo } = this.state;
+        if (selectedItem !== id) {
+            this.setState({ selectedItem: id, showInfo: true });
+        } else {
+            this.setState({ selectedItem: id, showInfo: !showInfo });
+        }
+    };
+
     render() {
-        const { item, showInfo } = this.state;
+        const { item, showInfo, selectedItem, showModal } = this.state;
         return (
             <Container>
                 <MainHeader
                     leftButtonType={"onHome"}
                     leftButton={true}
-                    rightButton={false}
+                    rightButton={true}
                     btnPress={() => this.onPressMethod()}
+                    onPress={() => this.handleDot(item.id)}
                     rightButtonType={"keyboard-control"}
                 />
-                <Content>
-                    <View style={innerStyle.container}>
-                        <View style={innerStyle.gridViewContainer}>
-                            {/* <View style={{ alignItems: 'flex-end', flex: 1, marginRight: 8, zIndex: 999 }}>
-                                    {showInfo &&
-                                        this.handleOptions()
-                                    }
-                                </View> */}
-                            <View style={{ marginTop: 8, marginBottom: 1 }}>
-                                <View style={{ marginBottom: 0 }}>
-                                    <Text
-                                        style={[
-                                            innerStyle.gridViewTextLayout,
-                                            {
-                                                fontFamily: Fonts.RobotoMedium,
-                                                fontSize: 15,
-                                            },
-                                        ]}
-                                    >
-                                        {item.sender_name}
-                                    </Text>
-                                    <Text
-                                        style={[
-                                            innerStyle.gridViewTextLayout,
-                                            {
-                                                fontFamily: Fonts.RobotoRegular,
-                                                fontSize: 15,
-                                                color: "#000",
-                                            },
-                                        ]}
-                                    >
-                                        {item.sender_email}
-                                    </Text>
-                                </View>
-                                <View style={innerStyle.titleView}>
-                                    <Text style={innerStyle.gridViewTextLayout}>
-                                        {item.title}
-                                    </Text>
-                                </View>
-                                {/* <View style={{ marginTop: 5, zIndex: -999 }}>
+
+                <View style={innerStyle.container}>
+                    <View style={innerStyle.gridViewContainer}>
+                        <View style={{ alignItems: 'flex-end', marginRight: 8, zIndex: 999 }}>
+                            {showInfo &&
+                                selectedItem === item.id &&
+                                this.handleOptions(item)
+                            }
+                        </View>
+                        <SnoozeModal
+                            visible={showModal}
+                            onCloseCall={(val) => this.setState({ showModal: val })}
+                            timeDuration={(val, id, value) =>
+                                this.handleSnooozeSubmit(val, id, value)
+                            }
+                        />
+                        <View style={{ marginTop: 8, marginBottom: 1 }}>
+                            <View style={{ marginBottom: 0 }}>
+                                <Text
+                                    style={[
+                                        innerStyle.gridViewTextLayout,
+                                        {
+                                            fontFamily: Fonts.RobotoMedium,
+                                            fontSize: 15,
+                                        },
+                                    ]}
+                                >
+                                    {item.sender_name}
+                                </Text>
+                                <Text
+                                    style={[
+                                        innerStyle.gridViewTextLayout,
+                                        {
+                                            fontFamily: Fonts.RobotoRegular,
+                                            fontSize: 15,
+                                            color: "#000",
+                                        },
+                                    ]}
+                                >
+                                    {item.sender_email}
+                                </Text>
+                            </View>
+                            <View style={innerStyle.titleView}>
+                                <Text style={innerStyle.gridViewTextLayout}>
+                                    {item.title}
+                                </Text>
+                            </View>
+                            {/* <View style={{ marginTop: 5, zIndex: -999 }}>
                                         <Image
                                             source={{ uri: item.image }}
                                             style={{ width: GLOBLE.DEVICE_WIDTH - 20, height: 230 }}
                                             resizeMode='contain'
                                         />
                                     </View> */}
-                                <View style={{ flex: 1 }}>
-                                    {/* <Text style={innerStyle.descriptionTextStyle}>
+                        </View>
+                        <View style={{ flex: 1 }}>
+                            {/* <Text style={innerStyle.descriptionTextStyle}>
                                             {item.description}
                                         </Text> */}
 
-                                    <WebView
-                                        decelerationRate="normal"
-                                        javaScriptEnabled={true}
-                                        automaticallyAdjustContentInsets={true}
-                                        domStorageEnabled={true}
-                                        scalesPageToFit={true}
-                                        justifyContent={"center"}
-                                        alignItems={"center"}
-                                        flex={1}
-                                        source={{ html: item.description }}
-                                        style={innerStyle.webView}
-                                        startInLoadingState={true}
-                                        scrollEnabled={true}
-                                    />
-                                </View>
-                            </View>
+                            <WebView
+                                decelerationRate="normal"
+                                javaScriptEnabled={true}
+                                automaticallyAdjustContentInsets={true}
+                                domStorageEnabled={true}
+                                scalesPageToFit={true}
+                                justifyContent={"center"}
+                                alignItems={"center"}
+                                flex={1}
+                                source={{ html: item.description }}
+                                style={innerStyle.webView}
+                                startInLoadingState={true}
+                                scrollEnabled={true}
+                            />
                         </View>
                     </View>
-                </Content>
+
+                </View>
+
             </Container>
         );
     }
@@ -210,7 +364,7 @@ const innerStyle = StyleSheet.create({
         height:
             Platform.OS == "ios"
                 ? GLOBLE.DEVICE_HEIGHT
-                : GLOBLE.DEVICE_HEIGHT / 1.4,
+                : GLOBLE.DEVICE_HEIGHT,
         //    height: 2000,
         //    marginBottom:-20
     },
@@ -385,6 +539,17 @@ const mapStateToProps = ({ newsFeed }) => {
     };
 };
 
-export default connect(mapStateToProps, { newsfeedDetailAction })(
-    NewsfeedDetails
-);
+
+export default connect(mapStateToProps, {
+    newsfeedListAction,
+    newsfeedDetailAction,
+    newsfeedSearchAction,
+    saveNewsfeedAction,
+    archiveNewsfeedAction,
+    deleteNewsfeedAction,
+    snoozSenderAction,
+})(NewsfeedDetails);
+
+// export default connect(mapStateToProps, { newsfeedDetailAction })(
+//     NewsfeedDetails
+// );

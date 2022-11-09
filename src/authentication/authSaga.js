@@ -1,7 +1,8 @@
 import { call, takeLatest, all, put, delay } from "redux-saga/effects";
 import { API, STATUS_CODES } from "../config";
 import { apiErrors, Toast } from "../helper";
-import { AUTH_API_FAILURE, AUTH_API_REQUEST, AUTH_API_SUCCESS, FORGOT_PASSWORD_SAGA_REQUEST, LOGIN_SAGA_REQUEST, LOGOUT_SAGA_REQUEST, RESEND_OTP_SAGA_REQUEST, SIGNUP_SAGA_REQUEST, VALIDATE_OTP_SAGA_REQUEST, LOGOUT_API_SUCCESS } from '../redux/actionType';
+import { AUTH_API_FAILURE, AUTH_API_REQUEST, AUTH_API_SUCCESS, 
+    FORGOT_PASSWORD_SAGA_REQUEST, LOGIN_SAGA_REQUEST, LOGOUT_SAGA_REQUEST, RESEND_OTP_SAGA_REQUEST, SIGNUP_SAGA_REQUEST, VALIDATE_OTP_SAGA_REQUEST, LOGOUT_API_SUCCESS } from '../redux/actionType';
 import apiService from '../utils/apiService'
 
 function* userLoginRequestSaga(action) {
@@ -12,7 +13,7 @@ function* userLoginRequestSaga(action) {
             postApi,
             ...[API.login, action.requestData],
         );
-        console.log('login response', loginResponse);
+        // console.log('login response', loginResponse);
         yield put({ type: AUTH_API_SUCCESS, payload: loginResponse && loginResponse.data && loginResponse.data.success && loginResponse.data.success.data });
         action.callback(loginResponse);
     } catch (error) {
@@ -43,7 +44,7 @@ function* userSignUpRequestSaga(action) {
             postApi,
             ...[API.userRegistration, action.requestData],
         );
-        console.log('sigup response', signupResponse);
+        console.log('sigup responseee', signupResponse);
         yield put({ type: AUTH_API_SUCCESS, payload: signupResponse && signupResponse.data && signupResponse.data.success && signupResponse.data.success.data });
         action.callback(signupResponse);
     } catch (error) {

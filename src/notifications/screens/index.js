@@ -5,8 +5,11 @@ import {
     View,
     Image,
     FlatList,
+    TouchableOpacity,
+    Alert
 } from 'react-native';
 import { connect } from "react-redux";
+import axios from 'axios';
 import { Container, Content, Icon } from 'native-base';
 import { LABELS } from '../../constant/LanguageConstants';
 import { MainHeader, NoContentFound } from '../../components';
@@ -15,10 +18,10 @@ import { GLOBLE } from '../../constant/utility.constant';
 import AsyncStorage from '@react-native-community/async-storage';
 import {
     getEmailDetailAction,
-  } from "../../redux/actions";
+} from "../../redux/actions";
 import { STATUS_CODES } from "../../config";
 
- class Notifications extends Component {
+class Notifications extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -29,92 +32,124 @@ import { STATUS_CODES } from "../../config";
             ],
         };
     }
-    
+    componentDidMount = async () => {
 
-    componentDidMount=async()=>{
+        let authToken = await AsyncStorage.getItem('@USERTOKEN');
 
-  let usertoken = await AsyncStorage.getItem('@LOGGEDUSER');
-    //let parseToken = JSON.parse(usertoken),
-    //alert(usertoken)
-    //let usertoken = JSON.stringify(parseToken),
+        axios.get('https://app.myinboxly.com/api/v1/get-email-notification', {
 
-    
-    fetch("https://inboxymobileapp.systematixwebsolutions.com/api/v1/get-email-notification", {
-       //fetch("https://app.myinboxly.com/api/v1/get-email-notification", {
-        method: "GET",
-        headers:{
-            //'Authorization': 'Bearer ' + usertoken
-
-            'Authorization': 'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5MWRmNTRkNy0yZDZiLTQxZTgtYjdiNi00YmQ3MzNiOTBlMmUiLCJqdGkiOiIwMDY0YjU0OWE0YjU5NjIxY2Y1Y2RjZWRiOGM3N2RjYjE5YTBkZWFhZGU2YThmNGNiNDYyMDkxNzRjZWEwNDhjYzAwNDkwNWM1MDg3NmE2YiIsImlhdCI6IjE2Mjk3OTQxMzQuNDIxNDA2IiwibmJmIjoiMTYyOTc5NDEzNC40MjE0MTIiLCJleHAiOiIxNjYxMzMwMTM0LjQxNzI3MiIsInN1YiI6IjgiLCJzY29wZXMiOltdfQ.N0Uh727OM3Ohylhmox2tPU-A66aKZVpznjlkD-GrAOJRpaDAIrdx_BUfvIfYZa05jW1eeTy_OIW9f8QnaIOje5LE2fpGkLUPVTxdPfVqJcskQEjCHKHDqGwjZO-8lQSIm5hecBLow22wFXYfgUHb1Xj1E0Ii6ccWcTgYllSUW0dClvB5nOuGHAKNkmwF6_gKsaMgHMy0_qKv_CHN61FmpRGeBm9wKkc4cMy9fzD4K4hFMDSMZSBdsMFwzRn5MdBRWSkIApCUbqHD9De9jKSQM-S_CN5mfPYQ-YlS7SarBni1oaAr559NdWJVeS6bAk0P8iA-NqTvCxHLe_-d11FzM7PwgJAGcijPk1gF34s9j825JdPc5RUQF_NcBNYA4c_EX42nzbcqRP-7iOAZA5ailgtGxj7jSBL3eKPl73I1l7fD6xuu-OfqSmQdlxSjz9cHKeankGfyUVnKSg617phgJXtRYfz1Df2P2mBx8sDOP-kPEkI1IPiqUhNkq4nzQwVNRT0s-JP7Qlerh1R0n-B3PqwOysqg5qShaJZ38a81g1Y5v6GXWjjIX8ty3Gg4OtCbeRBv0pVHY2B0xaGR65usuJY02-b98c0qQPHmCcEdn63PZQOfA9OBn5c7uPOaUmqH2r941nR1vpWH1uIituvSHb8rZckMYPEQELSw73D0r0I'
-        }
-      })
-      .then((response) => response.json())
-      .then((responseJson) => { 
-          console.log(responseJson)
-          this.setState({GridListItems:responseJson.success.data})
-          //alert(JSON.stringify(responseJson.success.data)) 
-        })
-    }
-
-    getEmailNotification = async () => { 
-        this.props.getEmailDetailAction((res) => { alert("res")
-          if (res.status === STATUS_CODES.OK) {
-            if (res && res.data && res.data.success && res.data.success.data) {
-              const { notification_flag } = res.data.success.data;
-              if (notification_flag == 0) {
-                setToggle(false);
-              } else {
-                setToggle(true);
-              }
-            }
-          }
+            headers: {
+                'Bearer Token': authToken,
+            },
+        }).then(response => {
+            this.setState({ GridListItems: response.data.success.data })
+        }).catch(error => {
+            console.log('print error...', error);
         });
-      };
+
+
+        // fetch("https://inboxymobileapp.systematixwebsolutions.com/api/v1/get-email-notification", {
+        //    fetch("https://app.myinboxly.com/api/v1/get-email-notification", {
+        //     method: "GET",
+        //     headers:{
+        //         'Authorization': 'Bearer ' + authToken
+        //         // 'Authorization': 'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5MWRmNTRkNy0yZDZiLTQxZTgtYjdiNi00YmQ3MzNiOTBlMmUiLCJqdGkiOiIwMDY0YjU0OWE0YjU5NjIxY2Y1Y2RjZWRiOGM3N2RjYjE5YTBkZWFhZGU2YThmNGNiNDYyMDkxNzRjZWEwNDhjYzAwNDkwNWM1MDg3NmE2YiIsImlhdCI6IjE2Mjk3OTQxMzQuNDIxNDA2IiwibmJmIjoiMTYyOTc5NDEzNC40MjE0MTIiLCJleHAiOiIxNjYxMzMwMTM0LjQxNzI3MiIsInN1YiI6IjgiLCJzY29wZXMiOltdfQ.N0Uh727OM3Ohylhmox2tPU-A66aKZVpznjlkD-GrAOJRpaDAIrdx_BUfvIfYZa05jW1eeTy_OIW9f8QnaIOje5LE2fpGkLUPVTxdPfVqJcskQEjCHKHDqGwjZO-8lQSIm5hecBLow22wFXYfgUHb1Xj1E0Ii6ccWcTgYllSUW0dClvB5nOuGHAKNkmwF6_gKsaMgHMy0_qKv_CHN61FmpRGeBm9wKkc4cMy9fzD4K4hFMDSMZSBdsMFwzRn5MdBRWSkIApCUbqHD9De9jKSQM-S_CN5mfPYQ-YlS7SarBni1oaAr559NdWJVeS6bAk0P8iA-NqTvCxHLe_-d11FzM7PwgJAGcijPk1gF34s9j825JdPc5RUQF_NcBNYA4c_EX42nzbcqRP-7iOAZA5ailgtGxj7jSBL3eKPl73I1l7fD6xuu-OfqSmQdlxSjz9cHKeankGfyUVnKSg617phgJXtRYfz1Df2P2mBx8sDOP-kPEkI1IPiqUhNkq4nzQwVNRT0s-JP7Qlerh1R0n-B3PqwOysqg5qShaJZ38a81g1Y5v6GXWjjIX8ty3Gg4OtCbeRBv0pVHY2B0xaGR65usuJY02-b98c0qQPHmCcEdn63PZQOfA9OBn5c7uPOaUmqH2r941nR1vpWH1uIituvSHb8rZckMYPEQELSw73D0r0I'
+        //     }
+        //   })
+        //   .then((response) => response.json())
+        //   .then((responseJson) => { 
+        //     console.log("responseJson.success.data",responseJson.success.data);
+
+        //       this.setState({GridListItems:responseJson.success.data})
+        //     //   alert(JSON.stringify(responseJson.success.data)) 
+        //     })
+    }
+    getEmailNotification = async () => {
+        this.props.getEmailDetailAction((res) => {
+            if (res.status === STATUS_CODES.OK) {
+                if (res && res.data && res.data.success && res.data.success.data) {
+                    const { notification_flag } = res.data.success.data;
+                    if (notification_flag == 0) {
+                        setToggle(false);
+                    } else {
+                        setToggle(true);
+                    }
+                }
+            }
+        });
+    };
+
+    handleNavigation = (item) => {
+        this.setState({ showInfo: false, showFilter: false });
+        this.props.navigation.navigate("NewsfeedDetails", { itemData: item });
+    };
 
     renderListSection = () => {
-        const {GridListItems} = this.state;
-        if (GridListItems && GridListItems.length > 0) {
-            return (
-                <FlatList
-                    showsVerticalScrollIndicator={false}
-                    data={GridListItems}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={({ item, index }) => (
-                        <View style={innerStyle.gridViewContainer} key={index}>
-                            <View style={{ flexDirection: 'row' }}>
-                                <View style={innerStyle.imageView}>
-                                    <View style={innerStyle.imageInnerStyle}>
-                                        <Icon name="bell-o" type="FontAwesome" style={{ fontSize: 25, color: '#034CBB' }} />
-                                    </View>
-                                </View>
-                                <View style={innerStyle.titleView}>
-                                <Text style={innerStyle.categoryText}>
-                                        {item.sender_name}
-                                    </Text>
-                                    <Text style={innerStyle.categoryText}>
-                                        {item.title}
-                                    </Text>
-                                    <Text style={[innerStyle.emailText, { marginTop: 2}]}>
-                                        {item.date_time}
-                                    </Text>
-                                </View>
-                            </View>
-                        </View>
-                    )}
 
-                    ListEmptyComponent={() => {
-                        if (GridListItems.length < 1) {
+        const { GridListItems } = this.state;
+
+        if (GridListItems && GridListItems.length > 0) {
+
+            console.log("GridListItems", GridListItems);
+            return (
+                <View>
+                    <FlatList
+                        showsVerticalScrollIndicator={false}
+                        data={GridListItems}
+                        keyExtractor={(item, index) => index.toString()}
+                        renderItem={(item, index) => {
                             return (
-                                <NoContentFound
-                                    customHeigth={400}
-                                    customWidth={400}
-                                    title={LABELS.NO_DATA}
-                                />
-                            );
+                                < View style={innerStyle.gridViewContainer} key={index} >
+                                    <TouchableOpacity
+                                        onPress={() => this.handleNavigation(item.item)}
+                                    >
+                                        <View style={{ flexDirection: 'row' }}>
+                                            <View style={innerStyle.imageView}>
+                                                <View style={innerStyle.imageInnerStyle}>
+                                                    <Icon name="bell-o" type="FontAwesome" style={{ fontSize: 25, color: '#034CBB' }} />
+                                                </View>
+                                            </View>
+                                            <View style={innerStyle.titleView}>
+                                                <Text style={innerStyle.categoryText}>
+                                                    {item.item.sender_name}
+                                                </Text>
+                                                <Text style={innerStyle.categoryText}>
+                                                    {item.item.title}
+                                                </Text>
+                                                <Text style={[innerStyle.emailText, { marginTop: 2 }]}>
+                                                    {item.item.date_time}
+                                                </Text>
+                                            </View>
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+
+                            )
                         }
-                    }}
-                />
+                        }
+
+                        ListEmptyComponent={() => {
+                            if (GridListItems.length < 1) {
+                                return (
+                                    <NoContentFound
+                                        customHeigth={400}
+                                        customWidth={400}
+                                        title={LABELS.NO_DATA}
+                                    />
+                                );
+                            }
+                        }}
+                    />
+                </View >
+
             );
+        }
+        else {
+            return (
+                <View style={{ flex: 1, height: 40, backgroundColor: 'lightgray', justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ color: '#000', fontSize: 15 }}>No data found</Text>
+                </View>
+            )
         }
     };
 
@@ -127,6 +162,7 @@ import { STATUS_CODES } from "../../config";
                         <View style={innerStyle.mainView}>
                             {this.renderListSection()}
                         </View>
+                        {/* <View><Text>01401ß</Text></View> */}
                     </View>
                 </Content>
             </Container>
@@ -135,7 +171,7 @@ import { STATUS_CODES } from "../../config";
 }
 
 const innerStyle = StyleSheet.create({
-    titleView: { 
+    titleView: {
         alignItems: 'flex-start',
         marginLeft: 0,
         marginRight: 60
@@ -167,7 +203,7 @@ const innerStyle = StyleSheet.create({
         justifyContent: 'center'
     },
     imageInnerStyle: {
-        height: 35, 
+        height: 35,
         width: 35,
         alignItems: 'center',
         justifyContent: 'center',
@@ -187,14 +223,14 @@ const innerStyle = StyleSheet.create({
         marginTop: 5,
     },
     categoryText: {
-        fontSize: 0.045*GLOBLE.DEVICE_WIDTH,
+        fontSize: 0.045 * GLOBLE.DEVICE_WIDTH,
         fontFamily: Fonts.RobotoRegular,
         justifyContent: 'center',
         color: '#47525E',
         marginLeft: 13,
     },
     emailText: {
-        fontSize: 0.038*GLOBLE.DEVICE_WIDTH,
+        fontSize: 0.038 * GLOBLE.DEVICE_WIDTH,
         fontFamily: Fonts.RobotoRegular,
         justifyContent: 'center',
         color: '#5A6978',
@@ -217,8 +253,8 @@ const innerStyle = StyleSheet.create({
 const mapStateToProps = ({ accountSetting }) => {
     const { profileLoader, profileData } = accountSetting;
     return { profileLoader, profileData };
-  };
-  export default connect(mapStateToProps, {
+};
+export default connect(mapStateToProps, {
     getEmailDetailAction,
-   
-  })(Notifications);
+
+})(Notifications);

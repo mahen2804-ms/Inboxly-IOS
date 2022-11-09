@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Dimensions, View, StyleSheet } from 'react-native';
+import { Dimensions, View, StyleSheet, BackgroundImage, Image } from 'react-native';
 import { Spinner } from 'native-base';
+import ImageBackground from 'react-native/Libraries/Image/ImageBackground';
 
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = '100%';
@@ -33,11 +34,11 @@ export default class Loader extends Component {
           {
             isLoading: true,
           },
-          () => {
-            setTimeout(() => {
-              this.autoOffLoader();
-            }, 12000);
-          },
+          // () => {
+          //   setTimeout(() => {
+          //     this.autoOffLoader();
+          //   }, 100);
+          // },
         );
       } else {
         this.setState({
@@ -51,11 +52,11 @@ export default class Loader extends Component {
           {
             isLoading: true,
           },
-          () => {
-            setTimeout(() => {
-              this.autoOffLoader();
-            }, 12000);
-          },
+          // () => {
+          //   setTimeout(() => {
+          //     this.autoOffLoader();
+          //   }, 100);
+          // },
         );
       } else {
         this.setState({
@@ -84,12 +85,18 @@ export default class Loader extends Component {
   render() {
     return (
       this.state.isLoading && (
+        // true && (
         <View style={innerStyles.loader}>
-          <Spinner color="#034CBB" />
-          {/* <Image
-            source={require('../../assets/images/loader.gif')}
-            style={{width: 150, height: 150}}
-          /> */}
+          <ImageBackground
+            style={{
+              height: "100%",
+              width: "100%", justifyContent: "center",
+            }}
+            source={require('../assets/images/inboldlogo.png')} resizeMode={'contain'}>
+            <Spinner
+              style={{ alignItems: "center", alignSelf: "center" }}
+              color="red" />
+          </ImageBackground>
         </View>
       )
     );
@@ -98,16 +105,22 @@ export default class Loader extends Component {
 
 const innerStyles = StyleSheet.create({
   loader: {
+    // flex: 1,
     position: 'absolute',
     top: 0,
     left: 0,
     zIndex: 9999,
     justifyContent: 'center',
     alignItems: 'center',
-    width: deviceWidth,
+
+    height: "100%",
+    width: "100%",
+    // width: deviceWidth,
     bottom: 0,
     backgroundColor: 'rgba(0,0,0,0.3)',
-    height: height,
+    // height: height,
+    backgroundColor: "#5e78a8",
+    opacity: 0.7
   },
   whiteColor: {
     color: '#FFF',

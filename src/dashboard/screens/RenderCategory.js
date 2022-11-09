@@ -23,8 +23,6 @@ export default class RenderCategory extends Component {
    */
   render() {
     const {item, index} = this.props.data;
-    // console.log('render cat', this.props.isSelected);
-    // console.log('render cat 2', item);
     return (
       <TouchableOpacity
         onPress={() => this.selectedData(item.id, item.name)}

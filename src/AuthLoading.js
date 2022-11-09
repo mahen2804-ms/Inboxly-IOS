@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { userLogoutAction } from './redux/actions';
 
 function AuthLoading(props) {
+
     /**
      * @method setInitialScreen
      * @description for initial setup ofsync data
@@ -17,6 +18,8 @@ function AuthLoading(props) {
         // alert('user data', usertoken);
         console.log('login data', loginValue);
         if (loginValue !== undefined && loginValue !== 'true' && usertoken !== '' && usertoken !== undefined && usertoken !== null && loginValue !== null) {
+           console.log("loginValue",loginValue);
+           console.log('usertoken', usertoken);
             props.userLogoutAction(() => {
                 axios.defaults.headers.common.Authorization = '';
                 axios.defaults.headers.common.Token = '';

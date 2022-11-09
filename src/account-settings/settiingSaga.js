@@ -26,6 +26,7 @@ function* updateProfileSaga(action) {
     }
 }
 
+
 function* chnagePasswordSaga(action) {
     const { postApi } = apiService;
     try {
@@ -169,7 +170,6 @@ function* manageSettingOfAlertRequestSaga(action) {
             fetchApiWithToken,
             ...[`${API.settingsAlertTypeDeatils}`],
         );
-   console.log('settingsAlertTypeDeatils detail response', settingsAlertTypeDeatils.data.success.data);
         yield put({ type: SETTING_TYPE_DETAILS_SUCCESS, payload: settingsAlertTypeDeatils.data.success.data });
         action.callback(settingsAlertTypeDeatils);
     } catch (error) {
@@ -183,7 +183,6 @@ function* manageSettingOfAlertRequestSaga(action) {
 
 function* manageNotiPrefeUpdateRequestSaga(action) {
    // alert('manageSettingPreferenceOfNotiRequestSaga');
-      console.log('update notificationPreferenceUpdateURL method');
     const { postApiWithToken } = apiService;
     try {
         yield put({ type: UPDATE_NOTIFICATION_PREFERENCE });
@@ -217,6 +216,8 @@ function* manageNotiPrefeUpdateRequestSaga(action) {
     //     console.log('UPDATE_SETTING_TYPE_PREFERENCE_UPDATE_REQUEST error found..', error);
     //     apiErrors(error);
     //     action.callback(error);
+
+    console.log("errrorr :",);
     // }
 }
 

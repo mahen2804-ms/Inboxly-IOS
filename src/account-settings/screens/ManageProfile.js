@@ -3,20 +3,26 @@ import {
     StyleSheet,
     View,
     KeyboardAvoidingView,
-    Keyboard
+    Keyboard,
+    Alert
 } from 'react-native';
 import { Container, Content } from 'native-base';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
+import axios from "axios";
 import { GLOBLE } from '../../constant/utility.constant';
 import { LABELS } from '../../constant/LanguageConstants';
 import { InputBox, Loader, TouchableButton } from '../../components';
 import { UpdateProfileDetailsValidationSchema } from '../../helper/validations';
 import { MainHeader } from '../../components';
-import { updateProfileAction, getUserDetailAction, verifyEmailAction } from '../../redux/actions';
+import { updateProfileAction, getUserDetailAction, verifyEmailAction, userLogoutAction } from '../../redux/actions';
 import { Fonts } from '../../utils/Fonts';
 import { Toast } from '../../helper';
 import { STATUS_CODES } from '../../config';
+import AsyncStorage from '@react-native-community/async-storage';
+import NavigationService, { navigationRef } from "../../utils/navigator"
+
+
 
 function ManageProfile(props) {
     const [prevEmail, setPrevEmail] = useState('')
@@ -49,7 +55,38 @@ function ManageProfile(props) {
         });
     };
 
+
+    const onLogout = () => {
+        AsyncStorage.setItem('isLogin', 'false');
+        console.log('service', NavigationService);
+        // NavigationService.navigate('AuthLoading');
+        // navigationRef.navigate("LoginScreen")
+
+        let loginValue = AsyncStorage.getItem('isLogin');
+        let usertoken = AsyncStorage.getItem('@USERTOKEN');
+        console.log("LoginValue", loginValue);
+
+        props.userLogoutAction(() => {
+            axios.defaults.headers.common.Authorization = '';
+            axios.defaults.headers.common.Token = '';
+            AsyncStorage.removeItem('@LOGGEDUSER');
+            AsyncStorage.removeItem('@USERTOKEN');
+            AsyncStorage.removeItem('isLogin');
+            AsyncStorage.removeItem('LoginFirstTime');
+            props.navigation.navigate('LoginScreen');
+        })
+    }
+
+
     const onPressUpdateDetails = (values) => {
+        // console.log("values",values);
+        //       Alert.alert(
+        //             'Session Expired!',
+        //             'Your session has been expired. Please login again.',
+        //             [{ text: 'OK', onPress: () => onLogout() }],
+        //             { cancelable: false },
+        //           );
+
         Keyboard.dismiss();
         if (profileFields.recoveryEmail == values.recoveryEmail || prevEmail == values.recoveryEmail) {
             let requestData = {
@@ -69,13 +106,14 @@ function ManageProfile(props) {
                 recovery_email: values.recoveryEmail.trim(),
             };
             props.verifyEmailAction(requestData, res => {
-                if (res.status === STATUS_CODES.CREATED) {
+                if (res.status === STATUS_CODES.OK) {
                     if (res && res.data && res.data.success && res.data.success.data && res.data.success.data.message) {
                         Toast.showToast(res.data.success.data.message, 'success');
                         props.navigation.navigate('VerifyEmail', {
                             verificationParams: profileFields.recoveryEmail,
                             newEmail: values.recoveryEmail,
                         });
+
                     }
                 }
             });
@@ -112,23 +150,25 @@ function ManageProfile(props) {
                                                 mandatory={true}
                                                 isDisabled={false}
                                                 label={LABELS.UPDATE_PROFILE_NAME_LABLE}
-                                                placeholder={'Enter your full name here'}
+                                                placeholder={'Enter your full name'}
                                                 placeholderTextColor={'#969FAA'}
                                                 maxLength={50}
                                                 style={innerStyle.usernameStyle}
                                                 onChangeText={handleChange('name')}
                                                 value={values.name}
+                                                title={"*"}
                                                 keyboardType={'default'}
                                                 isFieldInError={errors.name && touched.name ? true : false}
                                                 fieldErrorMessage={errors.name}
                                             />
                                         </View>
+
                                         <View style={innerStyle.textFiledStyle}>
                                             <InputBox
                                                 mandatory={true}
                                                 isDisabled={true}
                                                 label={LABELS.UPDATE_PROFILE_INBOXLY_EMAIL_LABLE}
-                                                info={LABELS.INFOEMAIL}
+                                                // info={LABELS.INFOEMAIL}
                                                 placeholder={'yourmail@inboxly.com'}
                                                 placeholderTextColor={'#969FAA'}
                                                 maxLength={70}
@@ -142,14 +182,16 @@ function ManageProfile(props) {
                                                 halfView={innerStyle.halfView}
                                             />
                                         </View>
+
                                         <View style={innerStyle.textFiledStyle}>
                                             <InputBox
                                                 mandatory={true}
                                                 isDisabled={false}
                                                 label={LABELS.UPDATE_PROFILE_RECOVERY_EMAIL_LABLE}
-                                                message={'This will be only used to recover your account if you forget your password.'}
+                                                message={'"This will be only used to recover your account if you forget your password."'}
                                                 placeholder={LABELS.EMAILDATA}
                                                 placeholderTextColor={'#969FAA'}
+                                                title={"*"}
                                                 maxLength={70}
                                                 style={innerStyle.usernameStyle}
                                                 onChangeText={handleChange('recoveryEmail')}
@@ -207,13 +249,15 @@ const innerStyle = StyleSheet.create({
         flex: 0.7
     },
     usernameStyle: {
-        height: 35,
+        height: 38,
         borderColor: '#000',
         borderRadius: 5,
         color: '#000',
         paddingLeft: 7,
         fontSize: 14,
         fontFamily: Fonts.RobotoMedium,
+        alignSelf: 'center',
+
     },
     emailStyle: {
         bottom: 3,
@@ -221,6 +265,7 @@ const innerStyle = StyleSheet.create({
         paddingLeft: 0,
         fontSize: 15,
         fontFamily: Fonts.RobotoRegular,
+        alignSelf:"center"
     },
     textFiledStyle: {
         marginTop: 10,
@@ -246,4 +291,4 @@ const mapStateToProps = ({ accountSetting, auth }) => {
     const { loggedUserData } = auth;
     return { profileLoader, loggedUserData };
 };
-export default connect(mapStateToProps, { updateProfileAction, getUserDetailAction, verifyEmailAction })(ManageProfile);
+export default connect(mapStateToProps, { updateProfileAction, getUserDetailAction, verifyEmailAction, userLogoutAction })(ManageProfile);

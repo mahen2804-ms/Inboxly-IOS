@@ -25,6 +25,20 @@ function ChangePassword(props) {
         newPassword: '',
         confirmPassword: '',
     });
+    const [showPassword, setShowPassword] = useState(true);
+    const [showNewPassword, setShowNewPassword] = useState(true);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(true);
+
+    const handlePasswordIcon = () => {
+        setShowPassword(!showPassword);
+    };
+    const handleNewPassIcon = () => {
+        setShowNewPassword(!showNewPassword);
+    };
+    const handleConfirmPassIcon = () => {
+        setShowConfirmPassword(!showConfirmPassword);
+    };
+    
 
     const onPressUpdatePassword = (values) => {
         Keyboard.dismiss();
@@ -68,49 +82,80 @@ function ChangePassword(props) {
                                         <>
                                             <View style={innerStyle.textFiledStyle}>
                                                 <InputBox
+                                                  iconName={
+                                                    showPassword
+                                                        ? "eye-off-outline"
+                                                        : "eye-outline"
+                                                }
                                                     mandatory={true}
                                                     isDisabled={false}
+                                                    IconSize={20}
+                                                    title={"*"}
                                                     label={LABELS.CHANGE_PWD_CURRENT_PASSWORD}
-                                                    placeholder={''}
+                                                    placeholder={'Enter your current password'}
                                                     placeholderTextColor={'#969FAA'}
                                                     style={innerStyle.usernameStyle}
                                                     onChangeText={handleChange('currentPassword')}
                                                     value={values.currentPassword}
                                                     isFieldInError={errors.currentPassword && touched.currentPassword ? true : false}
                                                     fieldErrorMessage={errors.currentPassword}
-                                                    secureTextEntry={true}
+                                                    secureTextEntry={showPassword}
+                                                    onIconPress={() => handlePasswordIcon()}
+                                                    returnKeyType="default"
+                                                    autoCapitalize="none"
                                                 />
                                             </View>
                                             <View style={innerStyle.textFiledStyle}>
                                                 <InputBox
                                                     mandatory={true}
+                                                    title={"*"}
                                                     isDisabled={false}
                                                     label={LABELS.CHANGE_PWD_NEW_PASSWORD}
-                                                    placeholder={''}
+                                                    placeholder={'Enter your new password'}
                                                     placeholderTextColor={'#969FAA'}
                                                     style={innerStyle.usernameStyle}
                                                     onChangeText={handleChange('newPassword')}
                                                     value={values.newPassword}
-                                                    keyboardType={'email-address'}
+                                                    // keyboardType={'email-address'}
                                                     isFieldInError={errors.newPassword && touched.newPassword ? true : false}
                                                     fieldErrorMessage={errors.newPassword}
-                                                    secureTextEntry={true}
+                                                    secureTextEntry={showNewPassword}
+                                                    onIconPress={() => handleNewPassIcon()}
+                                                    returnKeyType="default"
+                                                    autoCapitalize="none"
+                                                    iconName={
+                                                        showNewPassword
+                                                            ? "eye-off-outline"
+                                                            : "eye-outline"
+                                                    }
+                                                    IconSize={20}
                                                 />
                                             </View>
                                             <View style={innerStyle.textFiledStyle}>
                                                 <InputBox
                                                     mandatory={true}
                                                     isDisabled={false}
+                                                    title={"*"}
                                                     label={LABELS.CHANGE_PWD_CONFIRM_PASSWORD}
-                                                    placeholder={''}
+                                                    placeholder={'Enter your confirm password'}
                                                     placeholderTextColor={'#969FAA'}
                                                     style={innerStyle.usernameStyle}
                                                     onChangeText={handleChange('confirmPassword')}
                                                     value={values.confirmPassword}
-                                                    keyboardType={'email-address'}
+                                                    // keyboardType={'email-address'}
                                                     isFieldInError={errors.confirmPassword && touched.confirmPassword ? true : false}
                                                     fieldErrorMessage={errors.confirmPassword}
-                                                    secureTextEntry={true}
+                                                    returnKeyType="default"
+                                                    autoCapitalize="none"
+                                                    iconName={
+                                                        showConfirmPassword
+                                                            ? "eye-off-outline"
+                                                            : "eye-outline"
+                                                    } 
+                                                    IconSize={20}
+                                                    onIconPress={() => handleConfirmPassIcon()}
+                                                    secureTextEntry={showConfirmPassword}
+
                                                 />
                                             </View>
                                             <View style={innerStyle.bottomView}>
@@ -167,6 +212,9 @@ const innerStyle = StyleSheet.create({
         fontSize: 14,
         fontFamily: Fonts.RobotoMedium,
     },
+
+
+    
     textFiledStyle: {
         marginTop: 10,
     },

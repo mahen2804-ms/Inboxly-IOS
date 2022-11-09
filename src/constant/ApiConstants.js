@@ -1,4 +1,4 @@
-export const MAX_TIMEOUT = 10000; // 1000 = 1sec
+export const MAX_TIMEOUT = 0; // 1000 = 1sec
 export const SINGLE_ICON_FILE_SIZE = '2000000'; // 2 MB
 export const GOAL_ICON_MAX_SIZE = 2097152; // 2 mb (In bytes)
 export const TOASTER_LABEL = {

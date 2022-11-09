@@ -61,7 +61,7 @@ function ForgotPassword(props) {
             <Loader isLoading={isLoading} />
             <View style={innerStyle.logoView}>
                 <Image
-                    source={require('../../assets/images/logo.png')}
+                    source={require('../../assets/images/inboldlogo.png')}
                     style={innerStyle.logoImage}
                     resizeMode='contain'
                 />
@@ -95,7 +95,7 @@ function ForgotPassword(props) {
                                                 required
                                                 isDisabled={false}
                                                 label={LABELS.RECOVER_EMAIL_LABLE}
-                                                placeholder={''}
+                                                placeholder={'Enter your email'}
                                                 placeholderTextColor={'#969FAA'}
                                                 maxLength={70}
                                                 style={innerStyle.usernameStyle}

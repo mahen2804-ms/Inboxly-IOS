@@ -31,12 +31,15 @@ class ArchiveDetails extends Component {
         //     this.setState({ item: item });
         // }
         if (item) {
-            this.setState({ item: item });
+            // this.setState({ item: item });
             let requestData = {
                 id: item.id
             }
             this.props.newsfeedDetailAction(requestData, res => {
-                console.log('detail res', res);
+                this.setState({
+                    item: res.data.success.data[0]
+                });
+
                 // if (res.status === STATUS_CODES.OK) {
                 //     if (res && res.data && res.data.success) {
                 //         Toast.showToast(res.data.success.message, 'success');
@@ -47,7 +50,7 @@ class ArchiveDetails extends Component {
     }
 
     handleIconPress = () => {
-        this.setState({showInfo: !this.state.showInfo})
+        this.setState({ showInfo: !this.state.showInfo })
     }
 
     handleOptions = () => {
@@ -84,7 +87,7 @@ class ArchiveDetails extends Component {
         const { item, showInfo } = this.state;
         return (
             <Container>
-                <MainHeader leftButtonType={'back'} leftButton={true} rightButton={true} rightButtonType={'keyboard-control'} leftButton={true} rightButton={false} onPress={() => this.handleIconPress()} />
+                <MainHeader leftButtonType={'back'} leftButton={true} rightButton={true} rightButtonType={'keyboard-control'} onPress={() => this.handleIconPress()} />
                 <Content>
                     <View style={innerStyle.container}>
                         <View style={innerStyle.mainView}>
@@ -96,10 +99,10 @@ class ArchiveDetails extends Component {
                                 </View>
                                 <View style={{ marginTop: 8, marginBottom: 12 }}>
                                     <View style={{ marginBottom: 5 }}>
-                                        <Text style={[innerStyle.gridViewTextLayout, { fontFamily: Fonts.RobotoMedium, fontSize: 0.04*GLOBLE.DEVICE_WIDTH }]}>
+                                        <Text style={[innerStyle.gridViewTextLayout, { fontFamily: Fonts.RobotoMedium, fontSize: 0.04 * GLOBLE.DEVICE_WIDTH }]}>
                                             {item.sender_name}
                                         </Text>
-                                        <Text style={[innerStyle.gridViewTextLayout, { fontFamily: Fonts.RobotoRegular, fontSize: 0.04*GLOBLE.DEVICE_WIDTH, color: '#000' }]}>
+                                        <Text style={[innerStyle.gridViewTextLayout, { fontFamily: Fonts.RobotoRegular, fontSize: 0.04 * GLOBLE.DEVICE_WIDTH, color: '#000' }]}>
                                             {item.sender_email}
                                         </Text>
                                     </View>
@@ -108,29 +111,27 @@ class ArchiveDetails extends Component {
                                             {item.title}
                                         </Text>
                                     </View>
-                                    {/* <View style={innerStyle.imageContainView}>
+                                    <View style={innerStyle.imageContainView}>
                                         <Image
                                             source={{ uri: item.image }}
                                             style={{ width: GLOBLE.DEVICE_WIDTH - 20, height: 230 }}
                                             resizeMode='contain'
                                         />
-                                    </View> */}
+                                    </View>
 
                                     {/* <View style={{ marginTop: 10, marginRight: 5 }}>
                                         <Text style={innerStyle.descriptionTextStyle}>
                                             {item.description + ' ' + item.description}
                                         </Text>
                                     </View> */}
-                                    <View style={{ flex: 1}}>
+                                    <View style={{ flex: 1 }}>
                                         <WebView
                                             javaScriptEnabled={true}
-                                            justifyContent = {"center"}
-                                            alignItems ={"center"}
+                                            justifyContent={"center"}
+                                            alignItems={"center"}
                                             automaticallyAdjustContentInsets={true}
                                             domStorageEnabled={true}
                                             scalesPageToFit={false}
-                                            justifyContent = {"center"}
-                                            alignItems ={"center"} 
                                             source={{ html: item.description }}
                                             style={innerStyle.webView}
                                             startInLoadingState={true}
@@ -149,10 +150,10 @@ class ArchiveDetails extends Component {
 
 const innerStyle = StyleSheet.create({
     webView: {
-       backgroundColor: 'transparent',
-       width: '100%',
-       height: 2000,
-       marginBottom:-20
+        backgroundColor: 'transparent',
+        width: '100%',
+        height: 2000,
+        marginBottom: -20
 
     },
     textStyle: {
@@ -167,22 +168,22 @@ const innerStyle = StyleSheet.create({
         marginRight: 8,
         zIndex: 999,
     },
-    imageContainView: { 
-        marginTop: 5, 
-        zIndex: -999 
+    imageContainView: {
+        marginTop: 5,
+        zIndex: -999
     },
     optionView: {
         marginRight: 14,
         left: 15
     },
-    titleView: { 
-        flexDirection: 'row', 
-        marginBottom: 0, 
+    titleView: {
+        flexDirection: 'row',
+        marginBottom: 0,
         marginTop: 0
     },
     descriptionTextStyle: {
         fontFamily: Fonts.RobotoRegular,
-        fontSize: 0.045*GLOBLE.DEVICE_WIDTH,
+        fontSize: 0.045 * GLOBLE.DEVICE_WIDTH,
         color: '#171819'
     },
     searchIconStyle: {
@@ -204,7 +205,7 @@ const innerStyle = StyleSheet.create({
         margin: 3,
     },
     gridViewTextLayout: {
-        fontSize: 0.06*GLOBLE.DEVICE_WIDTH,
+        fontSize: 0.06 * GLOBLE.DEVICE_WIDTH,
         fontFamily: Fonts.BarlowCondensedMedium,
         justifyContent: 'center',
         color: '#034CBB',
@@ -264,9 +265,9 @@ const innerStyle = StyleSheet.create({
 const mapStateToProps = ({ newsFeed }) => {
     const { newsfeedData, feedLoader } = newsFeed;
     return {
-      newsfeedData,
-      feedLoader
+        newsfeedData,
+        feedLoader
     };
-  };
-  
-  export default connect(mapStateToProps, { newsfeedDetailAction })(ArchiveDetails);
+};
+
+export default connect(mapStateToProps, { newsfeedDetailAction })(ArchiveDetails);

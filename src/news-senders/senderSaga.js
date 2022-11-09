@@ -55,6 +55,10 @@ function* unsnoozedRequestSaga(action) {
     }
 }
 
+
+
+// console.log("dfndnf",sjdsd);
+
 function* senderListRequestSaga(action) {
     const { fetchApi } = apiService;
     try {
@@ -69,7 +73,7 @@ function* senderListRequestSaga(action) {
                 senderList.data.success &&
                 senderList.data.success.data,
         });
-        console.log("sender list response", senderList.data.success.data);
+        // console.log("sender list response", senderList.data.success.data);
         action.callback(senderList);
     } catch (error) {
         yield put({ type: SENDER_LIST_FAILURE });

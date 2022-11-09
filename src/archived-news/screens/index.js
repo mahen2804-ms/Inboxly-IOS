@@ -84,7 +84,6 @@ class ArchivedNews extends Component {
         this.props.deleteArchivedEmailAction(requestData, res => {
             if (res && res.data && res.data.success && res.data.success.data && res.data.success.data) {
                 Toast.showToast(res.data.success.data.message, 'success');
-                console.log('PRINT DATA DELETED EMAILS>>>>>>',res.data.success.data)
                 this.props.archivedEmailListAction(res => { });
             }
         });
@@ -149,7 +148,7 @@ class ArchivedNews extends Component {
         return (
             <Container>
                 <Loader isLoading={this.props.archivedEmailLoader} />
-                <MainHeader leftButtonType={'menu'} leftButton={true} rightButton={false} rightButtonType={'refresh'} rightButton={true} title={LABELS.ARCHIVE_EMAIL} onPress={() => this.handleRefresh()}/>
+                <MainHeader leftButtonType={'menu'} leftButton={true} rightButtonType={'refresh'} rightButton={true} title={LABELS.ARCHIVE_EMAIL} onPress={() => this.handleRefresh()}/>
                 <Content>
                     <View style={innerStyle.container}>
                         <View style={innerStyle.mainView}>

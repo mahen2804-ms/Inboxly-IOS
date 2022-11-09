@@ -28,16 +28,13 @@ class EmailDetails extends Component {
 
     componentDidMount() {
         const item = this.props.route.params.itemData;
-        // if (item) {
-        //     this.setState({ item: item });
-        // }
         if (item) {
-            this.setState({ item: item });
+            // this.setState({ item: item });
             let requestData = {
                 id: item.id
             }
             this.props.newsfeedDetailAction(requestData, res => {
-                console.log('detail res', res);
+                this.setState({ item: res.data.success.data[0] })
                 // if (res.status === STATUS_CODES.OK) {
                 //     if (res && res.data && res.data.success) {
                 //         Toast.showToast(res.data.success.message, 'success');
@@ -64,7 +61,9 @@ class EmailDetails extends Component {
                 <View style={[innerStyle.talkBubble]}>
                     <View style={innerStyle.talkBubbleSquare}>
                         <View style={innerStyle.deleteView}>
-                            <TouchableOpacity style={innerStyle.boxTextViewStyle}>
+                            <TouchableOpacity 
+                            // onPress={ this.setState({ showInfo: !this.state.showInfo })}
+                            style={innerStyle.boxTextViewStyle}>
                                 <Text style={innerStyle.talkBubbleMessage}>
                                     {LABELS.DELETE_NEWS}
                                 </Text>
@@ -85,7 +84,7 @@ class EmailDetails extends Component {
         const { item, showInfo } = this.state;
         return (
             <Container>
-                <MainHeader leftButtonType={'back'} leftButton={true} rightButton={true} rightButtonType={'keyboard-control'} leftButton={true} rightButton={false} onPress={() => this.handleIconPress()} />
+                <MainHeader leftButtonType={'back'} leftButton={true} rightButton={true} rightButtonType={'keyboard-control'}   onPress={() => this.handleIconPress()} />
                 <Content>
                     <View style={innerStyle.container}>
                         <View style={innerStyle.mainView}>

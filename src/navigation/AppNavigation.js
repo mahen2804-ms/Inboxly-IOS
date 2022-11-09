@@ -24,7 +24,7 @@ import ManageNotifications from '../account-settings/screens/ManageNotifications
 import Notifications from '../notifications/screens/index';
 import Legal from '../legal/screens/index';
 import LegalDetails from "../legal/screens/LegalDetails";
-
+import AuthLoading from '../AuthLoading';
 
 const AuthStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -61,6 +61,7 @@ function AppNavigation({ navigation, route }) {
           },
         }}
       />
+      
       <AuthStack.Screen
         name="AssignCategoryList"
         component={AssignCategoryList}
@@ -328,6 +329,12 @@ function AppNavigation({ navigation, route }) {
             fontSize: 30,
           },
         }}
+      />
+
+<AuthStack.Screen
+        name="AuthLoading"
+        component={AuthLoading}
+        options={{ headerShown: false, }}
       />
 
     </AuthStack.Navigator>

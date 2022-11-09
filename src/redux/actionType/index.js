@@ -1,6 +1,6 @@
 import { createTypes } from 'reduxsauce'
 
-export const MAX_TIMEOUT = 10000; // 1000 = 1sec
+export const MAX_TIMEOUT = 0; // 1000 = 1sec
 
 //saga types
 export const LOGIN_SAGA_REQUEST = 'LOGIN_SAGA_REQUEST';

@@ -38,7 +38,6 @@ class EditCategoryList extends Component {
         const item = this.props.route.params.feedId;
         const selectedCatId = this.props.route.params.categoryData;
         const selectedSender = this.props.route.params.selectedSender;
-        console.log('param', item, selectedCatId)
         if (item) {
             this.setState({ senderId: item, selectedCatId: selectedCatId, senderCatId: selectedSender });
         }

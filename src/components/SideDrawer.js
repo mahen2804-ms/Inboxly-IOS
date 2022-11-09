@@ -7,6 +7,7 @@ import {
     Image,
     Platform,
     TouchableOpacity,
+    Linking
 } from "react-native";
 import { Title, Subtitle, Icon, Container } from "native-base";
 import axios from "axios";
@@ -53,6 +54,22 @@ function SideDrawer(props) {
             handleNavigation("Auth");
         });
     };
+    const GOOGLE_PACKAGE_NAME = 'inboxly-app';
+    // `http://play.google.com/store/apps/details?id=${GOOGLE_PACKAGE_NAME}`
+
+    const rateUs = () => {
+        if (Platform.OS != 'ios') {
+            //To open the Google Play Store
+            Linking.openURL(`http://play.google.com/store/apps/details?id=${GOOGLE_PACKAGE_NAME}`).catch(err =>
+              alert('Please check for the Google Play Store')
+            );
+          } else {
+            //To open the Apple App Store
+            // Linking.openURL(
+            //   `itms://itunes.apple.com/in/app/apple-store/${APPLE_STORE_ID}`
+            // ).catch(err => alert('Please check for the App Store'));
+          }
+    }
 
     const userDetails = async () => {
         props.getUserDetailAction((res) => {
@@ -64,7 +81,6 @@ function SideDrawer(props) {
                     res.data.success.data
                 ) {
                     const { data } = res.data.success;
-                    console.log("print count>>>>>>", data);
                     setUpdateProfileFields({
                         name: data.user_name,
                         inboxlyEmail: data.email,
@@ -74,12 +90,12 @@ function SideDrawer(props) {
                         notificationUnreadCount: data.notification_unread_count,
                     });
                 }
+            }else{
             }
         });
     };
 
     const handleNavigation = (screen) => {
-        console.log("const handleNavigation = (screen) => {");
         props.navigation.closeDrawer();
         props.navigation.reset({
             index: 0,
@@ -95,7 +111,7 @@ function SideDrawer(props) {
                 <View style={styles.userInfoSection}>
                     <View style={styles.profileContentStyle}>
                         <Image
-                            source={require("../assets/images/logo.png")}
+                            source={require("../assets/images/inboldlogo.png")}
                             style={styles.logoImage}
                             resizeMode="contain"
                         />
@@ -161,6 +177,7 @@ function SideDrawer(props) {
                         <Text
                             style={[
                                 styles.menuTextStyle,
+
                                 { marginLeft: 0, marginTop: 5 },
                             ]}
                         >
@@ -216,7 +233,7 @@ function SideDrawer(props) {
                         onPress={() => props.navigation.navigate("NewsSenders")}
                         style={styles.menuItemContainer}
                     >
-                        {profileFields.senderUnreadCount !== "00" && (
+                        {/* {profileFields.senderUnreadCount !== "00" && (
                             <View
                                 style={{
                                     position: "absolute",
@@ -246,7 +263,7 @@ function SideDrawer(props) {
                                     </Text>
                                 </View>
                             </View>
-                        )}
+                        )} */}
                         <View style={styles.iconContainer}>
                             <Image
                                 source={require("../assets/images/at.png")}
@@ -259,8 +276,7 @@ function SideDrawer(props) {
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => props.navigation.navigate("SavedNews")}
-                        style={styles.menuItemContainer}
-                    >
+                        style={styles.menuItemContainer}>
                         <View style={styles.iconContainer}>
                             <Image
                                 source={require("../assets/images/savedEmail.png")}
@@ -333,6 +349,9 @@ function SideDrawer(props) {
                 </View>
                 <View style={styles.bottomContainer}>
                     <TouchableOpacity
+                 
+                    onPress={() => rateUs()
+                    }
                         style={[styles.menuItemContainer, { marginTop: 15 }]}
                     >
                         <View style={styles.iconContainer}>
@@ -470,8 +489,9 @@ const styles = StyleSheet.create({
  * @param {*} state
  */
 const mapStateToProps = ({ auth }) => {
-    const { loggedUserData, authLoader } = auth;
-    return { loggedUserData, authLoader };
+    const { loggedUserData, authLoader } = "";
+    // return { loggedUserData, authLoader };
+    return {  authLoader }
 };
 
 /**

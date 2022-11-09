@@ -11,7 +11,8 @@ import AuthLoading from '../AuthLoading';
 
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-community/async-storage';
-import {navigationRef} from './RootNavigation';
+// import {navigationRef} from './RootNavigation';
+import { navigationRef } from '../utils/navigator';
 //import PushNotification from 'react-native-push-notification';
 
 
@@ -32,8 +33,8 @@ class App extends React.Component {
   // }, [props.loggedUserData]);
 
   async componentDidMount() {
-        SplashScreen.hide();
-      this.checkPermission();
+    SplashScreen.hide();
+    this.checkPermission();
     // console.log('componentWillUnmount componentWillUnmount....');
     //   const unsubscribe = messaging().onMessage(async remoteMessage => {
     //   Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
@@ -42,40 +43,40 @@ class App extends React.Component {
 
     // return unsubscribe;
 
-  // messaging().onNotificationOpenedApp(remoteMessage => {
-  //     console.log('  messaging().onNotificationOpenedApp(remoteMessage => {');
-  //     console.log(
-  //       'Notification caused app to open from background state:',
-  //       remoteMessage.notification,
-  //     );
-  //   //  navigation.navigate(remoteMessage.data.type);
-  //     //console.log('remoteMessage.notification',remoteMessage.data.type);
-  //     console.log('remoteMessage.notification',remoteMessage);
-  // // navigation.navigate('NewsfeedDetails')
-   
-  //   RootNavigation.navigate('App', { screen: 'NewsfeedDetails' });
-  //   });
+    // messaging().onNotificationOpenedApp(remoteMessage => {
+    //     console.log('  messaging().onNotificationOpenedApp(remoteMessage => {');
+    //     console.log(
+    //       'Notification caused app to open from background state:',
+    //       remoteMessage.notification,
+    //     );
+    //   //  navigation.navigate(remoteMessage.data.type);
+    //     //console.log('remoteMessage.notification',remoteMessage.data.type);
+    //     console.log('remoteMessage.notification',remoteMessage);
+    // // navigation.navigate('NewsfeedDetails')
 
-  //   // Check whether an initial notification is available
-  //   messaging()
-  //     .getInitialNotification()
-  //     .then(remoteMessage => {
-  //       if (remoteMessage) {
-  //         console.log(
-  //           'Notification caused app to open from quit state:',
-  //           remoteMessage.notification,
-  //         );
-  //         setInitialRoute(remoteMessage.data.type); // e.g. "Settings"
-  //          console.log('Notification caused app to open from quit state:',remoteMessage);
-  //          //navigation.navigate('NewsfeedDetails')
-        
-  //           RootNavigation.navigate('App', { screen: 'NewsfeedDetails' });
-  //       }
-  //      // setLoading(false);
-  //     });
+    //   RootNavigation.navigate('App', { screen: 'NewsfeedDetails' });
+    //   });
+
+    //   // Check whether an initial notification is available
+    //   messaging()
+    //     .getInitialNotification()
+    //     .then(remoteMessage => {
+    //       if (remoteMessage) {
+    //         console.log(
+    //           'Notification caused app to open from quit state:',
+    //           remoteMessage.notification,
+    //         );
+    //         setInitialRoute(remoteMessage.data.type); // e.g. "Settings"
+    //          console.log('Notification caused app to open from quit state:',remoteMessage);
+    //          //navigation.navigate('NewsfeedDetails')
+
+    //           RootNavigation.navigate('App', { screen: 'NewsfeedDetails' });
+    //       }
+    //      // setLoading(false);
+    //     });
 
 
-  
+
   }
 
   //1
@@ -88,12 +89,12 @@ class App extends React.Component {
     const enabled = await messaging().hasPermission();
     if (enabled) {
       console.log('inside enabled', enabled);
-      this.getToken();
+      //this.getToken();
     } else {
       this.requestPermission();
     }
   }
-  
+
   //2
   /*
    * method: requestPermission
@@ -110,7 +111,7 @@ class App extends React.Component {
       console.log('permission rejected');
     }
   }
-  
+
   //3
   /*
    * method: getToken
@@ -124,17 +125,17 @@ class App extends React.Component {
       if (fcmToken) {
         console.log('FCM token', fcmToken);
         // user has a device token
-         try {
-   AsyncStorage.setItem('fcmToken', fcmToken);
-     console.log('Data successfully saved')
-  } catch (e) {
-    console.log('Failed to save the data to the storage')
-  }
-         
+        try {
+          AsyncStorage.setItem('fcmToken', fcmToken);
+          console.log('Data successfully saved')
+        } catch (e) {
+          console.log('Failed to save the data to the storage')
+        }
+
       }
     }
   }
-  
+
   componentWillUnmount() {
     //  console.log('componentWillUnmount componentWillUnmount....');
     //   const unsubscribe = messaging().onMessage(async remoteMessage => {
@@ -143,9 +144,9 @@ class App extends React.Component {
     // });
 
     // return unsubscribe;
-   // this.unsubscribe();
+    // this.unsubscribe();
   }
-  
+
   /*
    * method: createNotificationListeners
    * description: Called for create notification Listeners
@@ -159,52 +160,52 @@ class App extends React.Component {
   //    console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
   //   });
   // };
-// async createNotificationListeners() {
-//     /*
-//      * Triggered when a particular notification has been received in foreground
-//      */
-//     console.log('in createNotificationListeners createNotificationListeners');
-//     this.notificationListener = firebase
-//       .notification()
-//       .onNotification(notification => {
-//         console.log('action 11');
-//         this.displayNotification(notification);
-//       });
+  // async createNotificationListeners() {
+  //     /*
+  //      * Triggered when a particular notification has been received in foreground
+  //      */
+  //     console.log('in createNotificationListeners createNotificationListeners');
+  //     this.notificationListener = firebase
+  //       .notification()
+  //       .onNotification(notification => {
+  //         console.log('action 11');
+  //         this.displayNotification(notification);
+  //       });
 
-//     /*
-//      * If your app is in background, you can listen for when a notification is clicked / tapped / opened as follows:
-//      * */
-//     this.notificationOpenedListener = firebase
-//       .notifications()
-//       .onNotificationOpened(notificationOpen => {
-//         console.log('action 12', notificationOpen);
-//         if (notificationOpen.action === 'no') {
-//           console.log('NJ test');
-//         }
-//         if (notificationOpen.action === 'yes') {
-//           console.log('NJ NOTOFICATION');
-//         }
-//         // this.displayNotification(notificationOpen.notification);
-//       });
+  //     /*
+  //      * If your app is in background, you can listen for when a notification is clicked / tapped / opened as follows:
+  //      * */
+  //     this.notificationOpenedListener = firebase
+  //       .notifications()
+  //       .onNotificationOpened(notificationOpen => {
+  //         console.log('action 12', notificationOpen);
+  //         if (notificationOpen.action === 'no') {
+  //           console.log('NJ test');
+  //         }
+  //         if (notificationOpen.action === 'yes') {
+  //           console.log('NJ NOTOFICATION');
+  //         }
+  //         // this.displayNotification(notificationOpen.notification);
+  //       });
 
-//     /*
-//      * If your app is closed, you can check if it was opened by a notification being clicked / tapped / opened as follows:
-//      * */
-//     const notificationOpen = await firebase
-//       .notifications()
-//       .getInitialNotification();
-//     console.log('action 13', notificationOpen);
-//     if (notificationOpen) {
-//       this.displayNotification(notificationOpen.notification);
-//     }
-//     /*
-//      * Triggered for data only payload in foreground
-//      * */
-//     this.messageListener = firebase.messaging().onMessage(message => {
-//       //process data message
-//       console.log(JSON.stringify(message));
-//     });
-//   }
+  //     /*
+  //      * If your app is closed, you can check if it was opened by a notification being clicked / tapped / opened as follows:
+  //      * */
+  //     const notificationOpen = await firebase
+  //       .notifications()
+  //       .getInitialNotification();
+  //     console.log('action 13', notificationOpen);
+  //     if (notificationOpen) {
+  //       this.displayNotification(notificationOpen.notification);
+  //     }
+  //     /*
+  //      * Triggered for data only payload in foreground
+  //      * */
+  //     this.messageListener = firebase.messaging().onMessage(message => {
+  //       //process data message
+  //       console.log(JSON.stringify(message));
+  //     });
+  //   }
 
   // async subscribeToNotificationListeners() {
   //   const channel = new firebase.notifications.Android.Channel(
@@ -334,10 +335,10 @@ class App extends React.Component {
 
 
 
-  
+
   render() {
     return (
-     <NavigationContainer ref={navigationRef}>
+      <NavigationContainer ref={navigationRef}>
         <Stack.Navigator
           screenOptions={{
             headerTitleAlign: 'center',

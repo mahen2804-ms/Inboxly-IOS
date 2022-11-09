@@ -22,7 +22,7 @@ import { Fonts } from "../../utils/Fonts";
 import { STATUS_CODES } from "../../config";
 import crashlytics from "@react-native-firebase/crashlytics";
 import { getUniqueId, getSystemName } from "react-native-device-info";
-
+import messaging from '@react-native-firebase/messaging'
 function LoginScreen(props) {
     const [loginField, setLoginField] = useState({
         username: "",
@@ -41,7 +41,6 @@ function LoginScreen(props) {
      * @description used as a componentDidMount lifeCycle
      */
     useEffect(() => {
-        console.log("useEffect(() => { called...");
         setDeviceId(getUniqueId());
         setDeviceType(getSystemName());
         //  getFcmTokenId();
@@ -64,12 +63,12 @@ function LoginScreen(props) {
 
     const onPressLogin = async (values) => {
         // crashlytics().crash();
-
         try {
-            const fcmTokenVal = await AsyncStorage.getItem("fcmToken");
-
+            await messaging().registerDeviceForRemoteMessages();
+              const fcmTokenVal = await messaging().getToken();
+            // var fcmTokenVal = 1234
             if (fcmTokenVal !== null) {
-                console.log("function called fcmTokenVal", fcmTokenVal);
+                // console.log("function called fcmTokenValll", fcmTokenVal);
                 setFcmToken(fcmTokenVal);
 
                 Keyboard.dismiss();
@@ -80,7 +79,6 @@ function LoginScreen(props) {
                     device_type: deviceType,
                     device_token: deviceId,
                 };
-                console.log("lof data login", requestData);
                 setIsLoading(true);
                 props.loginUserAction(requestData, (res) => {
                     setIsLoading(props.authLoader);
@@ -105,11 +103,14 @@ function LoginScreen(props) {
                             token !== undefined &&
                             token !== null
                         ) {
+                            AsyncStorage.setItem("loginToken",token)
+                            console.log("toksndnsnsnfs",token);
                             setAsyncStorageValues(userDetail, token);
                         }
                     }
                 });
             }
+          
         } catch (e) {
             console.log("Failed to fetch the data from storage");
         }
@@ -120,6 +121,8 @@ function LoginScreen(props) {
      * @description set async storage values
      */
     async function setAsyncStorageValues(userDetail, token) {
+        console.log("toekn of the app",token);
+
         AsyncStorage.multiSet([
             [
                 "@LOGGEDUSER",
@@ -172,7 +175,7 @@ function LoginScreen(props) {
             <Loader isLoading={isLoading} />
             <View style={innerStyle.logoView}>
                 <Image
-                    source={require("../../assets/images/logo.png")}
+                    source={require("../../assets/images/inboldlogo.png")}
                     style={innerStyle.logoImage}
                     resizeMode="contain"
                 />
@@ -209,33 +212,23 @@ function LoginScreen(props) {
                                                 <InputBox
                                                     isDisabled={false}
                                                     label={LABELS.USERNAME}
-                                                    placeholder={""}
+                                                    title={"*"}
+                                                    placeholder={"Enter your email "}
                                                     placeholderTextColor={
-                                                        "#969FAA"
-                                                    }
-                                                    maxLength={20}
+                                                        "#969FAA"  }
+                                                    maxLength={20}       
                                                     style={
-                                                        innerStyle.usernameStyle
-                                                    }
+                                                        innerStyle.usernameStyle }
                                                     onChangeText={handleChange(
-                                                        "username"
-                                                    )}
+                                                        "username"  )}
                                                     value={values.username}
-                                                    keyboardType={
-                                                        "email-address"
-                                                    }
-                                                    isFieldInError={
-                                                        errors.username &&
+                                                    keyboardType={ "email-address"}
+                                                    isFieldInError={  errors.username &&
                                                         touched.username
                                                             ? true
-                                                            : false
-                                                    }
-                                                    fieldErrorMessage={
-                                                        errors.username
-                                                    }
-                                                    halfView={
-                                                        innerStyle.halfView
-                                                    }
+                                                            : false }
+                                                    fieldErrorMessage={ errors.username }
+                                                    halfView={  innerStyle.halfView }
                                                 />
                                             </View>
                                             <View
@@ -246,7 +239,7 @@ function LoginScreen(props) {
                                                             errors.username &&
                                                             touched.username
                                                                 ? 0
-                                                                : 18,
+                                                                : 12,
                                                     },
                                                 ]}
                                             >
@@ -267,6 +260,7 @@ function LoginScreen(props) {
                                                     "password"
                                                 )}
                                                 value={values.password}
+                                                title={"*"}
                                                 iconName={
                                                     showPassword
                                                         ? "eye-off-outline"
@@ -425,13 +419,14 @@ const innerStyle = StyleSheet.create({
         width: GLOBLE.DEVICE_WIDTH / 2,
     },
     usernameStyle: {
-        height: 37,
+        height: GLOBLE.DEVICE_HEIGHT / 19,
         borderColor: "#000",
         borderRadius: 5,
         color: "#000",
         paddingLeft: 7,
         fontSize: 15,
         fontFamily: Fonts.RobotoMedium,
+        alignSelf:'center'
     },
     iconView: {
         position: "absolute",

@@ -39,8 +39,7 @@ const MainHeader = (props) => {
                             height: 45,
                             justifyContent: "center",
                         }}
-                        onPress={() => onPressMenuToggle()}
-                    >
+                        onPress={() => onPressMenuToggle()}>
                         <Icon
                             type="EvilIcons"
                             name="navicon"
@@ -96,7 +95,7 @@ const MainHeader = (props) => {
 
     const renderTitle = (title, rightButton) => {
         return (
-            <Body style={{ alignItems: "center", left: rightButton ? 55 : -5 }}>
+            <Body style={{ alignItems: "center", left: rightButton ? 7 : -35, }}>
                 <Title style={innerStyle.titleText}>{title}</Title>
             </Body>
         );
@@ -106,7 +105,7 @@ const MainHeader = (props) => {
         if (props.rightButtonType && props.rightButtonType !== "") {
             return (
                 <View style={innerStyle.rightButtonStyle}>
-                    <View style={{ width: 40 }}></View>
+                    <View style={{ width: 19, }}></View>
                     <Button
                         transparent
                         style={{ top: 4, left: 20 }}
@@ -119,6 +118,7 @@ const MainHeader = (props) => {
                                     height: 26,
                                     width: 26,
                                     marginRight: 20,
+
                                 }}
                             />
                         ) : (
@@ -136,23 +136,31 @@ const MainHeader = (props) => {
                 <View style={innerStyle.rightButtonStyle}>
                     <Button
                         transparent
-                        style={{ left: 43, top: 3 }}
+                        style={{ top: 3 }}
                         onPress={() => navigation.navigate("Notifications")}
                     >
                         <Image
                             source={require("../assets/images/notification.png")}
-                            style={{ height: 22, width: 22, marginRight: 30 }}
+                            style={{ height: 22, width: 22, marginStart: 20, }}
                         />
                     </Button>
                     <Button
                         transparent
-                        style={{ left: 16, top: 5 }}
+                        style={{ top: 5 }}
                         onPress={() => props.onPress()}
                     >
-                        <Image
-                            source={require("../assets/images/filter.png")}
-                            style={{ height: 22, width: 22, marginRight: 15 }}
-                        />
+
+                        {props.title == "Inbox Categories" ?
+                         <Image
+                         source={require("../assets/images/add.png")}
+                         style={{ height: 20, width: 20, }}
+                     />
+                    :
+                    <Image
+                    source={require("../assets/images/filter.png")}
+                    style={{ height: 22, width: 22, }}
+                /> }
+                       
                     </Button>
                 </View>
             );
@@ -162,11 +170,11 @@ const MainHeader = (props) => {
     const renderImage = (rightButton) => {
         return (
             <Body
-                style={{ alignItems: "center", left: rightButton ? 35 : -20 }}
+                style={{ alignItems: "center", }}
             >
                 <TouchableOpacity onPress={() => props.onImagePress()}>
                     <Image
-                        source={require("../assets/images/logo.png")}
+                        source={require("../assets/images/logoBold.png")}
                         style={{ width: 70, height: 35 }}
                         resizeMode="cover"
                     />
@@ -194,6 +202,7 @@ const innerStyle = StyleSheet.create({
         justifyContent: "center",
         flexDirection: "row",
         bottom: 5,
+
     },
     iconStyle: {
         color: "#fff",
@@ -208,16 +217,19 @@ const innerStyle = StyleSheet.create({
         backgroundColor: "#034CBB",
     },
     menuView: {
-        width: 50,
+        width: 75,
         alignItems: "flex-start",
         justifyContent: "center",
         right: 10,
+
+
     },
     titleText: {
         color: "#fff",
         fontFamily: Fonts.RobotoMedium,
         fontSize: 0.05 * GLOBLE.DEVICE_WIDTH,
         bottom: 2,
+
     },
 });
 

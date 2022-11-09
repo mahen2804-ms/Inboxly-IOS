@@ -41,7 +41,6 @@ class AssignCategoryList extends Component {
         const senderId = this.props.route.params.senderId;
         const itemReceive = this.props.route.params.refreshItem;
         const valueReceive = this.props.route.params.refreshValue;
-        console.log('received value', itemReceive, valueReceive);
         const newsCategoryId = this.props.route.params.news_category_id;
         if (item && senderId) {
             this.setState({ feedId: item, senderId: senderId, newsCategoryId: newsCategoryId });

@@ -4,9 +4,10 @@ import { NEWSFEED_LIST_SAGA_REQUEST, NEWSFEED_SEARCH_SAGA_REQUEST, ASSIGN_CATEGO
  * @method newsfeedListAction
  * @description action for newsFeed list
 */
-export const newsfeedListAction = (callback) => {
+export const newsfeedListAction = (requestData,callback) => {
   return {
     type: NEWSFEED_LIST_SAGA_REQUEST,
+    requestData,
     callback,
   };
 };
@@ -15,10 +16,11 @@ export const newsfeedListAction = (callback) => {
  * @method newsfeedSearchAction
  * @description action for newsFeed search
 */
-export const newsfeedSearchAction = (requestData) => {
+export const newsfeedSearchAction = (requestData,callback) => {
   return {
     type: NEWSFEED_SEARCH_SAGA_REQUEST,
     requestData,
+    callback
   };
 };
 

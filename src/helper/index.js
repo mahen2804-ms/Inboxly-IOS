@@ -4,7 +4,7 @@ import { TOASTER_LABEL } from '../constant/ApiConstants';
 import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
-import NavigationService from '../utils/navigator';
+import NavigationService, { navigationRef } from '../utils/navigator';
 export class Toast {
     /**
      * @method showToast
@@ -29,14 +29,18 @@ export class Toast {
 }
 
 export function onLogout() {
-  AsyncStorage.setItem('isLogin', 'false');
-  console.log('service', NavigationService);
-  NavigationService.navigate('AuthLoading');
+  var loginValue = AsyncStorage.getItem("isLogin")
+  if(loginValue){
+    AsyncStorage.setItem('isLogin', 'false');
+    NavigationService.navigate('AuthLoading');
+  }
+  // AsyncStorage.setItem('isLogin', 'false');
+  // NavigationService.navigate('AuthLoading');
 }
 
 export const apiErrors = res => {
     const response = res ? res.response : undefined;
-    // console.log('error code',res.response)
+    console.log(JSON.stringify(response));
     if (
       res &&
       res.data &&

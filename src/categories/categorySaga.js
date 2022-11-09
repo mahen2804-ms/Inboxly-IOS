@@ -69,7 +69,7 @@ function* categoryListRequestSaga(action) {
             fetchApi,
             ...[`${API.categoryList}`],
         );
-        console.log('category list response', categoryList);
+        // console.log('category list response', categoryList);
         yield put({ type: CATEGORY_LIST_SUCCESS, payload: categoryList && categoryList.data && categoryList.data.success && categoryList.data.success.data });
         action.callback(categoryList);
     } catch (error) {
