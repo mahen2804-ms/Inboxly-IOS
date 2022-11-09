@@ -5,21 +5,21 @@ import Navigation from './src/navigation';
 
 
 class App extends Component {
-render() {
-return (
-<View style={styles.mainContainer}>
-<Navigation />
-</View>
-);
-}
+    render() {
+        return (
+            <View style={styles.mainContainer}>
+                <Navigation />
+            </View>
+        );
+    }
 }
 
 
 
 const styles = StyleSheet.create({
-mainContainer: {
-flex: 1
-}
+    mainContainer: {
+        flex: 1
+    }
 });
 
 
