@@ -26,12 +26,12 @@ public class MainActivity extends ReactActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    SplashScreen.show(this);
-    super.onCreate(savedInstanceState);
-    //  getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE,
-    //  WindowManager.LayoutParams.FLAG_SECURE);
+      super.onCreate(savedInstanceState);
+      SplashScreen.show(this);
+      // super.onCreate(savedInstanceState);
+     // getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);
 
-    getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+     /// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
   }
 
   /**

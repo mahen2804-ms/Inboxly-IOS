@@ -42,43 +42,8 @@
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:allowBackup="false"
+        android:allowBackup="true"
         android:theme="@style/AppTheme">
-
-
-
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_stat_microsoftteams_image_2" />
-
- <meta-data  android:name="com.dieam.reactnativepushnotification.notification_foreground"
-                    android:value="true"/>
-                    <meta-data  android:name="com.dieam.reactnativepushnotification.notification_color"
-                    android:resource="@color/splashscreen_bg"/> <!-- or @android:color/{name} to use a standard color -->
-        <meta-data  android:name="com.dieam.reactnativepushnotification.default_notification_icon"
-            android:resource="@drawable/ic_stat_microsoftteams_image_2" />
-
-
- <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationActions" />
-        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher" />
-        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationBootEventReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
-            </intent-filter>
-        </receiver>
-
-         <service
-            android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-<!--        <meta-data android:name="com.google.firebase.messaging.default_notification_color"-->
-<!--            android:resource="@color/dummy"-->
-<!--            tools:replace="android:resource" />-->
 
         <activity
             android:name=".SplashActivity"
@@ -101,9 +66,43 @@
             android:exported="true">
         </activity>
 
-
-
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_stat_microsoftteams_image_2" />
+
+        <meta-data  android:name="com.dieam.reactnativepushnotification.notification_foreground"
+            android:value="true"/>
+        <meta-data  android:name="com.dieam.reactnativepushnotification.notification_color"
+            android:resource="@color/splashscreen_bg"/> <!-- or @android:color/{name} to use a standard color -->
+        <meta-data  android:name="com.dieam.reactnativepushnotification.default_notification_icon"
+            android:resource="@drawable/ic_stat_microsoftteams_image_2" />
+
+
+        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationActions" />
+        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher" />
+        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationBootEventReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <!--        <meta-data android:name="com.google.firebase.messaging.default_notification_color"-->
+        <!--            android:resource="@color/dummy"-->
+        <!--            tools:replace="android:resource" />-->
+
+
     </application>
 
 
