@@ -5,7 +5,8 @@
 #import <React/RCTRootView.h>
 @import Firebase;
 #import "RNFBMessagingModule.h"
-
+#import <UserNotifications/UserNotifications.h>
+#import <RNCPushNotificationIOS.h>
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
 #import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>
@@ -65,12 +66,15 @@ static void InitializeFlipper(UIApplication *application) {
 }
 
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+  NSLog(@"notificationnotificationnotification%@", notification);
   
+  completionHandler(UNNotificationPresentationOptionSound | UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionBadge);
 }
 
 -(void)messaging:(FIRMessaging *)messaging didReceiveRegistrationToken:(NSString *)fcmToken {
   NSLog(@"fcmToken %@", fcmToken);
 }
+
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {

@@ -107,13 +107,12 @@ function ManageNotifications(props) {
   }
 
   const getListofItems = (value) => {
-    setlistDeatils([])
+    // setlistDeatils([])
     return new Promise((resolve, reject) => {
       setIsLoading(true);
       axios.get('https://app.myinboxly.com/api/v1/user-notification-preference-list', {
-
         headers: {
-          'Bearer Token': value,
+          'BearerToken': value,
         },
       }).then(response => {
         setIsLoading(false);
@@ -141,7 +140,7 @@ function ManageNotifications(props) {
       axios
         .post('https://app.myinboxly.com/api/v1/update-user-notification-preference', requestData, {
           headers: {
-            'Bearer Token': authToken,
+            'BearerToken': authToken,
           },
         })
         .then((response) => {
@@ -252,6 +251,7 @@ function ManageNotifications(props) {
       <Loader isLoading={isLoading} />
 
       <MainHeader
+      leftButtonType=""
         leftButton={true}
         rightButton={false}
         title={LABELS.MANAGE_NOTIFICATIONS}

@@ -123,8 +123,8 @@ function ManageProfile(props) {
     return (
         <Container>
             <Loader isLoading={props.profileLoader} />
-            <MainHeader leftButton={true} rightButton={false} title={LABELS.MANAGE_PROFILE} />
-            <Content>
+            <MainHeader leftButtonType="" leftButton={true} rightButton={false} title={LABELS.MANAGE_PROFILE} />
+            {/* <Content> */}
                 <KeyboardAvoidingView
                     behavior={Platform.OS === "ios" ? "padding" : null}
                     style={innerStyle.container}
@@ -215,7 +215,7 @@ function ManageProfile(props) {
                         </View>
                     </View>
                 </KeyboardAvoidingView>
-            </Content>
+            {/* </Content> */}
         </Container>
     );
 }

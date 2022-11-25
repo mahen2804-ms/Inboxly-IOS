@@ -1,5 +1,7 @@
 #import <React/RCTBridgeDelegate.h>
 #import <UIKit/UIKit.h>
+#import <UserNotifications/UNUserNotificationCenter.h>
+
 @import Firebase;
 @import Messages;
 @import UserNotifications;
@@ -10,3 +12,4 @@
 
 @end
 
+			

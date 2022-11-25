@@ -59,8 +59,8 @@ function ChangePassword(props) {
     return (
         <Container>
             <Loader isLoading={props.profileLoader} />
-            <MainHeader leftButton={true} rightButton={false} title={LABELS.CHANGE_PASSWORD} />
-            <Content>
+            <MainHeader leftButtonType="" leftButton={true} rightButton={false} title={LABELS.CHANGE_PASSWORD} />
+            {/* <Content> */}
                 <KeyboardAvoidingView
                     behavior={Platform.OS === "ios" ? "padding" : null}
                     style={innerStyle.container}
@@ -172,7 +172,7 @@ function ChangePassword(props) {
                         </View>
                     </View>
                 </KeyboardAvoidingView>
-            </Content>
+            {/* </Content> */}
         </Container>
     );
 }

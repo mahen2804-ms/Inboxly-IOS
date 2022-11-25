@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { Container, Content } from 'native-base';
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
@@ -107,11 +108,12 @@ function SignupScreen(props) {
           resizeMode='contain'
         />
       </View>
-      <Content>
-        <KeyboardAvoidingView
+      {/* <Content> */}
+        {/* <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : null}
           style={innerStyle.container}
-        >
+        > */}
+        <KeyboardAwareScrollView style={innerStyle.container}>
           <View style={innerStyle.mainView}>
             <View style={innerStyle.loginTextView}>
               <Text style={innerStyle.loginTextStyle}>
@@ -240,13 +242,15 @@ function SignupScreen(props) {
               </Formik>
             </View>
           </View>
-        </KeyboardAvoidingView>
+        {/* </KeyboardAvoidingView> */}
         <TouchableOpacity style={innerStyle.backToLoginViewStyle} onPress={() => handleNavigation()}>
           <Text style={innerStyle.backToLoginTextStyle}>
             {LABELS.SIGNUP_BUTTON_BACK_LOGIN}
           </Text>
         </TouchableOpacity>
-      </Content>
+        </KeyboardAwareScrollView>
+        
+      {/* </Content> */}
       <AlertComponent
         transparent={true}
         modalStyle={innerStyle.modalStyle}

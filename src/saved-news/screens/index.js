@@ -266,7 +266,7 @@ class SavedNews extends Component {
             <Container>
                 <Loader isLoading={this.props.saveNewsLoader || this.state.loading} />
                 <MainHeader leftButtonType={'menu'} leftButton={true} rightButtonType={'refresh'} rightButton={true} title={LABELS.SAVED_EMAIL} onPress={() => this.handleRefresh()} />
-                <Content>
+                {/* <Content> */}
                     <View style={innerStyle.container}>
                         <View style={innerStyle.mainView}>
                             <FlatList
@@ -279,7 +279,7 @@ class SavedNews extends Component {
                             />
                         </View>
                     </View>
-                </Content>
+                {/* </Content> */}
             </Container>
         );
     }
@@ -373,7 +373,7 @@ const innerStyle = StyleSheet.create({
         flex: 1,
         marginLeft: 6,
         marginRight: 6,
-        justifyContent: 'center',
+        // justifyContent: 'center',
     },
     gridViewContainer: {
         justifyContent: 'center',

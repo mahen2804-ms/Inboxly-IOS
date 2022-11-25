@@ -345,6 +345,10 @@ class App extends React.Component {
             headerStyle: { height: 100, backgroundColor: '#da291c' },
             headerTintColor: '#fff',
           }}>
+            {/* <Stack.Screen
+            name="AuthLoading"
+            component={AuthLoading}
+            opt */}
           <Stack.Screen
             name="AuthLoading"
             component={AuthLoading}

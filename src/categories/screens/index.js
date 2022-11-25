@@ -204,14 +204,14 @@ class Categories extends Component {
                     title={LABELS.MANAGE_CATEGORY}
                     onPress={() => this.setState({ showModal: true })}
                 />
-                <Content>
+                {/* <Content> */}
                     <View style={innerStyle.container}>
                         {}
                         <View style={innerStyle.mainView}>
                             {this.renderListSection()}                        
                         </View>
                     </View>
-                </Content>
+                {/* </Content> */}
                 <ModalComponent
                     transparent={true}
                     modalStyle={innerStyle.modalStyle}
@@ -310,7 +310,7 @@ const innerStyle = StyleSheet.create({
         flex: 1,
         marginLeft: 2,
         marginRight: 2,
-        justifyContent: "center",
+        // justifyContent: "center",
     },
     gridViewContainer: {
         justifyContent: "center",

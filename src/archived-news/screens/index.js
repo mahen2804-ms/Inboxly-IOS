@@ -149,7 +149,7 @@ class ArchivedNews extends Component {
             <Container>
                 <Loader isLoading={this.props.archivedEmailLoader} />
                 <MainHeader leftButtonType={'menu'} leftButton={true} rightButtonType={'refresh'} rightButton={true} title={LABELS.ARCHIVE_EMAIL} onPress={() => this.handleRefresh()}/>
-                <Content>
+                {/* <Content> */}
                     <View style={innerStyle.container}>
                         <View style={innerStyle.mainView}>
                             <FlatList
@@ -245,7 +245,7 @@ class ArchivedNews extends Component {
                             />
                         </View>
                     </View>
-                </Content>
+                {/* </Content> */}
             </Container>
         );
     }
@@ -286,7 +286,7 @@ const innerStyle = StyleSheet.create({
         flex: 1,
         marginLeft: 6,
         marginRight: 6,
-        justifyContent: 'center',
+        // justifyContent: 'center',
     },
     gridViewContainer: {
         justifyContent: 'center',

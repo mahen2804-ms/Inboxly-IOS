@@ -172,13 +172,13 @@ const MainHeader = (props) => {
             <Body
                 style={{ alignItems: "center", }}
             >
-                <TouchableOpacity onPress={() => props.onImagePress()}>
+                {/* <TouchableOpacity onPress={() => props.onImagePress()}> */}
                     <Image
                         source={require("../assets/images/logoBold.png")}
                         style={{ width: 70, height: 35 }}
                         resizeMode="cover"
                     />
-                </TouchableOpacity>
+                {/* </TouchableOpacity> */}
             </Body>
         );
     };

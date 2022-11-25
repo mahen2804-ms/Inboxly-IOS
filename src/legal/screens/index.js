@@ -10,7 +10,7 @@ import { GLOBLE } from '../../constant/utility.constant';
 function Legal(props) {
     return (
         <Container>
-            <MainHeader leftButtonType={'menu'} leftButton={true} rightButton={false} title={'Legal'} />
+            <MainHeader leftButtonType="" leftButton={true} rightButton={true} title={'Legal'} />
             <View style={{ marginTop: 10, justifyContent: 'center' }}>
                 <View style={innerStyle.listStyle}>
                     <Icon

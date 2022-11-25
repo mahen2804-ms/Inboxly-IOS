@@ -54,13 +54,15 @@ function SideDrawer(props) {
             handleNavigation("Auth");
         });
     };
-    const GOOGLE_PACKAGE_NAME = 'inboxly-app';
+    // const GOOGLE_PACKAGE_NAME = 'inboxly-app';
+    const GOOGLE_PACKAGE_NAME = 'com.inboxlyapp';
     // `http://play.google.com/store/apps/details?id=${GOOGLE_PACKAGE_NAME}`
+    //https://play.google.com/store/apps/details?id=com.inboxly
 
     const rateUs = () => {
         if (Platform.OS != 'ios') {
             //To open the Google Play Store
-            Linking.openURL(`http://play.google.com/store/apps/details?id=${GOOGLE_PACKAGE_NAME}`).catch(err =>
+            Linking.openURL(`https://play.google.com/store/apps/details?id=${GOOGLE_PACKAGE_NAME}`).catch(err =>
               alert('Please check for the Google Play Store')
             );
           } else {

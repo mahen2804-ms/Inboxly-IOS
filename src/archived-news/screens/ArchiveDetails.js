@@ -87,8 +87,8 @@ class ArchiveDetails extends Component {
         const { item, showInfo } = this.state;
         return (
             <Container>
-                <MainHeader leftButtonType={'back'} leftButton={true} rightButton={true} rightButtonType={'keyboard-control'} onPress={() => this.handleIconPress()} />
-                <Content>
+                <MainHeader leftButtonType="" leftButton={true} rightButton={true} rightButtonType={'keyboard-control'} onPress={() => this.handleIconPress()} />
+                {/* <Content> */}
                     <View style={innerStyle.container}>
                         <View style={innerStyle.mainView}>
                             <View style={innerStyle.gridViewContainer}>
@@ -142,7 +142,7 @@ class ArchiveDetails extends Component {
                             </View>
                         </View>
                     </View>
-                </Content>
+                {/* </Content> */}
             </Container>
         );
     }
@@ -194,7 +194,7 @@ const innerStyle = StyleSheet.create({
         flex: 1,
         marginLeft: 6,
         marginRight: 6,
-        justifyContent: 'center',
+        // justifyContent: 'center',
     },
     gridViewContainer: {
         justifyContent: 'center',

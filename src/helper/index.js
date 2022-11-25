@@ -29,11 +29,13 @@ export class Toast {
 }
 
 export function onLogout() {
-  var loginValue = AsyncStorage.getItem("isLogin")
-  if(loginValue){
-    AsyncStorage.setItem('isLogin', 'false');
-    NavigationService.navigate('AuthLoading');
-  }
+  AsyncStorage.setItem('isLogin', 'false');
+  NavigationService.navigate('AuthLoading');
+  // var loginValue = AsyncStorage.getItem("isLogin")
+  // if(loginValue){
+  //   AsyncStorage.setItem('isLogin', 'false');
+  //   NavigationService.navigate('AuthLoading');
+  // }
   // AsyncStorage.setItem('isLogin', 'false');
   // NavigationService.navigate('AuthLoading');
 }

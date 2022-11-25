@@ -45,15 +45,17 @@ class NewsfeedDetails extends Component {
     }
 
     componentDidMount() {
-        console.log("componentDidMount in newsfeedDetail");
+        console.log("componentDidMount in newsfeedDetail",this.props.route.params.itemData);
         const item = this.props.route.params.itemData;
         if (item) {
             // this.setState({ item: item });
-            console.log("fgfgbbb",item);
             let requestData = {
                 id: item.id,
             };
             this.props.newsfeedDetailAction(requestData, (res) => {
+                console.log('====================================');
+                console.log("line no 57",res.data.success);
+                console.log('====================================');
                 this.setState({ item: res.data.success.data[0] });
                 // if (res.status === STATUS_CODES.OK) {
                 //     if (res && res.data && res.data.success) {

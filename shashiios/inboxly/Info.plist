@@ -28,7 +28,7 @@
 	<true/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSAppTransportSecurity</key>
+	<key>NSAppTransportSecurity</key>photo
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
@@ -43,8 +43,6 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Enable myinboxly App to access your camera roll to upload a profile picture</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto-Regular.ttf</string>

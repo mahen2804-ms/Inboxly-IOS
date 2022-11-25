@@ -68,7 +68,7 @@ function LoginScreen(props) {
               const fcmTokenVal = await messaging().getToken();
             // var fcmTokenVal = 1234
             if (fcmTokenVal !== null) {
-                // console.log("function called fcmTokenValll", fcmTokenVal);
+                console.log("function called fcmTokenValll", fcmTokenVal);
                 setFcmToken(fcmTokenVal);
 
                 Keyboard.dismiss();
@@ -81,8 +81,11 @@ function LoginScreen(props) {
                 };
                 setIsLoading(true);
                 props.loginUserAction(requestData, (res) => {
+                    console.log("line84******");
                     setIsLoading(props.authLoader);
+                    console.log("line86******",res.status);
                     if (res.status === STATUS_CODES.OK) {
+                        console.log("line87******");
                         const { userDetail, token } = res.data.success.data;
                         console.log(
                             "print login data....",
@@ -180,7 +183,7 @@ function LoginScreen(props) {
                     resizeMode="contain"
                 />
             </View>
-            <Content>
+            {/* <Content> */}
                 <KeyboardAvoidingView
                     behavior={Platform.OS === "ios" ? "padding" : null}
                     style={innerStyle.container}
@@ -285,6 +288,7 @@ function LoginScreen(props) {
                                             />
                                             <TouchableOpacity
                                                 onPress={() =>
+                                                    //  {crashlytics().crash()}
                                                     props.navigation.navigate(
                                                         "ForgotPasswordScreen"
                                                     )
@@ -318,7 +322,7 @@ function LoginScreen(props) {
                         </View>
                     </View>
                 </KeyboardAvoidingView>
-            </Content>
+            {/* </Content> */}
             <TouchableOpacity
                 style={innerStyle.registerView}
                 onPress={() => handleNavigation()}

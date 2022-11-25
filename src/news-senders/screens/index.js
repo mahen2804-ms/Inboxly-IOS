@@ -307,7 +307,7 @@ class NewsSenders extends Component {
                     }
                     onPress={() => this.handleFilter()}
                 />
-                <Content>
+                {/* <Content> */}
                     <View style={innerStyle.container}>
                         {onCheck &&
                             selectedSenderId !== "" &&
@@ -383,7 +383,7 @@ class NewsSenders extends Component {
                             this.handleSnooozeSubmit(val, id, value)
                         }
                     />
-                </Content>
+                {/* </Content> */}
             </Container>
         );
     }
@@ -430,7 +430,7 @@ const innerStyle = StyleSheet.create({
         flex: 1,
         marginLeft: 2,
         marginRight: 2,
-        justifyContent: "center",
+        // justifyContent: "center",
     },
     mainView: {
         marginTop: 5,
